@@ -10,6 +10,11 @@ modules
 
 These commands can be run from the root directory
 
+### `npm i`
+Downloads all node modules defined
+[package.json](https://github.gatech.edu/mfraschilla3/BioPortal/blob/master/package.json).
+Only needs to be ran once or any time packages are added/updated
+
 ### `npm start`
 
 Runs the app in the development mode.<br>
