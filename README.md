@@ -2,18 +2,18 @@ BioPortal Junior Design Project
 ========
 
 ## Getting Started With Development
-To start clone repo and type `npm i` at root directory to import all node
-modules
+To start clone repo and type `npm i` at root directory to import all required
+packages.
 
 
 ## Commands
 
-These commands can be run from the root directory
+These commands can be run from the root directory.
 
 ### `npm i`
-Downloads all node modules defined
+Downloads all node modules defined in
 [package.json](https://github.gatech.edu/mfraschilla3/BioPortal/blob/master/package.json).
-Only needs to be ran once or any time packages are added/updated
+Only needs to be ran once or any time packages are added/updated.
 
 ### `npm start`
 
