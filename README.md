@@ -1,6 +1,11 @@
 BioPortal Junior Design Project
 ========
 
+## Getting Started With Development
+To start clone repo and type `npm i` at root directory to import all node
+modules
+
+
 ## Commands
 
 These commands can be run from the root directory

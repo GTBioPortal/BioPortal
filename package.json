@@ -1,8 +1,8 @@
 {
   "name": "BioPortal",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "BioPortal Junior Design Project",
+  "main": "index.jsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --mode-development --open",

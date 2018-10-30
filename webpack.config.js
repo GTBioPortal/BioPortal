@@ -1,10 +1,10 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: './src/index.js',
+    entry: './src/index.jsx',
     module: {
         rules: [
-            { test: /\.(js)$/, exclude: /node_modules/, use: 'babel-loader' },
+            { test: /\.(js|jsx)$/, exclude: /node_modules/, loader: 'babel-loader' },
             { test: /\.css$/, use: [ 'style-loader', 'css-loader' ]}
         ]
     },
@@ -12,5 +12,8 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: 'src/index.html'
         })
-    ]
+    ],
+    resolve: {
+        extensions: ['.js', '.jsx']
+    }
 }
