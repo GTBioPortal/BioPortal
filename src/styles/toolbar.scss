@@ -1,0 +1,23 @@
+@import "colors.scss";
+
+.Navbar {
+    background-color: $green !important;
+    @media (min-width: 480px) {
+        padding-left: 15%;
+        padding-right: 15%;
+    }
+}
+
+.grow {
+    flex-grow: 1
+}
+
+.inputRoot {
+    color: red;
+    width: 100%;
+}
+
+.inputInput {
+    width: 100%;
+    color: orange;
+}
