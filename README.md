@@ -5,6 +5,14 @@ BioPortal Junior Design Project
 To start clone repo and type `npm i` at root directory to import all required
 packages.
 
+### React Developer Tools
+Allows you to view React components in developer tools. Really useful for
+debugging. Download for [Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) or [Firefox](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/)
+
+### Redux Developer Tools
+Allows you to track Redux messages in developer tools. Also really useful for
+debugging. Download for
+[Chrome](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en) or [Firefox](https://addons.mozilla.org/en-US/firefox/addon/remotedev/)
 
 ## Commands
 
