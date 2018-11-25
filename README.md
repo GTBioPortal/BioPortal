@@ -64,5 +64,3 @@ color constants for the application's color theme.
 
 ## store.jsx
 [Redux store](https://redux.js.org/basics/store)
-
-

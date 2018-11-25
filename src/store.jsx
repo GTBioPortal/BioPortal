@@ -5,7 +5,8 @@ import jobs from './data/jobs'
 
 
 const defaultState = {
-    modals: initialModalState
+    modals: initialModalState,
+    jobs
 };
 
 const store = createStore(

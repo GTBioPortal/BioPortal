@@ -77,4 +77,6 @@ const jobs = [
         'deadline': 1543640400,
         'position': 'Biomedical Engineer Summer Clinical Operations Intern'
     }
-]
+];
+
+export default jobs;
