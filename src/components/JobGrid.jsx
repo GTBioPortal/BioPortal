@@ -32,7 +32,6 @@ class JobGrid extends React.Component {
             let row = [];
             for (let i = 0; i < elemsToDisplay; i++) {
                 const job = this.props.jobs[page * jobsPerPage + i];
-                console.log(job);
                 row.push(
                     <TableCell 
                         key={i}
@@ -42,7 +41,6 @@ class JobGrid extends React.Component {
                         <JobCard {...this.props} key={i} i={i} job={job} />
                     </TableCell>
                 );
-                //row.push(<TableCell key={i}>{job.company}</TableCell>);
                 if ((i + 1) % 5 == 0) {
                     table.push(
                         <TableRow key={table.length}>
@@ -56,7 +54,6 @@ class JobGrid extends React.Component {
             if (row.length !== 0) {
                 table.push(row);
             }
-            console.log(table);
             return table;
 
         }
