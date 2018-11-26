@@ -1,0 +1,16 @@
+
+.job-grid {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    @media(min-width: 480px) {
+        padding-left: 15px;
+        padding-right: 15px;
+    } 
+    margin: 50px auto;
+
+    table {
+        table-layout: fixed;
+        width: 100%;
+    }
+}
