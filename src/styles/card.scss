@@ -4,8 +4,25 @@
     flex-grow: 1;
     flex-shrink: 0;
     height: 80%;
+    display: flex;
+    flex-direction: column;
 }
+
+.card-td {
+    width: 20%;
+    height: 85%;
+}
+
 
 .job-card {
     margin: 1rem 1rem 1rem 1rem;
+
+    #view-job {
+        margin: auto;
+        bottom: 0px;
+    }
+
+    #view-job-div {
+        margin-top: auto;
+    }
 }
