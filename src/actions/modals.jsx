@@ -11,3 +11,9 @@ export function hideUploadResume() {
         type: 'HIDE_MODAL',
     };
 }
+
+export function showUploadSnackbar() {
+    return {
+        type: 'SHOW_SNACKBAR'
+    };
+}

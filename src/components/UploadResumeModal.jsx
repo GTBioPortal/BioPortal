@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { hideUploadResume }  from '../actions/modals'
+import { hideUploadResume, showUploadSnackbar }  from '../actions/modals'
 
 import '../styles/modals.scss'
 
@@ -26,6 +26,7 @@ class UploadResumeModal extends React.Component {
             console.log(this.state.resumeName);
             console.log("Resume uploaded successfully");
             this.props.hideUploadResume();
+            this.props.showUploadSnackbar();
         }
     }
 
@@ -80,7 +81,7 @@ class UploadResumeModal extends React.Component {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ hideUploadResume }, dispatch);
+    return bindActionCreators({ hideUploadResume, showUploadSnackbar }, dispatch);
 }
 
 export default connect(
