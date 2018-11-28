@@ -12,7 +12,7 @@ class JobCard extends React.Component {
     render() {
         const { job, i } = this.props;
         return (
-            <td key={i} className='card job-card'>
+            <td key={i} className='card-td job-card'>
             <Card className='card job-card'>
                 <CardContent>
                     <Typography className='card-title' gutterBottom>
@@ -26,8 +26,8 @@ class JobCard extends React.Component {
                     </Typography>
                 </CardContent>
 
-                <CardActions>
-                    <Button size='small'>View Job</Button> 
+                <CardActions id='view-job-div'>
+                    <Button size='small' id='view-job'>View Job</Button> 
                 </CardActions>
             </Card>
         </td>
