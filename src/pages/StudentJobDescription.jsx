@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import '../styles/app.scss';
 
+import { connect } from 'react-redux'
 import Snackbar from '@material-ui/core/Snackbar';
 
 class StudentJobDescription extends React.Component {
