@@ -2,36 +2,72 @@ import React from 'react';
 
 class JobPostingForm extends React.Component {
 
+    jobTitleRef = React.createRef();
+    companyRef = React.createRef();
+    startDateRef = React.createRef();
+    descRef = React.createRef();
+    skillsRef = React.createRef();
+    deadlineRef = React.createRef();
+    resumeRef = React.createRef();
+    clRef = React.createRef();
+    transcriptRef = React.createRef();
+
+    createPosting = (event) => {
+        // 1. Stop from submitting
+        event.preventDefault();
+
+        const posting = {
+            jobTitle: this.jobTitleRef.current.value,
+            company: this.companyRef.current.value,
+            startDate: this.startDateRef.current.value,
+            jobDesc: this.descRef.current.value,
+            skills: this.skillsRef.current.value;
+            deadline: this.deadlineRef.current.value,
+            resume: this.resumeRef.current.value,
+            coverLetter: this.clRef.current.value,
+            transcript: this.transcriptRef.current.value,
+        }
+
+        //this.props.addJobPosting(posting);
+
+        // refresh form
+        event.currentTarget.reset();
+
+        console.log(posting)
+
+    }
+
     render()  {
         return (
-            <form className = "job-posting">
+            <form className = "jobPosting" onSubmit={this.createPosting}>
+            <h1>Position Information</h1>
                 <label>Job Title:
-                    <input name="job-title" type="text" placeholder="Job Title"/>
+                    <input name="jobTitle" ref={this.jobTitleRef} type="text" placeholder="Job Title"/>
                 </label><br/>
                 <label>Company:
-                    <input name="company" type="text" placeholder="Company"/>
+                    <input name="company" ref={this.companyRef} type="text" placeholder="Company"/>
                 </label><br/>
 
                 <label>Start Date:
-                    <input name="start-date" type="text" placeholder="Start Date"/>
+                    <input name="startDate" ref={this.startDateRef} type="text" placeholder="Start Date"/>
                 </label><br/>
 
                 <label>Job Description:
-                    <textarea name="job-desc" placeholder="Job Description" />
+                    <textarea name="jobDesc" ref={this.descRef} placeholder="Job Description" />
                 </label><br/>
 
                 <label>Preferred Skills:
-                    <textarea name="skills" placeholder="Preferred Skills" />
+                    <textarea name="skills" ref={this.skillsRef} placeholder="Preferred Skills" />
                 </label><br/>
 
                 <label>Application Deadline:
-                    <input name="app-deadline" type="text" placeholder="Application Deadline" />
+                    <input name="deadline" ref={this.deadlineRef} type="text" placeholder="Application Deadline" />
                 </label><br/>
 
                 <label>Supplementary Materials:
-                    <label><input name="resume" type="checkbox"/> Resume</label>
-                    <label><input name="cover-letter" type="checkbox" /> Cover Letter</label>
-                    <label><input name="transcript" type="checkbox"/> Transcript</label>
+                    <label><input name="resume" ref={this.resumeRef} type="checkbox"/> Resume</label>
+                    <label><input name="coverLetter" ref={this.clRef} type="checkbox" /> Cover Letter</label>
+                    <label><input name="transcript" ref={this.transcriptRef} type="checkbox"/> Transcript</label>
 
 
                 </label><br/>
