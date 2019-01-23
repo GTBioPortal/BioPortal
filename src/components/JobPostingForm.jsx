@@ -2,13 +2,12 @@ import React from 'react';
 
 class JobPostingForm extends React.Component {
 
-    render() {
+    render()  {
         return (
             <form className = "job-posting">
                 <label>Job Title:
                     <input name="job-title" type="text" placeholder="Job Title"/>
                 </label><br/>
-
                 <label>Company:
                     <input name="company" type="text" placeholder="Company"/>
                 </label><br/>
@@ -33,7 +32,7 @@ class JobPostingForm extends React.Component {
                     <label><input name="resume" type="checkbox"/> Resume</label>
                     <label><input name="cover-letter" type="checkbox" /> Cover Letter</label>
                     <label><input name="transcript" type="checkbox"/> Transcript</label>
-                    <label><input name="other" type="checkbox"/> Other: <input name="other" type="text" placeholder="Other" /> </label>
+
 
                 </label><br/>
 
