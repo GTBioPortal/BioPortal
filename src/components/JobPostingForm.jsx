@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/employerJobPosting.scss';
 
 class JobPostingForm extends React.Component {
 
