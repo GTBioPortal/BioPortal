@@ -7,7 +7,7 @@ import '../styles/app.scss';
 
 import { connect } from 'react-redux';
 import Snackbar from '@material-ui/core/Snackbar';
-import TextField from '@material-ui/core/TextField';
+import Chip from '@material-ui/core/Chip';
 
 class ViewJobPage extends React.Component {
     constructor(props) {
@@ -26,7 +26,10 @@ class ViewJobPage extends React.Component {
         return (
             <div>
                 <Navbar msgCount={0} notificationCount={0}/>
-                <TextField label={job.company}/>
+                <Chip label={job.company}/>
+                <Chip label={job.position}/>
+                <Chip label={job.location}/>
+                <Chip label={job.deadline}/>
             </div>
         );
     }
