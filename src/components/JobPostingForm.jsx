@@ -21,7 +21,7 @@ class JobPostingForm extends React.Component {
             company: this.companyRef.current.value,
             startDate: this.startDateRef.current.value,
             jobDesc: this.descRef.current.value,
-            skills: this.skillsRef.current.value;
+            skills: this.skillsRef.current.value,
             deadline: this.deadlineRef.current.value,
             resume: this.resumeRef.current.value,
             coverLetter: this.clRef.current.value,
