@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter, push } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -8,6 +9,15 @@ import Typography from '@material-ui/core/Typography';
 import '../styles/card.scss';
 
 class JobCard extends React.Component {
+    constructor(props) {
+        super(props)
+        this.viewJob = this.viewJob.bind(this);
+    }
+
+    viewJob() {
+        let path = '/viewjobs';
+        this.props.history.push(path);
+    }
 
     render() {
         const { job, i } = this.props;
@@ -27,7 +37,7 @@ class JobCard extends React.Component {
                 </CardContent>
 
                 <CardActions id='view-job-div'>
-                    <Button size='small' id='view-job'>View Job</Button> 
+                    <Button size='small' id='view-job' onClick={this.viewJob}>View Job</Button> 
                 </CardActions>
             </Card>
         </td>
@@ -35,4 +45,4 @@ class JobCard extends React.Component {
     }
 }
 
-export default JobCard;
+export default withRouter (JobCard);
