@@ -1,15 +1,13 @@
 import React from 'react';
 import BaseModal from '../containers/BaseModal';
 import JobGrid from '../components/JobGrid';
-import { withRouter, push } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import '../styles/app.scss';
 
 import { connect } from 'react-redux';
 import Snackbar from '@material-ui/core/Snackbar';
-import TextField from '@material-ui/core/TextField';
 
-class ViewJobPage extends React.Component {
+class JobPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = { showUploadSnackbar: true };
@@ -21,12 +19,19 @@ class ViewJobPage extends React.Component {
     }
 
     render() {
-        console.log(this.props.location.data.job);
-        const job = this.props.location.data.job;
+        const { data } = this.props.location
         return (
             <div>
                 <Navbar msgCount={0} notificationCount={0}/>
-                <TextField label={job.company}/>
+                <Snackbar
+                    anchorOrigin={{vertical: 'top', horizontal: 'center'}}
+                    open={this.props.showUploadSnackbar && this.state.showUploadSnackbar}
+                    onClose={this.handleSnackbarClose}
+                    autoHideDuration={2000}
+                    message={<span id='message-id'>Resume uploaded successfully!</span>} />
+                <JobGrid />
+
+                <BaseModal />
             </div>
         );
     }
@@ -38,7 +43,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default withRouter(connect(
-    mapStateToProps,
-    null
-)(ViewJobPage));
+
