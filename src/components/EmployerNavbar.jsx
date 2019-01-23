@@ -17,7 +17,7 @@ import '../styles/toolbar.scss'
 class EmployerNavbar extends React.Component {
     render() {
         return (
-            <AppBar position='static' className='EmployerNavbar'>
+            <AppBar position='static' className='Navbar'>
                 <Toolbar>
                     <Typography variant='title' color='inherit' className='grow'>
                         BioPortal
