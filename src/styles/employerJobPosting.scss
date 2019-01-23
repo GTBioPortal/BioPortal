@@ -1,0 +1,21 @@
+form {
+  background-color: 'white';
+  line-height: 3
+}
+
+input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+textarea {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  height: 150px;
+  border-radius: 4px;
+}
