@@ -3,6 +3,7 @@ import BaseModal from '../containers/BaseModal';
 import JobGrid from '../components/JobGrid';
 import { withRouter, push } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import JobDescription from '../components/JobDescription'
 import '../styles/app.scss';
 
 import { connect } from 'react-redux';
@@ -21,15 +22,16 @@ class ViewJobPage extends React.Component {
     }
 
     render() {
-        console.log(this.props.location.data.job);
-        const job = this.props.location.data.job;
         return (
             <div>
                 <Navbar msgCount={0} notificationCount={0}/>
-                <Chip label={job.company}/>
-                <Chip label={job.position}/>
-                <Chip label={job.location}/>
-                <Chip label={job.deadline}/>
+                <Snackbar
+                    anchorOrigin={{vertical: 'top', horizontal: 'center'}}
+                    open={this.props.showUploadSnackbar && this.state.showUploadSnackbar}
+                    onClose={this.handleSnackbarClose}
+                    autoHideDuration={2000}
+                    message={<span id='message-id'>Resume uploaded successfully!</span>} />
+                <JobDescription />
             </div>
         );
     }
