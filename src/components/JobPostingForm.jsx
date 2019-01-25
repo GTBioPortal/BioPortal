@@ -42,7 +42,7 @@ class JobPostingForm extends React.Component {
 
     render()  {
         return (
-            <form className = "jobPosting">
+            <form className = "jobPosting" onSubmit={this.createPosting}>
             <br/>
             <Typography variant="h2" align="center">Position Information</Typography>
                 <Typography variant="h6">Job Title:<br/>
@@ -75,8 +75,7 @@ class JobPostingForm extends React.Component {
 
                 </Typography><br/>
 
-
-                <Button size='large' onClick={this.createPosting} variant="contained" fullWidth="true" className="submit" color="secondary">Submit</Button>
+                <Button size='large' type="submit" variant="contained" fullWidth={true} className="submit" color="secondary">Submit</Button>
 
                 <div><br/></div>
 
