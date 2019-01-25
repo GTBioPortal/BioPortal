@@ -42,26 +42,26 @@ class JobPostingForm extends React.Component {
         return (
             <form className = "jobPosting" onSubmit={this.createPosting}>
             <h1>Position Information</h1>
-                <label>Job Title:
+                <label>Job Title:<br/>
                     <input name="jobTitle" ref={this.jobTitleRef} type="text" placeholder="Job Title"/>
                 </label><br/>
-                <label>Company:
+                <label>Company:<br/>
                     <input name="company" ref={this.companyRef} type="text" placeholder="Company"/>
                 </label><br/>
 
-                <label>Start Date:
+                <label>Start Date:<br/>
                     <input name="startDate" ref={this.startDateRef} type="text" placeholder="Start Date"/>
                 </label><br/>
 
-                <label>Job Description:
+                <label>Job Description:<br/>
                     <textarea name="jobDesc" ref={this.descRef} placeholder="Job Description" />
                 </label><br/>
 
-                <label>Preferred Skills:
+                <label>Preferred Skills:<br/>
                     <textarea name="skills" ref={this.skillsRef} placeholder="Preferred Skills" />
                 </label><br/>
 
-                <label>Application Deadline:
+                <label>Application Deadline:<br/>
                     <input name="deadline" ref={this.deadlineRef} type="text" placeholder="Application Deadline" />
                 </label><br/>
 
