@@ -44,7 +44,7 @@ class JobPostingForm extends React.Component {
         return (
             <form className = "jobPosting" onSubmit={this.createPosting}>
             <br/>
-            <Typography variant="h2" align="center">Position Information</Typography>
+            <Typography variant="h2" align="center">Position Information</Typography><br/>
                 <Typography variant="h6">Job Title:<br/>
                     <input name="jobTitle" ref={this.jobTitleRef} type="text" placeholder="Job Title"/>
                 </Typography><br/>
