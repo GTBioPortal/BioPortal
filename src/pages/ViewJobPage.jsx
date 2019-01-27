@@ -13,7 +13,7 @@ import Chip from '@material-ui/core/Chip';
 class ViewJobPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { showUploadSnackbar: true };
+        this.state = { showUploadSnackbar: false };
         //:this.handleSnackbarClose = this.handleSnackbarClose.bind(this);
     }
 
