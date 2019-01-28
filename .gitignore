@@ -1,3 +1,8 @@
 dist
-node_modules
+frontend/node_modules
 *.log
+backend/requirements.txt
+backend/__pycache__
+backend/env
+backend/venv
+backend/.vscode
