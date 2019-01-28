@@ -6,3 +6,4 @@ backend/__pycache__
 backend/env
 backend/venv
 backend/.vscode
+*.pyc
