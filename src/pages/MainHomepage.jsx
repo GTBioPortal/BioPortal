@@ -16,12 +16,12 @@ class MainHomepage extends React.Component {
     }
 
     studentHomepage() {
-        const path = '/student/' + ':' + 'sampleStudent';
+        const path = '/student/' + 'sampleStudent';
         this.props.history.push(path);
     }
 
     employerHomepage() {
-        const path = '/employer/' + ':' + 'sampleEmployer';
+        const path = '/employer/' + 'sampleEmployer';
         this.props.history.push(path);
     }
 
