@@ -44,13 +44,15 @@ class UploadResumeModal extends React.Component {
                 open={true}
                 onClose={this.props.hideUploadResume}>
                 <div className='resume-modal'>
-                    <span className='modal-title'>Upload Resum&#233;</span>
+                    <Typography variant='headline'>
+                        <span className='modal-title'>Upload Resum&#233;</span>
+                    </Typography>
                     <div id='file-upload'>
                         <input
                             accept='application/pdf'
                             hidden
                             onChange={this.resumeChange}
-                            type='file' 
+                            type='file'
                             id='file-button'/>
                         <label htmlFor='file-button'>
                             <Button component='span' variant='contained' color='primary'>
@@ -62,7 +64,7 @@ class UploadResumeModal extends React.Component {
                         </Typography>
                     </div>
                     <div id='buttons'>
-                        <Button variant='contained' 
+                        <Button variant='contained'
                             color='primary'
                             disabled={!this.state.resumeSelected}
                             id='upload-button'
@@ -86,5 +88,5 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(
     null,
-    mapDispatchToProps    
+    mapDispatchToProps
 )(UploadResumeModal);

@@ -6,6 +6,9 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
+import { Link } from 'react-router-dom';
+
+
 import '../styles/card.scss';
 
 class JobCard extends React.Component {
@@ -15,8 +18,12 @@ class JobCard extends React.Component {
     }
 
     viewJob() {
-        let path = '/viewjobs';
-        this.props.history.push(path);
+        const { job } = this.props;
+        const path = '/job/' + job.id;
+        this.props.history.push({
+            pathname: path,
+            data: this.props
+        });
     }
 
     render() {
@@ -37,7 +44,7 @@ class JobCard extends React.Component {
                 </CardContent>
 
                 <CardActions id='view-job-div'>
-                    <Button size='small' id='view-job' onClick={this.viewJob}>View Job</Button> 
+                    <Button size='small' id='view-job' onClick={this.viewJob}>View Job</Button>
                 </CardActions>
             </Card>
         </td>
