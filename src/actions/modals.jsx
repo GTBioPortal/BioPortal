@@ -17,3 +17,9 @@ export function showUploadSnackbar() {
         type: 'SHOW_SNACKBAR'
     };
 }
+
+export function hideUploadSnackbar() {
+    return {
+        type: 'HIDE_SNACKBAR'
+    };
+}
