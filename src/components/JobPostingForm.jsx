@@ -1,4 +1,7 @@
 import React from 'react';
+import '../styles/employerJobPosting.scss';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 class JobPostingForm extends React.Component {
 
@@ -21,7 +24,7 @@ class JobPostingForm extends React.Component {
             company: this.companyRef.current.value,
             startDate: this.startDateRef.current.value,
             jobDesc: this.descRef.current.value,
-            skills: this.skillsRef.current.value;
+            skills: this.skillsRef.current.value,
             deadline: this.deadlineRef.current.value,
             resume: this.resumeRef.current.value,
             coverLetter: this.clRef.current.value,
@@ -40,39 +43,41 @@ class JobPostingForm extends React.Component {
     render()  {
         return (
             <form className = "jobPosting" onSubmit={this.createPosting}>
-            <h1>Position Information</h1>
-                <label>Job Title:
+            <br/>
+            <Typography variant="h2" align="center">Position Information</Typography><br/>
+                <Typography variant="h6">Job Title:<br/>
                     <input name="jobTitle" ref={this.jobTitleRef} type="text" placeholder="Job Title"/>
-                </label><br/>
-                <label>Company:
+                </Typography><br/>
+                <Typography variant="h6">Company:<br/>
                     <input name="company" ref={this.companyRef} type="text" placeholder="Company"/>
-                </label><br/>
+                </Typography><br/>
 
-                <label>Start Date:
+                <Typography variant="h6">Start Date:<br/>
                     <input name="startDate" ref={this.startDateRef} type="text" placeholder="Start Date"/>
-                </label><br/>
+                </Typography><br/>
 
-                <label>Job Description:
+                <Typography variant="h6">Job Description:<br/>
                     <textarea name="jobDesc" ref={this.descRef} placeholder="Job Description" />
-                </label><br/>
+                </Typography><br/>
 
-                <label>Preferred Skills:
+                <Typography variant="h6">Preferred Skills:<br/>
                     <textarea name="skills" ref={this.skillsRef} placeholder="Preferred Skills" />
-                </label><br/>
+                </Typography><br/>
 
-                <label>Application Deadline:
+                <Typography variant="h6">Application Deadline:<br/>
                     <input name="deadline" ref={this.deadlineRef} type="text" placeholder="Application Deadline" />
-                </label><br/>
+                </Typography><br/>
 
-                <label>Supplementary Materials:
-                    <label><input name="resume" ref={this.resumeRef} type="checkbox"/> Resume</label>
-                    <label><input name="coverLetter" ref={this.clRef} type="checkbox" /> Cover Letter</label>
-                    <label><input name="transcript" ref={this.transcriptRef} type="checkbox"/> Transcript</label>
+                <Typography variant="h6">Supplementary Materials:
+                    <Typography><input name="resume" ref={this.resumeRef} type="checkbox"/> Resume</Typography>
+                    <Typography><input name="coverLetter" ref={this.clRef} type="checkbox" /> Cover Letter</Typography>
+                    <Typography><input name="transcript" ref={this.transcriptRef} type="checkbox"/> Transcript</Typography>
 
+                </Typography><br/>
 
-                </label><br/>
+                <Button size='large' type="submit" variant="contained" fullWidth={true} className="submit" color="secondary">Submit</Button>
 
-                <button type="submit">Submit</button>
+                <div><br/></div>
 
             </form>
         )
