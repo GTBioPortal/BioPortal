@@ -12,13 +12,13 @@ class StudentHomePage extends React.Component {
     constructor(props) {
         super(props);
         this.state = { showUploadSnackbar: true };
-        //:this.handleSnackbarClose = this.handleSnackbarClose.bind(this); 
+        //:this.handleSnackbarClose = this.handleSnackbarClose.bind(this);
     }
 
     handleSnackbarClose = () => {
         this.setState({ showUploadSnackbar: false });
     }
-    
+
     render() {
         return (
             <div>
@@ -30,10 +30,10 @@ class StudentHomePage extends React.Component {
                     autoHideDuration={2000}
                     message={<span id='message-id'>Resume uploaded successfully!</span>} />
                 <JobGrid />
-        
+
                 <BaseModal />
             </div>
-        );    
+        );
     }
 }
 
