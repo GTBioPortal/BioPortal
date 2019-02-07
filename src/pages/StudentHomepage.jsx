@@ -1,10 +1,11 @@
 import React from 'react';
+import { hideUploadSnackbar } from '../actions/modals'
 import BaseModal from '../containers/BaseModal';
 import JobGrid from '../components/JobGrid';
 import Navbar from '../components/Navbar';
 import { withRouter, push } from 'react-router-dom';
 import '../styles/app.scss';
-
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Snackbar from '@material-ui/core/Snackbar';
 
@@ -13,6 +14,10 @@ class StudentHomePage extends React.Component {
         super(props);
         this.state = { showUploadSnackbar: true };
         //:this.handleSnackbarClose = this.handleSnackbarClose.bind(this);
+    }
+
+    componentWillUnmount(){
+        this.props.hideUploadSnackbar();
     }
 
     handleSnackbarClose = () => {
@@ -37,13 +42,18 @@ class StudentHomePage extends React.Component {
     }
 }
 
+
 function mapStateToProps(state) {
     return {
         showUploadSnackbar: state.showUploadSnackbar
     }
 }
 
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ hideUploadSnackbar }, dispatch);
+}
+
 export default withRouter(connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
 )(StudentHomePage));
