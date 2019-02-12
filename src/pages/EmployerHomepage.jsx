@@ -1,6 +1,6 @@
 import React from 'react';
 import EmployerJobGrid from '../components/EmployerJobGrid';
-import Navbar from '../components/Navbar';
+import EmployerNavbar from '../components/EmployerNavbar';
 import { withRouter, push } from 'react-router-dom';
 import '../styles/app.scss';
 import { bindActionCreators } from 'redux';
@@ -14,11 +14,11 @@ class EmployerHomePage extends React.Component {
     render() {
         return (
             <div>
-                <Navbar msgCount={0} notificationCount={0}/>
+                <EmployerNavbar msgCount={0} notificationCount={0}/>
                 <EmployerJobGrid />
             </div>
         );
     }
 }
 
-export default EmployerHomePage;
+export default withRouter(EmployerHomePage);

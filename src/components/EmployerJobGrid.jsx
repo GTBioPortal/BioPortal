@@ -1,5 +1,5 @@
 import React from 'react';
-import EmployerJobCard from './JobCard';
+import EmployerJobCard from './EmployerJobCard';
 import { connect } from 'react-redux';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';

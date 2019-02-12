@@ -40,7 +40,7 @@ class EmployerJobCard extends React.Component {
                     </CardContent>
 
                     <CardActions id='edit-job-div'>
-                        <Button size='small' id='edit-job' onClick={this.editJob}>Edit Job</Button>
+                        <Button size='small' id='edit-job' onClick={this.editJob}>Edit Job Posting</Button>
                     </CardActions>
                 </Card>
             </td>

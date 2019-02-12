@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import StudentHomepage from './pages/StudentHomepage'
+import EmployerHomepage from './pages/EmployerHomepage'
 import ViewJobPage from './pages/ViewJobPage'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -10,7 +10,7 @@ const router = (
     <Provider store={store}>
         <Router>
         	<div>
-            	<Route exact path='/' component={StudentHomepage}>
+            	<Route exact path='/' component={EmployerHomepage}>
             	</Route>
             	<Route path='/job' component={ViewJobPage}>
             	</Route>
