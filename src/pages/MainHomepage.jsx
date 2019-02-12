@@ -24,7 +24,7 @@ class MainHomepage extends React.Component {
     }
 
     employerLoginpage() {
-        const path = '/employer';
+        const path = '/employerLogin';
         this.props.history.push(path);
     }
 

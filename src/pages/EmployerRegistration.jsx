@@ -1,18 +1,19 @@
 import React from 'react';
-import EmployerNavbar from '../components/EmployerNavbar';
+import LoginNavbar from '../components/LoginNavbar';
 import '../styles/app.scss';
 import RegistrationForm from "../components/RegistrationForm";
+import { withRouter, push } from 'react-router-dom';
+
 
 class EmployerRegistration extends React.Component {
     render() {
         return (
             <div>
-                <EmployerNavbar msgCount={0} notificationCount={0}/>
-
+                <LoginNavbar/>
                 <RegistrationForm/>
             </div>
         );
     }
 }
 
-export default EmployerRegistration;
+export default withRouter (EmployerRegistration);

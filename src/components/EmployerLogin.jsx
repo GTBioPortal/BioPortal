@@ -12,7 +12,7 @@ import { withRouter, push } from 'react-router-dom';
 
 import "../styles/login.scss";
 
-export default class EmployerLogin extends Component {
+class EmployerLogin extends Component {
   constructor(props) {
     super(props);
 
@@ -41,6 +41,16 @@ export default class EmployerLogin extends Component {
   // studentHomepage() {
   //   const path = '/student';
   //   this.props.history.push(null, path);
+  // }
+
+  registerEmployer = () => {
+    const path = '/registerEmployer';
+    this.props.history.push(path);
+  }
+
+  // loginEmployer = () => {
+  //   const path = '/Employer';
+  //   this.props.history.push(path);
   // }
 
   render() {
@@ -103,13 +113,14 @@ export default class EmployerLogin extends Component {
                     disabled={!this.validateForm()}
                     type="submit"
                     variant="outlined"
-                    > Login</Button>
+                    onClick = {this.loginEmployer}> Login</Button>
               </Grid>
               <Grid item xs={6}>
                   <Button
                     size="medium"
                     type="submit"
-                    variant="outlined"> Register</Button>
+                    variant="outlined"
+                    onClick = {this.registerEmployer}> Register</Button>
               </Grid>
             </Grid>
           </form>
@@ -122,4 +133,4 @@ export default class EmployerLogin extends Component {
   }
 }
 
-// export default withRouter(EmployerLogin);
+export default withRouter(EmployerLogin);

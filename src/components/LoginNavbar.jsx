@@ -11,10 +11,15 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import { withRouter, push } from 'react-router-dom';
+
 
 import '../styles/toolbar.scss'
 
 class LoginNavbar extends React.Component {
+
+
+
     render() {
         return (
             <AppBar position='static' className='Navbar'>
@@ -22,8 +27,8 @@ class LoginNavbar extends React.Component {
                     <Typography variant='title' color='inherit' className='grow'>
                         BioPortal
                     </Typography>
-                    <Button color="inherit">Login</Button>
-                    <Button color="inherit">Register</Button>
+                    <Button color="inherit" onClick={this.loginEmployer}>Login</Button>
+                    <Button color="inherit" onClick={this.registerEmployer}>Register</Button>
 
                 </Toolbar>
             </AppBar>
@@ -31,4 +36,4 @@ class LoginNavbar extends React.Component {
     }
 }
 
-export default LoginNavbar;
+export default withRouter(LoginNavbar);

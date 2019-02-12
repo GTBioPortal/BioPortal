@@ -6,15 +6,6 @@ import { withRouter, push } from 'react-router-dom';
 
 
 class EmployerLoginpage extends React.Component {
-    constructor(props) {
-        super(props);
-        this.studentHomepage = this.studentHomepage.bind(this);
-    }
-
-    studentHomepage() {
-        const path = '/student/' + 'sampleStudent';
-        this.props.history.push(path);
-    }
 
     render() {
         return (
