@@ -19,6 +19,15 @@ import '../styles/toolbar.scss'
 class LoginNavbar extends React.Component {
 
 
+    registerEmployer = () => {
+        const path = '/registerEmployer';
+        this.props.history.push(path);
+    }
+
+    loginEmployer = () => {
+        const path = '/employerLogin';
+        this.props.history.push(path);
+    }
 
     render() {
         return (
@@ -27,8 +36,8 @@ class LoginNavbar extends React.Component {
                     <Typography variant='title' color='inherit' className='grow'>
                         BioPortal
                     </Typography>
-                    <Button color="inherit" onClick={this.loginEmployer}>Login</Button>
-                    <Button color="inherit" onClick={this.registerEmployer}>Register</Button>
+                    <Button color="inherit"  onClick={this.loginEmployer}>Login</Button>
+                    <Button color="inherit"  onClick={this.registerEmployer}>Register</Button>
 
                 </Toolbar>
             </AppBar>
