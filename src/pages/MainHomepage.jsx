@@ -12,7 +12,7 @@ class MainHomepage extends React.Component {
     constructor(props) {
         super(props);
         this.studentHomepage = this.studentHomepage.bind(this);
-        this.employerHomepage = this.employerHomepage.bind(this);
+        this.employerLoginpage = this.employerLoginpage.bind(this);
     }
 
     studentHomepage() {
@@ -20,22 +20,22 @@ class MainHomepage extends React.Component {
         this.props.history.push(path);
     }
 
-    employerHomepage() {
-        const path = '/employer/' + 'sampleEmployer';
+    employerLoginpage() {
+        const path = '/employer';
         this.props.history.push(path);
     }
 
     render() {
         return (
             <div>
-                <Button variant='contained' 
+                <Button variant='contained'
                             color='primary'
                             onClick={this.studentHomepage}>
                             Student
                         </Button>
-                <Button variant='contained' 
+                <Button variant='contained'
                             color='primary'
-                            onClick={this.employerHomepage}>
+                            onClick={this.employerLoginpage}>
                             Employer
                         </Button>
             </div>
