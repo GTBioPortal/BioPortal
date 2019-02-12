@@ -70,7 +70,7 @@ class JobPostingForm extends React.Component {
 
                 <Typography variant="h6">Supplementary Materials:
                     <Typography><input name="resume" ref={this.resumeRef} type="checkbox"/> Resume</Typography>
-                    <Typography><input name="coverLetter" ref={this.clRef} type="checkbox" /> Cover Letter</Typography>
+                    <Typography><input name="coverLetter" ref={this.clRef} type="checkbox"/> Cover Letter</Typography>
                     <Typography><input name="transcript" ref={this.transcriptRef} type="checkbox"/> Transcript</Typography>
 
                 </Typography><br/>
