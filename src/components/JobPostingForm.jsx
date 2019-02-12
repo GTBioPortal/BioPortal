@@ -2,6 +2,8 @@ import React from 'react';
 import '../styles/employerJobPosting.scss';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 class JobPostingForm extends React.Component {
 
@@ -26,9 +28,9 @@ class JobPostingForm extends React.Component {
             jobDesc: this.descRef.current.value,
             skills: this.skillsRef.current.value,
             deadline: this.deadlineRef.current.value,
-            resume: this.resumeRef.current.value,
-            coverLetter: this.clRef.current.value,
-            transcript: this.transcriptRef.current.value,
+            resume: this.state.resume,
+            coverLetter: this.state.coverLetter,
+            transcript: this.state.transcript,
         }
 
         //this.props.addJobPosting(posting);
@@ -36,9 +38,19 @@ class JobPostingForm extends React.Component {
         // refresh form
         event.currentTarget.reset();
 
-        console.log(posting)
+        console.log(posting);
 
     }
+
+    state = {
+        resume: false,
+        coverLetter: false,
+        transcript: false,
+    };
+
+    handleChange = name => event => {
+        this.setState({ [name]: event.target.checked });
+    };
 
     render()  {
         return (
@@ -69,10 +81,16 @@ class JobPostingForm extends React.Component {
                 </Typography><br/>
 
                 <Typography variant="h6">Supplementary Materials:
-                    <Typography><input name="resume" ref={this.resumeRef} type="checkbox"/> Resume</Typography>
-                    <Typography><input name="coverLetter" ref={this.clRef} type="checkbox"/> Cover Letter</Typography>
-                    <Typography><input name="transcript" ref={this.transcriptRef} type="checkbox"/> Transcript</Typography>
-
+                    <br/>
+                    <FormControlLabel control=
+                        {<Checkbox name= "resume" checked={this.state.resume} onChange={this.handleChange('resume')} value="resume" color="default"/>}
+                    label="Resume"/>
+                    <FormControlLabel control=
+                        {<Checkbox name= "coverLetter" checked={this.state.coverLetter} onChange={this.handleChange('coverLetter')} value="coverLetter" color="default"/>}
+                    label="Cover Letter"/>
+                    <FormControlLabel control=
+                        {<Checkbox name= "transcript" checked={this.state.transcript} onChange={this.handleChange('transcript')} value="transcript" color="default"/>}
+                    label="Transcript"/>
                 </Typography><br/>
 
                 <Button size='large' type="submit" variant="contained" fullWidth={true} className="submit" color="secondary">Submit</Button>
