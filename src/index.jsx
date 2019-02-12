@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import ViewJobPage from './pages/ViewJobPage'
 import MainHomepage from './pages/MainHomepage'
 import EmployerLoginpage from './pages/EmployerLoginpage'
+import EmployerHomepage from './pages/EmployerHomepage'
 import EmployerRegistration from './pages/EmployerRegistration'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -18,6 +19,8 @@ const router = (
             	<Route path='/job' component={ViewJobPage}>
             	</Route>
                 <Route path='/student' component={StudentHomepage}>
+                </Route>
+                <Route path='/employer' component={EmployerHomepage}>
                 </Route>
                 <Route path='/employerLogin' component={EmployerLoginpage}>
                 </Route>
