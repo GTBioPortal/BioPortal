@@ -78,7 +78,7 @@ def create_account():
                 data['name'],
                 data['email'],
                 data['username'],
-                data['password']
+                data['password'],
                 data['account_type']
             )
             user.save()
