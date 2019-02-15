@@ -54,7 +54,7 @@ class User(db.Model):
             return 'Invalid JWT'
 
 
-class ExpiredToken(db.model):
+class ExpiredToken(db.Model):
     __tablename__ = 'jwt_tokens'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
