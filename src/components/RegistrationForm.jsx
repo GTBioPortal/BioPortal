@@ -6,11 +6,6 @@ import TextField from '@material-ui/core/TextField';
 
 class RegistrationForm extends React.Component {
 
-    nameRef = React.createRef();
-    companyNameRef = React.createRef();
-    emailRef = React.createRef();
-    summaryRef = React.createRef();
-
     createRegistration = (event) => {
 
         event.preventDefault();
@@ -22,7 +17,10 @@ class RegistrationForm extends React.Component {
             summary: this.state.summary,
         }
 
-        event.currentTarget.reset();
+        this.setState({name: ''});
+        this.setState({companyName: ''});
+        this.setState({email: ''});
+        this.setState({summary: ''});
 
         console.log(regis);
     }
@@ -36,6 +34,10 @@ class RegistrationForm extends React.Component {
 
     handleChange = name => event => {
         this.setState({[name]: event.target.value,});
+    };
+
+    handleReset = name => event => {
+        this.setState({[name]: ''});
     };
 
 
