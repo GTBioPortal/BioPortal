@@ -36,6 +36,7 @@ def get_all_jobs():
         response.status_code = 200
         return response
     except Exception as e:
+        raise e
         response = jsonify({
             'status': 'error',
             'message': 'could not fetch job postings'
