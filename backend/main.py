@@ -1,5 +1,6 @@
 from models import db
 from models.JobPosting import JobPosting
+from models.User import User
 from config import app_config
 from flask import Flask, request, jsonify
 
@@ -13,7 +14,7 @@ app = Flask(__name__)
 @app.route('/ping/', methods=['GET'])
 def index():
     return 'pong'
-'''
+
 @app.route('/jobs/create', methods=['POST'])
 def create_job():
     data = request.json
@@ -143,7 +144,3 @@ def login():
         })
         response.status = 401
         return response
-'''
-
-#if __name__ == '__main__':
-#    app.run()
