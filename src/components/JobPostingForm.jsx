@@ -48,7 +48,7 @@ class JobPostingForm extends React.Component {
         transcript: false,
     };
 
-    handleChange = name => event => {
+    handleChange = event => {
         this.setState({ [name]: event.target.checked });
     };
 
