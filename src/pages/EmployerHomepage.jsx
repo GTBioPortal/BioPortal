@@ -6,6 +6,7 @@ import '../styles/app.scss';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+
 class EmployerHomePage extends React.Component {
     constructor(props) {
         super(props);
