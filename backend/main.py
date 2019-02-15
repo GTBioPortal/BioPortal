@@ -7,9 +7,9 @@ from flask import Flask, request, jsonify
 
 
 app = Flask(__name__)
-#app.config.from_object(app_config['development'])
+app.config.from_object(app_config['development'])
 
-#db.init_app(app)
+db.init_app(app)
 
 @app.route('/ping/', methods=['GET'])
 def index():
