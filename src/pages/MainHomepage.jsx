@@ -15,7 +15,7 @@ class MainHomepage extends React.Component {
     constructor(props) {
         super(props);
         this.studentHomepage = this.studentHomepage.bind(this);
-        this.employerHomepage = this.employerHomepage.bind(this);
+        this.employerLoginpage = this.employerLoginpage.bind(this);
     }
 
     studentHomepage() {
@@ -23,8 +23,8 @@ class MainHomepage extends React.Component {
         this.props.history.push(path);
     }
 
-    employerHomepage() {
-        const path = '/employer/' + 'sampleEmployer';
+    employerLoginpage() {
+        const path = '/employerLogin';
         this.props.history.push(path);
     }
 
@@ -36,18 +36,19 @@ class MainHomepage extends React.Component {
                             Welcome to BioPortal!
                         </Typography>
                 <Grid container direction="row" justify="center" alignItems="center">
-                    <Button variant='contained' 
+                    <Button variant='contained'
                                 color='primary'
                                 onClick={this.studentHomepage}>
                                 Student
                             </Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <Button variant='contained' 
+                    <Button variant='contained'
                                 color='primary'
-                                onClick={this.employerHomepage}>
+                                onClick={this.employerLoginpage}>
                                 Employer
                             </Button>
                 </Grid>
-            </div> 
+            </div>
+
         );
     }
 }
