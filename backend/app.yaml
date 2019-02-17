@@ -4,3 +4,10 @@ handlers:
 - url: /.*
   script: auto 
 
+env_variables:
+  SQLALCHEMY_DATABASE_URI: >-
+    mysql+pymysql://bioportal:bioportal@/bioportal_db?unix_socket=/cloudsql/gtbio-231502:us-central1:gtbioportal
+
+beta_settings:
+  cloud_sql_instances: gtbio-231502:us-central1:gtbioportal
+
