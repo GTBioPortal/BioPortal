@@ -8,7 +8,7 @@ import os
 
 
 app = Flask(__name__)
-app.config.from_object(app_config['development'])
+#app.config.from_object(app_config['development'])
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
