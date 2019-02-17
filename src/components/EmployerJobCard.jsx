@@ -18,7 +18,7 @@ class EmployerJobCard extends React.Component {
 
     editJob() {
         const { job } = this.props;
-        const path = '/job/' + job.id;
+        const path = '/editJobForm/' + job.id;
         this.props.history.push({
             pathname: path,
             data: this.props
