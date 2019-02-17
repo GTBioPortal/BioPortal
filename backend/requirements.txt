@@ -3,6 +3,6 @@ flask_restful==0.3.6
 flask_migrate==2.1.1
 flask_script==2.0.6
 flask_sqlalchemy==2.3.2
-psycopg==2.8
+psycopg2==2.7.7
 Werkzeug==0.14.1
 PyMySQL==0.9.3
