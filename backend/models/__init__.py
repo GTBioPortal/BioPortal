@@ -6,5 +6,5 @@ from main import db
 
 ma = Marshmallow()
 
-from .JobPosting import JobPosting, JobPostingSchema
-from .User import User, ExpiredToken
+#from .JobPosting import JobPosting, JobPostingSchema
+#from .User import User, ExpiredToken
