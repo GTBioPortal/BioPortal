@@ -77,15 +77,15 @@ class EditJobPosting extends React.Component {
                 </Typography><br/>
 
                 <Typography variant="h6">Start Date:<br/>
-                    <input name="startDate" ref={this.startDateRef} type="text" placeholder="Start Date"/>
+                    <input name="startDate" ref={this.startDateRef} type="text" placeholder={job.start_date}/>
                 </Typography><br/>
 
                 <Typography variant="h6">Job Description:<br/>
-                    <textarea name="jobDesc" ref={this.descRef} placeholder="Job Description" />
+                    <textarea name="jobDesc" ref={this.descRef} placeholder={job.description} />
                 </Typography><br/>
 
                 <Typography variant="h6">Preferred Skills:<br/>
-                    <textarea name="skills" ref={this.skillsRef} placeholder="Preferred Skills" />
+                    <textarea name="skills" ref={this.skillsRef} placeholder={job.skills} />
                 </Typography><br/>
 
                 <Typography variant="h6">Application Deadline:<br/>
