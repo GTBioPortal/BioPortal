@@ -21,7 +21,7 @@ from models.User import User
 
 @app.route('/ping/', methods=['GET'])
 def index():
-    return 'test cloud deploy'
+    return 'pong'
 
 @app.route('/jobs/create', methods=['POST'])
 def create_job():
