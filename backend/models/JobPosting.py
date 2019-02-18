@@ -34,16 +34,6 @@ class JobPosting(db.Model):
         db.session.delete(self)
         db.session.commit()
 
-    def serialize(self):
-        return {
-            'id': self.id,
-            'title': self.title,
-            'company': self.company,
-            'description': self.description,
-            'start_date': 
-        }
-
-
     @staticmethod
     def get_all_jobs():
         return JobPosting.query.all()
