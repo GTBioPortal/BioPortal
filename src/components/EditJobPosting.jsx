@@ -2,6 +2,8 @@ import React from 'react';
 import '../styles/employerJobPosting.scss';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 class EditJobPosting extends React.Component {
     constructor(props){
@@ -17,6 +19,7 @@ class EditJobPosting extends React.Component {
     resumeRef = React.createRef();
     clRef = React.createRef();
     transcriptRef = React.createRef();
+    locationRef = React.createRef();
 
 
     createPosting = (event) => {
@@ -26,6 +29,7 @@ class EditJobPosting extends React.Component {
         const posting = {
             jobTitle: this.jobTitleRef.current.value,
             company: this.companyRef.current.value,
+            location: this.locationRef.current.value,
             startDate: this.startDateRef.current.value,
             jobDesc: this.descRef.current.value,
             skills: this.skillsRef.current.value,
@@ -44,6 +48,16 @@ class EditJobPosting extends React.Component {
 
     }
 
+    state = {
+        resume: false,
+        coverLetter: false,
+        transcript: false,
+    };
+
+    handleChange = name => event => {
+        this.setState({ [name]: event.target.checked });
+    };
+
     render()  {
         const job = this.props.vars.job
         console.log(job)
@@ -56,6 +70,10 @@ class EditJobPosting extends React.Component {
                 </Typography><br/>
                 <Typography variant="h6">Company:<br/>
                     <input name="company" ref={this.companyRef} type="text" placeholder={job.company}/>
+                </Typography><br/>
+
+                <Typography variant="h6">Location<br/>
+                    <input name="location" ref={this.locationRef} type="text" placeholder={job.location} />
                 </Typography><br/>
 
                 <Typography variant="h6">Start Date:<br/>
@@ -75,10 +93,16 @@ class EditJobPosting extends React.Component {
                 </Typography><br/>
 
                 <Typography variant="h6">Supplementary Materials:
-                    <Typography><input name="resume" ref={this.resumeRef} type="checkbox"/> Resume</Typography>
-                    <Typography><input name="coverLetter" ref={this.clRef} type="checkbox"/> Cover Letter</Typography>
-                    <Typography><input name="transcript" ref={this.transcriptRef} type="checkbox"/> Transcript</Typography>
-
+                    <br/>
+                    <FormControlLabel control=
+                        {<Checkbox name= "resume" checked={this.state.resume} onChange={this.handleChange('resume')} value="resume" color="default"/>}
+                    label="Resume"/>
+                    <FormControlLabel control=
+                        {<Checkbox name= "coverLetter" checked={this.state.coverLetter} onChange={this.handleChange('coverLetter')} value="coverLetter" color="default"/>}
+                    label="Cover Letter"/>
+                    <FormControlLabel control=
+                        {<Checkbox name= "transcript" checked={this.state.transcript} onChange={this.handleChange('transcript')} value="transcript" color="default"/>}
+                    label="Transcript"/>
                 </Typography><br/>
 
                 <Button size='large' type="submit" variant="contained" fullWidth={true} className="submit" color="secondary">Submit</Button>

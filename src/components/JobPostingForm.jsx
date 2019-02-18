@@ -16,6 +16,7 @@ class JobPostingForm extends React.Component {
     resumeRef = React.createRef();
     clRef = React.createRef();
     transcriptRef = React.createRef();
+    locationRef = React.createRef();
 
     createPosting = (event) => {
         // 1. Stop from submitting
