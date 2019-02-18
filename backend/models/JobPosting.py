@@ -42,7 +42,7 @@ class JobPosting(db.Model):
     def get_job(id):
         return JobPosting.query.get(id)
 
-class JobPostingSchema(ma.Schama):
+class JobPostingSchema(ma.Schema):
     id = fields.Integer(dump_only=True)
     title = fields.String(required=True)
     company = fields.String(required=True)

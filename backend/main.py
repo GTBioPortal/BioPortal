@@ -1,5 +1,5 @@
 #from models import db
-#from models.JobPosting import JobPosting
+#from models.JobPosting import JobPosting, JobPostingSchema
 #from models.User import User
 from config import app_config
 from flask import Flask, request, jsonify
@@ -16,6 +16,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 import models
+from models.JobPosting import JobPosting, JobPostingSchema
+from models.User import User
 
 @app.route('/ping/', methods=['GET'])
 def index():
@@ -38,7 +40,7 @@ def get_all_jobs():
         job_postings = JobPosting.get_all_jobs()
         response = jsonify({
             'status': 'success',
-            'jobs': JobPostingSchema.dump(job_postings).data
+            'jobs': JobPostingSchema().dump(job_postings).data
         })
         response.status_code = 200
         return response
