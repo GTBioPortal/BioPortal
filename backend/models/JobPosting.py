@@ -1,6 +1,6 @@
 import datetime
 
-from . import db
+from . import db, ma
 from marshmallow import Schema, fields, pre_load, validate
 
 
