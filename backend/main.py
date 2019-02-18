@@ -40,7 +40,7 @@ def get_all_jobs():
         job_postings = JobPosting.get_all_jobs()
         response = jsonify({
             'status': 'success',
-            'jobs': JobPostingSchema().dump(job_postings).data
+            'jobs': JobPostingSchema(many=True).dump(job_postings).data
         })
         response.status_code = 200
         return response
