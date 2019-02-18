@@ -39,10 +39,6 @@ class RegistrationForm extends React.Component {
         this.setState({[name]: event.target.value,});
     };
 
-    handleReset = name => event => {
-        this.setState({[name]: ''});
-    };
-
 
     render()  {
         return (

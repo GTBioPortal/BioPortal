@@ -4,42 +4,37 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import TextField from '@material-ui/core/TextField';
 
 class JobPostingForm extends React.Component {
-
-    jobTitleRef = React.createRef();
-    companyRef = React.createRef();
-    startDateRef = React.createRef();
-    descRef = React.createRef();
-    skillsRef = React.createRef();
-    deadlineRef = React.createRef();
-    resumeRef = React.createRef();
-    clRef = React.createRef();
-    transcriptRef = React.createRef();
 
     createPosting = (event) => {
         // 1. Stop from submitting
         event.preventDefault();
 
         const posting = {
-            jobTitle: this.jobTitleRef.current.value,
-            company: this.companyRef.current.value,
-            location: this.locationRef.current.value,
-
-            startDate: this.startDateRef.current.value,
-            jobDesc: this.descRef.current.value,
-            skills: this.skillsRef.current.value,
-            deadline: this.deadlineRef.current.value,
-
+            jobTitle: this.state.jobTitle,
+            company: this.state.company,
             resume: this.state.resume,
             coverLetter: this.state.coverLetter,
             transcript: this.state.transcript,
+            location: this.state.location,
+            startDate: this.state.startDate,
+            desc: this.state.desc,
+            skills: this.state.skills,
+            deadline: this.state.deadline,
         }
 
-        //this.props.addJobPosting(posting);
-
-        // refresh form
-        event.currentTarget.reset();
+        this.setState({resume: false});
+        this.setState({coverLetter: false});
+        this.setState({transcript: false});
+        this.setState({jobTitle: ''});
+        this.setState({company: ''});
+        this.setState({location: ''});
+        this.setState({startDate: '2019-01-01'});
+        this.setState({desc: ''});
+        this.setState({skills: ''});
+        this.setState({deadline: '2019-01-01'});
 
         console.log(posting);
 
@@ -49,10 +44,21 @@ class JobPostingForm extends React.Component {
         resume: false,
         coverLetter: false,
         transcript: false,
+        jobTitle: '',
+        company: '',
+        location: '',
+        startDate: "2019-01-01",
+        desc: '',
+        skills: '',
+        deadline: "2019-01-01",
+    };
+
+    handleCheckedChange = name => event => {
+        this.setState({ [name]: event.target.checked });
     };
 
     handleChange = name => event => {
-        this.setState({ [name]: event.target.checked });
+        this.setState({[name]: event.target.value,});
     };
 
     render()  {
@@ -60,43 +66,45 @@ class JobPostingForm extends React.Component {
             <form className = "jobPosting" onSubmit={this.createPosting}>
             <br/>
             <Typography variant="h2" align="center">Position Information</Typography><br/>
-                <Typography variant="h6">Job Title:<br/>
-                    <input name="jobTitle" ref={this.jobTitleRef} type="text" placeholder="Job Title"/>
-                </Typography><br/>
-                <Typography variant="h6">Company:<br/>
-                    <input name="company" ref={this.companyRef} type="text" placeholder="Company"/>
-                </Typography><br/>
 
-                <Typography variant="h6">Location<br/>
-                    <input name="location" ref={this.locationRef} type="text" placeholder="Location" />
-                </Typography><br/>
+                <TextField name="jobTitle" id="outlined-full-width-name" label="Job Title" placeholder="Job Title" fullWidth margin="normal"
+                variant="outlined"
+                InputLabelProps={{shrink: true,}} value={this.state.jobTitle} onChange={this.handleChange('jobTitle')}/>
 
-                <Typography variant="h6">Start Date:<br/>
-                    <input name="startDate" ref={this.startDateRef} type="text" placeholder="Start Date"/>
-                </Typography><br/>
+                <TextField name="company" id="outlined-full-width-name" label="Company" placeholder="Company Name"
+                fullWidth margin="normal" variant="outlined"
+                InputLabelProps={{shrink: true,}} value={this.state.company} onChange={this.handleChange('company')}/>
 
-                <Typography variant="h6">Job Description:<br/>
-                    <textarea name="jobDesc" ref={this.descRef} placeholder="Job Description" />
-                </Typography><br/>
+                <TextField name="location" id="outlined-full-width-name" label="Location" placeholder="Job Location"
+                fullWidth margin="normal" variant="outlined"
+                InputLabelProps={{shrink: true,}} value={this.state.location} onChange={this.handleChange('location')}/>
 
-                <Typography variant="h6">Preferred Skills:<br/>
-                    <textarea name="skills" ref={this.skillsRef} placeholder="Preferred Skills" />
-                </Typography><br/>
+                <TextField name="startDate" id="outlined-full-width-name" label="Start Date" type="date"
+                fullWidth margin="normal" variant="outlined"
+                InputLabelProps={{shrink: true,}} value={this.state.startDate} onChange={this.handleChange('startDate')}/>
 
-                <Typography variant="h6">Application Deadline:<br/>
-                    <input name="deadline" ref={this.deadlineRef} type="text" placeholder="Application Deadline" />
-                </Typography><br/>
+                <TextField name="desc" id="outlined-full-width-name" label="Job Description" placeholder="Job Description"
+                fullWidth margin="normal" variant="outlined" multiline rows="5"
+                InputLabelProps={{shrink: true,}} value={this.state.desc} onChange={this.handleChange('desc')}/>
+
+                <TextField name="skills" id="outlined-full-width-name" label="Preferred Skills" placeholder="Preferred Skills"
+                fullWidth margin="normal" variant="outlined"
+                InputLabelProps={{shrink: true,}} value={this.state.skills} onChange={this.handleChange('skills')}/>
+
+                <TextField name="deadline" id="outlined-full-width-name" label="Application Deadline" type="date"
+                fullWidth margin="normal" variant="outlined"
+                InputLabelProps={{shrink: true,}} value={this.state.deadline} onChange={this.handleChange('deadline')}/>
 
                 <Typography variant="h6">Supplementary Materials:
                     <br/>
                     <FormControlLabel control=
-                        {<Checkbox name= "resume" checked={this.state.resume} onChange={this.handleChange('resume')} value="resume" color="default"/>}
+                        {<Checkbox name= "resume" checked={this.state.resume} onChange={this.handleCheckedChange('resume')} value="resume" color="default"/>}
                     label="Resume"/>
                     <FormControlLabel control=
-                        {<Checkbox name= "coverLetter" checked={this.state.coverLetter} onChange={this.handleChange('coverLetter')} value="coverLetter" color="default"/>}
+                        {<Checkbox name= "coverLetter" checked={this.state.coverLetter} onChange={this.handleCheckedChange('coverLetter')} value="coverLetter" color="default"/>}
                     label="Cover Letter"/>
                     <FormControlLabel control=
-                        {<Checkbox name= "transcript" checked={this.state.transcript} onChange={this.handleChange('transcript')} value="transcript" color="default"/>}
+                        {<Checkbox name= "transcript" checked={this.state.transcript} onChange={this.handleCheckedChange('transcript')} value="transcript" color="default"/>}
                     label="Transcript"/>
                 </Typography><br/>
 
