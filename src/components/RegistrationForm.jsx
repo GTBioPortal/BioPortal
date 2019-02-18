@@ -14,12 +14,14 @@ class RegistrationForm extends React.Component {
             name: this.state.name,
             companyName: this.state.companyName,
             email: this.state.email,
+            username: this.state.username,
             summary: this.state.summary,
         }
 
         this.setState({name: ''});
         this.setState({companyName: ''});
         this.setState({email: ''});
+        this.setState({username: ''});
         this.setState({summary: ''});
 
         console.log(regis);
@@ -29,6 +31,7 @@ class RegistrationForm extends React.Component {
         name: '',
         companyName: '',
         email: '',
+        username: '',
         summary: '',
     };
 
@@ -55,6 +58,11 @@ class RegistrationForm extends React.Component {
 
                 <TextField name="email" id="outlined-full-width-email" label="E-mail Address" placeholder="E-mail Address" fullWidth margin="normal" variant="outlined"
                 InputLabelProps={{shrink: true,}} autoComplete="email" value={this.state.email} onChange={this.handleChange('email')} type="email"/>
+
+                <TextField name="username" id="outlined-full-width-email" label="Username" placeholder="Username" fullWidth
+                margin="normal" variant="outlined"
+                InputLabelProps={{shrink: true,}} value={this.state.username}
+                onChange={this.handleChange('username')}/>
 
                 <TextField name="summary" id="outlined-full-width-summary" label="Summary of Position/Company" placeholder="Summary of Position/Company" multiline
                 fullWidth rows="5" margin="normal" variant="outlined"

@@ -24,10 +24,13 @@ class JobPostingForm extends React.Component {
         const posting = {
             jobTitle: this.jobTitleRef.current.value,
             company: this.companyRef.current.value,
+            location: this.locationRef.current.value,
+
             startDate: this.startDateRef.current.value,
             jobDesc: this.descRef.current.value,
             skills: this.skillsRef.current.value,
             deadline: this.deadlineRef.current.value,
+
             resume: this.state.resume,
             coverLetter: this.state.coverLetter,
             transcript: this.state.transcript,
@@ -48,7 +51,7 @@ class JobPostingForm extends React.Component {
         transcript: false,
     };
 
-    handleChange = event => {
+    handleChange = name => event => {
         this.setState({ [name]: event.target.checked });
     };
 
@@ -62,6 +65,10 @@ class JobPostingForm extends React.Component {
                 </Typography><br/>
                 <Typography variant="h6">Company:<br/>
                     <input name="company" ref={this.companyRef} type="text" placeholder="Company"/>
+                </Typography><br/>
+
+                <Typography variant="h6">Location<br/>
+                    <input name="location" ref={this.locationRef} type="text" placeholder="Location" />
                 </Typography><br/>
 
                 <Typography variant="h6">Start Date:<br/>
