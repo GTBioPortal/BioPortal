@@ -155,3 +155,6 @@ def login():
         })
         response.status = 401
         return response
+
+if __name__ == '__main__':
+    app.run(debug=True)
