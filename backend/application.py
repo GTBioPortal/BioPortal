@@ -1,29 +1,29 @@
 #from models import db
 #from models.JobPosting import JobPosting, JobPostingSchema
 #from models.User import User
-#from config import app_config
+from config import app_config
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import os
 
 
 
-app = Flask(__name__)
+application = Flask(__name__)
 #app.config.from_object(app_config['development'])
 #app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
 #app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 #db.init_app(app)
-db = SQLAlchemy(app)
+db = SQLAlchemy(application)
 
 import models
 from models.JobPosting import JobPosting, JobPostingSchema
 from models.User import User
 
-@app.route('/ping/', methods=['GET'])
+@application.route('/ping/', methods=['GET'])
 def index():
     return 'pong'
 
-@app.route('/jobs/create', methods=['POST'])
+@application.route('/jobs/create', methods=['POST'])
 def create_job():
     data = request.json
     posting = JobPosting(data)
@@ -35,7 +35,7 @@ def create_job():
     return response
 
 # TODO: Make paginated
-@app.route('/jobs/', methods=['GET'])
+@application.route('/jobs/', methods=['GET'])
 def get_all_jobs():
     try:
         job_postings = JobPosting.get_all_jobs()
@@ -57,7 +57,7 @@ def get_all_jobs():
 # TODO: Fix this to use /jobs/ route and
 # where this method is used when request type is POST
 # and above method used when request type is GET
-@app.route('/jobs/get', methods=['POST'])
+@application.route('/jobs/get', methods=['POST'])
 def get_job():
     data = request.json
     try:
@@ -77,7 +77,7 @@ def get_job():
         return response
 
 
-@app.route('/account/create', methods=['POST'])
+@application.route('/account/create', methods=['POST'])
 def create_account():
     data = request.json
     user = User.query.filter_by(email=data.get('email')).first()
@@ -116,7 +116,7 @@ def create_account():
         response.status_code = 202
         return response
 
-@app.route('/account/login', methods=['POST'])
+@application.route('/account/login', methods=['POST'])
 def login():
     data = request.json
     try:
@@ -157,4 +157,4 @@ def login():
         return response
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    application.run(debug=True)
