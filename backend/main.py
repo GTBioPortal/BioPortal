@@ -1,7 +1,7 @@
 #from models import db
 #from models.JobPosting import JobPosting, JobPostingSchema
 #from models.User import User
-from config import app_config
+#from config import app_config
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import os
