@@ -34,6 +34,7 @@ def create_job():
     response.status_code = 200
     return response
 
+# TODO: Make paginated
 @app.route('/jobs/', methods=['GET'])
 def get_all_jobs():
     try:

@@ -2,8 +2,10 @@ dist
 frontend/node_modules
 *.log
 backend/requirements.txt
-backend/__pycache__
+*/__pycache__
 backend/env
+backend/lib
+backend/migrations
 backend/venv
 backend/.vscode
 *.pyc
