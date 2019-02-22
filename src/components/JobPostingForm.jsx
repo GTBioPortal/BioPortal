@@ -75,7 +75,7 @@ class JobPostingForm extends React.Component {
                 fullWidth margin="normal" variant="outlined"
                 InputLabelProps={{shrink: true,}} value={this.state.company} onChange={this.handleChange('company')}/>
 
-                <TextField name="location" id="outlined-full-width-name" label="Location" placeholder="Job Location"
+                <TextField name="location" id="outlined-full-width-name" label="Job Location" placeholder="e.g. Atlanta, Georgia"
                 fullWidth margin="normal" variant="outlined"
                 InputLabelProps={{shrink: true,}} value={this.state.location} onChange={this.handleChange('location')}/>
 
