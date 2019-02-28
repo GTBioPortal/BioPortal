@@ -10,9 +10,6 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import Grid from '@material-ui/core/Grid';
 import { withRouter, push } from 'react-router-dom';
-
-
-
 import '../styles/job-grid.scss';
 
 class EmployerJobGrid extends React.Component {
@@ -88,6 +85,7 @@ class EmployerJobGrid extends React.Component {
                   </Grid>
                 </Grid>
             </div>
+
         );
     }
 }
