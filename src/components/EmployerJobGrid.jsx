@@ -6,6 +6,12 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import Grid from '@material-ui/core/Grid';
+import { withRouter, push } from 'react-router-dom';
+
+
 
 import '../styles/job-grid.scss';
 
@@ -17,6 +23,11 @@ class EmployerJobGrid extends React.Component {
             page: 0,
             jobsPerPage: 10
         };
+    }
+
+    newPost = () => {
+    const path = '/employerJobForm';
+    this.props.history.push(path);
     }
 
     render() {
@@ -59,11 +70,24 @@ class EmployerJobGrid extends React.Component {
         }
 
         return (
-            <Table className='employer-job-grid'>
-                <TableBody>
-                    {renderRows()}
-                </TableBody>
-            </Table>
+            <div>
+                <Table className='employer-job-grid'>
+                    <TableBody>
+                        {renderRows()}
+                    </TableBody>
+                </Table>
+                <Grid container
+                    direction="column"
+                    justify="center"
+                    alignItems="center"
+                    spacing='15'>
+                  <Grid item xs={12}>
+                       <Fab onClick={this.newPost} align="center" color="primary" aria-label="Add">
+                            <AddIcon />
+                        </Fab>
+                  </Grid>
+                </Grid>
+            </div>
         );
     }
 }
@@ -74,7 +98,9 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(
+
+
+export default withRouter(connect(
     mapStateToProps,
     null
-)(EmployerJobGrid);
+)(EmployerJobGrid));
