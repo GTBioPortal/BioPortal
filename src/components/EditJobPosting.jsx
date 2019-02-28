@@ -6,7 +6,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import TextField from '@material-ui/core/TextField';
 
-class JobPostingForm extends React.Component {
+class EditJobPostingForm extends React.Component {
 
     createPosting = (event) => {
         // 1. Stop from submitting
@@ -62,36 +62,37 @@ class JobPostingForm extends React.Component {
     };
 
     render()  {
+        const job = this.props.vars.job
         return (
             <form className = "jobPosting" onSubmit={this.createPosting}>
             <br/>
             <Typography variant="h2" align="center">Position Information</Typography><br/>
 
-                <TextField name="jobTitle" id="outlined-full-width-name" label="Job Title" placeholder="Job Title" fullWidth margin="normal"
+                <TextField name="jobTitle" id="outlined-full-width-name" label="Job Title" placeholder={job.position} fullWidth margin="normal"
                 variant="outlined"
                 InputLabelProps={{shrink: true,}} value={this.state.jobTitle} onChange={this.handleChange('jobTitle')}/>
 
-                <TextField name="company" id="outlined-full-width-name" label="Company" placeholder="Company Name"
+                <TextField name="company" id="outlined-full-width-name" label="Company" placeholder={job.company}
                 fullWidth margin="normal" variant="outlined"
                 InputLabelProps={{shrink: true,}} value={this.state.company} onChange={this.handleChange('company')}/>
 
-                <TextField name="location" id="outlined-full-width-name" label="Job Location" placeholder="e.g. Atlanta, Georgia"
+                <TextField name="location" id="outlined-full-width-name" label="Job Location" placeholder={job.location}
                 fullWidth margin="normal" variant="outlined"
                 InputLabelProps={{shrink: true,}} value={this.state.location} onChange={this.handleChange('location')}/>
 
-                <TextField name="startDate" id="outlined-full-width-name" label="Start Date" type="date"
+                <TextField name="startDate" id="outlined-full-width-name" label="Start Date" type="date" placeholder={job.start_date}
                 fullWidth margin="normal" variant="outlined"
                 InputLabelProps={{shrink: true,}} value={this.state.startDate} onChange={this.handleChange('startDate')}/>
 
-                <TextField name="desc" id="outlined-full-width-name" label="Job Description" placeholder="Job Description"
+                <TextField name="desc" id="outlined-full-width-name" label="Job Description" placeholder={job.description}
                 fullWidth margin="normal" variant="outlined" multiline rows="5"
                 InputLabelProps={{shrink: true,}} value={this.state.desc} onChange={this.handleChange('desc')}/>
 
-                <TextField name="skills" id="outlined-full-width-name" label="Preferred Skills" placeholder="Preferred Skills"
+                <TextField name="skills" id="outlined-full-width-name" label="Preferred Skills" placeholder={job.skills}
                 fullWidth margin="normal" variant="outlined"
                 InputLabelProps={{shrink: true,}} value={this.state.skills} onChange={this.handleChange('skills')}/>
 
-                <TextField name="deadline" id="outlined-full-width-name" label="Application Deadline" type="date"
+                <TextField name="deadline" id="outlined-full-width-name" label="Application Deadline" type="date" placeholder={job.deadline}
                 fullWidth margin="normal" variant="outlined"
                 InputLabelProps={{shrink: true,}} value={this.state.deadline} onChange={this.handleChange('deadline')}/>
 
@@ -117,4 +118,4 @@ class JobPostingForm extends React.Component {
     }
 }
 
-export default JobPostingForm
+export default EditJobPostingForm
