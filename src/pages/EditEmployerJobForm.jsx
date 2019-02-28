@@ -3,7 +3,7 @@ import EmployerNavbar from '../components/EmployerNavbar';
 import '../styles/app.scss';
 import EditJobPosting from "../components/EditJobPosting";
 
-class EmployerJobForm extends React.Component {
+class EditEmployerJobForm extends React.Component {
 	constructor(props) {
         super(props)
     }
@@ -19,4 +19,4 @@ class EmployerJobForm extends React.Component {
     }
 }
 
-export default EmployerJobForm;
+export default EditEmployerJobForm;
