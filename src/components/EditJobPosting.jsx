@@ -4,47 +4,39 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import TextField from '@material-ui/core/TextField';
 
-class EditJobPosting extends React.Component {
-    constructor(props){
-        super(props)
-    }
-
-    jobTitleRef = React.createRef();
-    companyRef = React.createRef();
-    startDateRef = React.createRef();
-    descRef = React.createRef();
-    skillsRef = React.createRef();
-    deadlineRef = React.createRef();
-    resumeRef = React.createRef();
-    clRef = React.createRef();
-    transcriptRef = React.createRef();
-    locationRef = React.createRef();
-
+class EditJobPostingForm extends React.Component {
 
     createPosting = (event) => {
         // 1. Stop from submitting
         event.preventDefault();
 
         const posting = {
-            jobTitle: this.jobTitleRef.current.value,
-            company: this.companyRef.current.value,
-            location: this.locationRef.current.value,
-            startDate: this.startDateRef.current.value,
-            jobDesc: this.descRef.current.value,
-            skills: this.skillsRef.current.value,
-            deadline: this.deadlineRef.current.value,
-            resume: this.resumeRef.current.value,
-            coverLetter: this.clRef.current.value,
-            transcript: this.transcriptRef.current.value,
+            jobTitle: this.state.jobTitle,
+            company: this.state.company,
+            resume: this.state.resume,
+            coverLetter: this.state.coverLetter,
+            transcript: this.state.transcript,
+            location: this.state.location,
+            startDate: this.state.startDate,
+            desc: this.state.desc,
+            skills: this.state.skills,
+            deadline: this.state.deadline,
         }
 
-        //this.props.addJobPosting(posting);
+        this.setState({resume: false});
+        this.setState({coverLetter: false});
+        this.setState({transcript: false});
+        this.setState({jobTitle: ''});
+        this.setState({company: ''});
+        this.setState({location: ''});
+        this.setState({startDate: '2019-01-01'});
+        this.setState({desc: ''});
+        this.setState({skills: ''});
+        this.setState({deadline: '2019-01-01'});
 
-        // refresh form
-        event.currentTarget.reset();
-
-        console.log(posting)
+        console.log(posting);
 
     }
 
@@ -52,56 +44,68 @@ class EditJobPosting extends React.Component {
         resume: false,
         coverLetter: false,
         transcript: false,
+        jobTitle: '',
+        company: '',
+        location: '',
+        startDate: "2019-01-01",
+        desc: '',
+        skills: '',
+        deadline: "2019-01-01",
+    };
+
+    handleCheckedChange = name => event => {
+        this.setState({ [name]: event.target.checked });
     };
 
     handleChange = name => event => {
-        this.setState({ [name]: event.target.checked });
+        this.setState({[name]: event.target.value,});
     };
 
     render()  {
         const job = this.props.vars.job
-        console.log(job)
         return (
             <form className = "jobPosting" onSubmit={this.createPosting}>
             <br/>
             <Typography variant="h2" align="center">Position Information</Typography><br/>
-                <Typography variant="h6">Job Title:<br/>
-                    <input name="jobTitle" ref={this.jobTitleRef} type="text" placeholder={job.position}/>
-                </Typography><br/>
-                <Typography variant="h6">Company:<br/>
-                    <input name="company" ref={this.companyRef} type="text" placeholder={job.company}/>
-                </Typography><br/>
 
-                <Typography variant="h6">Location<br/>
-                    <input name="location" ref={this.locationRef} type="text" placeholder={job.location} />
-                </Typography><br/>
+                <TextField name="jobTitle" id="outlined-full-width-name" label="Job Title" placeholder={job.position} fullWidth margin="normal"
+                variant="outlined"
+                InputLabelProps={{shrink: true,}} value={this.state.jobTitle} onChange={this.handleChange('jobTitle')}/>
 
-                <Typography variant="h6">Start Date:<br/>
-                    <input name="startDate" ref={this.startDateRef} type="text" placeholder={job.start_date}/>
-                </Typography><br/>
+                <TextField name="company" id="outlined-full-width-name" label="Company" placeholder={job.company}
+                fullWidth margin="normal" variant="outlined"
+                InputLabelProps={{shrink: true,}} value={this.state.company} onChange={this.handleChange('company')}/>
 
-                <Typography variant="h6">Job Description:<br/>
-                    <textarea name="jobDesc" ref={this.descRef} placeholder={job.description} />
-                </Typography><br/>
+                <TextField name="location" id="outlined-full-width-name" label="Job Location" placeholder={job.location}
+                fullWidth margin="normal" variant="outlined"
+                InputLabelProps={{shrink: true,}} value={this.state.location} onChange={this.handleChange('location')}/>
 
-                <Typography variant="h6">Preferred Skills:<br/>
-                    <textarea name="skills" ref={this.skillsRef} placeholder={job.skills} />
-                </Typography><br/>
+                <TextField name="startDate" id="outlined-full-width-name" label="Start Date" type="date" placeholder={job.start_date}
+                fullWidth margin="normal" variant="outlined"
+                InputLabelProps={{shrink: true,}} value={this.state.startDate} onChange={this.handleChange('startDate')}/>
 
-                <Typography variant="h6">Application Deadline:<br/>
-                    <input name="deadline" ref={this.deadlineRef} type="text" placeholder={job.deadline} />
-                </Typography><br/>
+                <TextField name="desc" id="outlined-full-width-name" label="Job Description" placeholder={job.description}
+                fullWidth margin="normal" variant="outlined" multiline rows="5"
+                InputLabelProps={{shrink: true,}} value={this.state.desc} onChange={this.handleChange('desc')}/>
+
+                <TextField name="skills" id="outlined-full-width-name" label="Preferred Skills" placeholder={job.skills}
+                fullWidth margin="normal" variant="outlined"
+                InputLabelProps={{shrink: true,}} value={this.state.skills} onChange={this.handleChange('skills')}/>
+
+                <TextField name="deadline" id="outlined-full-width-name" label="Application Deadline" type="date" placeholder={job.deadline}
+                fullWidth margin="normal" variant="outlined"
+                InputLabelProps={{shrink: true,}} value={this.state.deadline} onChange={this.handleChange('deadline')}/>
 
                 <Typography variant="h6">Supplementary Materials:
                     <br/>
                     <FormControlLabel control=
-                        {<Checkbox name= "resume" checked={this.state.resume} onChange={this.handleChange('resume')} value="resume" color="default"/>}
+                        {<Checkbox name= "resume" checked={this.state.resume} onChange={this.handleCheckedChange('resume')} value="resume" color="default"/>}
                     label="Resume"/>
                     <FormControlLabel control=
-                        {<Checkbox name= "coverLetter" checked={this.state.coverLetter} onChange={this.handleChange('coverLetter')} value="coverLetter" color="default"/>}
+                        {<Checkbox name= "coverLetter" checked={this.state.coverLetter} onChange={this.handleCheckedChange('coverLetter')} value="coverLetter" color="default"/>}
                     label="Cover Letter"/>
                     <FormControlLabel control=
-                        {<Checkbox name= "transcript" checked={this.state.transcript} onChange={this.handleChange('transcript')} value="transcript" color="default"/>}
+                        {<Checkbox name= "transcript" checked={this.state.transcript} onChange={this.handleCheckedChange('transcript')} value="transcript" color="default"/>}
                     label="Transcript"/>
                 </Typography><br/>
 
@@ -114,4 +118,4 @@ class EditJobPosting extends React.Component {
     }
 }
 
-export default EditJobPosting
+export default EditJobPostingForm
