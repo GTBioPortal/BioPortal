@@ -23,3 +23,11 @@ export function hideUploadSnackbar() {
         type: 'HIDE_SNACKBAR'
     };
 }
+
+export function showEmailStudent() {
+    return {
+        type: 'SHOW_EMAIL_FORM',
+        modalType: 'EMAIL_STUDENT',
+        modalProps: {}
+    };
+}
