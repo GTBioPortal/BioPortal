@@ -3,6 +3,7 @@ import { hideUploadSnackbar } from '../actions/modals'
 import BaseModal from '../containers/BaseModal';
 import JobGrid from '../components/JobGrid';
 import Navbar from '../components/Navbar';
+import JobList from '../components/JobList';
 import { withRouter, push } from 'react-router-dom';
 import '../styles/app.scss';
 import { bindActionCreators } from 'redux';
@@ -35,7 +36,7 @@ class StudentHomePage extends React.Component {
                     autoHideDuration={2000}
                     message={<span id='message-id'>Resume uploaded successfully!</span>} />
                 <JobGrid />
-
+                <JobList/>
                 <BaseModal />
             </div>
         );
