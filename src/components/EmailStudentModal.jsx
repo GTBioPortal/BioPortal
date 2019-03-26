@@ -6,7 +6,9 @@ import TextField from '@material-ui/core/TextField';
 
 import { connect } from 'react-redux';
 
-import '../styles/modals.scss'
+import '../styles/modals.scss';
+import '../styles/employerEmailStudent.scss';
+
 
 class EmailStudentModal extends React.Component {
     sendMessage = (event) => {

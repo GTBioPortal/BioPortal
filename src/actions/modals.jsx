@@ -26,7 +26,7 @@ export function hideUploadSnackbar() {
 
 export function showEmailStudent() {
     return {
-        type: 'SHOW_EMAIL_FORM',
+        type: 'SHOW_MODAL',
         modalType: 'EMAIL_STUDENT',
         modalProps: {}
     };

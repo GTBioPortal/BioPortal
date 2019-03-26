@@ -1,0 +1,31 @@
+@import "colors.scss";
+
+form {
+  line-height: 3;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+textarea {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  height: 150px;
+  border-radius: 4px;
+  resize: none;
+}
+
+.sendMessage {
+  background-color: $green !important;
+  color: #ffffff;
+
+}
