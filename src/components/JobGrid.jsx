@@ -6,6 +6,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import API from '../api/api'
 
 import '../styles/job-grid.scss';
 
@@ -15,30 +16,38 @@ class JobGrid extends React.Component {
         super(props);
         this.state = {
             page: 0,
-            jobsPerPage: 10
+            jobsPerPage: 10,
+            jobs: []
         };
+    }
+
+    componentDidMount() {
+        API.get('jobs/').then(res => {
+            var allJobs = res.data.jobs;
+            this.setState({ jobs: allJobs });
+      })
     } 
     
     render() {
         const JOBS_PER_ROW = 5;
         const { page, jobsPerPage } = this.state;
-        const totalJobs = this.props.jobs.length;
+        const totalJobs = this.state.jobs.length;
         const elemsToDisplay = ((page + 1) * jobsPerPage) > totalJobs ? totalJobs - (page * jobsPerPage) : jobsPerPage 
         const rowsToDisplay = Math.ceil(elemsToDisplay / JOBS_PER_ROW);
 
         const renderRows = () => {
             let table = [];
-            const jobsToShow = this.props.jobs.slice(page * jobsPerPage, page * jobsPerPage + elemsToDisplay);
+            const jobsToShow = this.state.jobs.slice(page * jobsPerPage, page * jobsPerPage + elemsToDisplay);
             let row = [];
             for (let i = 0; i < elemsToDisplay; i++) {
-                const job = this.props.jobs[page * jobsPerPage + i];
+                const job = this.state.jobs[page * jobsPerPage + i];
                 row.push(
                     <TableCell 
                         key={i}
                         padding='none'
                         className='card job-card'
                         component={() => <JobCard job={job} />} >
-                        <JobCard {...this.props} key={i} i={i} job={job} />
+                        <JobCard {...this.state.jobs} key={i} i={i} job={job} />
                     </TableCell>
                 );
                 if ((i + 1) % 5 == 0) {
@@ -68,13 +77,6 @@ class JobGrid extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        jobs: state.jobs
-    }
-}
-
 export default connect(
-    mapStateToProps,
     null
 )(JobGrid);

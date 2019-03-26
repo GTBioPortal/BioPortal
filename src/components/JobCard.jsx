@@ -36,7 +36,7 @@ class JobCard extends React.Component {
                         {job.company}
                     </Typography>
                     <Typography color='textSecondary'>
-                        {job.position}
+                        {job.description}
                     </Typography>
                     <Typography color='textSecondary'>
                         {job.location}
