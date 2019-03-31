@@ -10,7 +10,9 @@ class EmployerLoginpage extends React.Component {
     render() {
         return (
             <div>
+                //insert navigation bar into the top of the page
                 <LoginNavbar/>
+                //insert login application into the page
                 <EmployerLogin/>
             </div>
         );
