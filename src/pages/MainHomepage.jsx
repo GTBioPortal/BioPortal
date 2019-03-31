@@ -19,7 +19,7 @@ class MainHomepage extends React.Component {
     }
 
     studentHomepage() {
-        const path = '/student/' + 'sampleStudent';
+        const path = '/studentLogin';
         this.props.history.push(path);
     }
 
