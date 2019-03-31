@@ -6,12 +6,17 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import TextField from '@material-ui/core/TextField';
 
+/**
+ * JobPostingForm component allows employers to create a job posting by
+ * inputting info into a form and creates prop
+ */
 class JobPostingForm extends React.Component {
 
     createPosting = (event) => {
         // 1. Stop from submitting
         event.preventDefault();
 
+        // creates posting prop
         const posting = {
             jobTitle: this.state.jobTitle,
             company: this.state.company,
@@ -25,6 +30,7 @@ class JobPostingForm extends React.Component {
             deadline: this.state.deadline,
         }
 
+        // resets form to default onSubmit
         this.setState({resume: false});
         this.setState({coverLetter: false});
         this.setState({transcript: false});
@@ -36,10 +42,12 @@ class JobPostingForm extends React.Component {
         this.setState({skills: ''});
         this.setState({deadline: '2019-01-01'});
 
+        // prints to console (testing)
         console.log(posting);
 
     }
 
+    // default state
     state = {
         resume: false,
         coverLetter: false,
@@ -53,10 +61,12 @@ class JobPostingForm extends React.Component {
         deadline: "2019-01-01",
     };
 
+    // handles checkbox changes
     handleCheckedChange = name => event => {
         this.setState({ [name]: event.target.checked });
     };
 
+    // handles form changes
     handleChange = name => event => {
         this.setState({[name]: event.target.value,});
     };

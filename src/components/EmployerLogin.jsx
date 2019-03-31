@@ -12,6 +12,10 @@ import { withRouter, push } from 'react-router-dom';
 
 import "../styles/login.scss";
 
+/**
+ * EmployerLogin component allows employers to login
+ */
+
 class EmployerLogin extends Component {
   constructor(props) {
     super(props);
