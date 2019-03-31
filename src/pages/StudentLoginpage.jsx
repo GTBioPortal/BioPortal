@@ -10,6 +10,7 @@ class StudentLoginpage extends React.Component {
     render() {
         return (
             <div>
+                //creates login page with two components: navigation bar and the login interface
                 <StudentLoginNavbar/>
                 <StudentLogin/>
             </div>
