@@ -1,3 +1,4 @@
+// Provides hard coded job description for testing purposes
 const jobs = [
     {
         'id': 'XemdTpsMSn',

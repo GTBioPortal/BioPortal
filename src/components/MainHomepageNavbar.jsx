@@ -14,11 +14,16 @@ import Typography from '@material-ui/core/Typography';
 
 import '../styles/toolbar.scss'
 
+/**
+ * MainHomepageNavbar component sets the portal title at the top
+ */
 class MainHomepageNavbar extends React.Component {
     render() {
         return (
+            // create a bar at the top
             <AppBar position='static' className='Navbar'>
                 <Toolbar>
+                    // add portal title
                     <Typography variant='title' color='inherit' className='grow' align='left'>
                         BioPortal
                     </Typography>
@@ -28,4 +33,5 @@ class MainHomepageNavbar extends React.Component {
     }
 }
 
+// export component for use
 export default MainHomepageNavbar;

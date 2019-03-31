@@ -9,8 +9,11 @@ import TableRow from '@material-ui/core/TableRow';
 
 import '../styles/job-grid.scss';
 
+/**
+ * JobGrid component shows all available job postings
+ */
 class JobGrid extends React.Component {
-
+    // set states 
     constructor(props) {
         super(props);
         this.state = {
@@ -20,12 +23,14 @@ class JobGrid extends React.Component {
     } 
     
     render() {
+        // set number of jobs per row and number of rows/jobs per row based on total number of job postings
         const JOBS_PER_ROW = 5;
         const { page, jobsPerPage } = this.state;
         const totalJobs = this.props.jobs.length;
         const elemsToDisplay = ((page + 1) * jobsPerPage) > totalJobs ? totalJobs - (page * jobsPerPage) : jobsPerPage 
         const rowsToDisplay = Math.ceil(elemsToDisplay / JOBS_PER_ROW);
 
+        // function to get specific jobs and show them on grid
         const renderRows = () => {
             let table = [];
             const jobsToShow = this.props.jobs.slice(page * jobsPerPage, page * jobsPerPage + elemsToDisplay);
@@ -59,6 +64,7 @@ class JobGrid extends React.Component {
         }
 
         return (
+            // call renderRows function to set table 
             <Table className='job-grid'>
                 <TableBody>
                     {renderRows()}
@@ -68,12 +74,14 @@ class JobGrid extends React.Component {
     }
 }
 
+// map states to props
 function mapStateToProps(state) {
     return {
         jobs: state.jobs
     }
 }
 
+// export component for use/routing
 export default connect(
     mapStateToProps,
     null

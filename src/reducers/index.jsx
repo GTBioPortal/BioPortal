@@ -3,6 +3,7 @@ import { routerReducer as routing } from 'react-router-redux';
 import modals from './modals';
 import jobs from './jobs';
 
+// set reducer for snackbar 
 const showUploadSnackbar = (state = false, action) => {
     switch (action.type) {
         case 'SHOW_SNACKBAR':
@@ -14,6 +15,7 @@ const showUploadSnackbar = (state = false, action) => {
     }
 }
 
+// create single reducing function combining all reducers
 const rootReducer = combineReducers({
     modals,
     jobs,
@@ -21,4 +23,5 @@ const rootReducer = combineReducers({
     routing
 });
 
+// export reducer for use
 export default rootReducer;
