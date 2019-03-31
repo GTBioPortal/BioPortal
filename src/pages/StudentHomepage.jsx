@@ -33,10 +33,12 @@ class StudentHomePage extends React.Component {
                 <Navbar msgCount={0} notificationCount={0}/>
                 <Snackbar
                     anchorOrigin={{vertical: 'top', horizontal: 'center'}}
+                    //determines if resume confirmation pop-up message needs to be displayed
                     open={this.props.showUploadSnackbar && this.state.showUploadSnackbar}
                     onClose={this.handleSnackbarClose}
                     autoHideDuration={2000}
                     message={<span id='message-id'>Resume uploaded successfully!</span>} />
+                //inserts job grid with the different cards into the page
                 <JobGrid />
                 <BaseModal />
             </div>

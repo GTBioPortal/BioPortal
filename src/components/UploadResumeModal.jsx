@@ -8,7 +8,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { hideUploadResume, showUploadSnackbar }  from '../actions/modals'
 
-import '../styles/modals.scss'
+import '../styles/modals.scss';
 
 
 class UploadResumeModal extends React.Component {

@@ -9,6 +9,7 @@ class StudentRegistration extends React.Component {
     render() {
         return (
             <div>
+                {/*creates page with two components: navigation bar and the actual form*/}
                 <StudentLoginNavbar/>
                 <StudentRegistrationForm/>
             </div>

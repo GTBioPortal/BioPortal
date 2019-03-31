@@ -1,10 +1,12 @@
 import React from 'react';
 import UploadResumeModal from '../components/UploadResumeModal';
 import { connect } from 'react-redux';
+import EmailStudentModal from "../components/EmailStudentModal";
 
 
 const MODAL_COMPONENTS = {
     'UPLOAD_RESUME': UploadResumeModal,
+    'EMAIL_STUDENT': EmailStudentModal,
 }
 
 const BaseModal = ({ modals }) => {

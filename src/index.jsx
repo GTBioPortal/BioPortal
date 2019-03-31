@@ -1,3 +1,5 @@
+/* Homepage for BioPortal */
+
 import React from 'react'
 import ReactDOM from 'react-dom'
 import ViewJobPage from './pages/ViewJobPage'
@@ -14,6 +16,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 import StudentHomepage from "./pages/StudentHomepage";
 
+/* Router: Determines path to component correspondence */
 const router = (
     <Provider store={store}>
         <Router>
@@ -43,6 +46,7 @@ const router = (
     </Provider>
 );
 
+/* renders router */
 ReactDOM.render(
     router,
     document.getElementById('app')
