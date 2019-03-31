@@ -51,7 +51,7 @@ class Navbar extends React.Component {
 
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ showEmailStudent }, dispatch);
+    return bindActionCreators({ showUploadResume }, dispatch);
 }
 
 export default connect(
