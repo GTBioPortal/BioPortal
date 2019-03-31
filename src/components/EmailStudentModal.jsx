@@ -15,40 +15,48 @@ class EmailStudentModal extends React.Component {
 
         event.preventDefault();
 
+        //set initial values of the different attributes
         const messageInfo = {
             to: "123@gmail.com",
             subject: this.state.subject,
             body: this.state.body,
         }
 
+        //set the states of the different data structures
         this.setState({to: ''});
         this.setState({subject: ''});
         this.setState({body: ''});
 
+        //specify different variables within data structure
         var body_message = messageInfo.body;
         var email = messageInfo.to;
         var subject = messageInfo.subject;
 
         var mailto_link = 'mailto:' + email + '?subject=' + subject + '&body=' + body_message;
 
+        //open new window to send email using mailto client
         var win = window.open(mailto_link, 'emailWindow');
         if (win && win.open && !win.closed) win.close();
     }
 
+    //defines data structure that holds information to send email
     state = {
         to: '',
         subject: '',
         body: '',
     };
 
+    //updates values within data structure based on what is submitted in the form
     handleChange = name => event => {
         this.setState({[name]: event.target.value,});
     };
 
     render () {
         return (
+            //defines pop-up window for sending an email
             <Modal
                 open={true}>
+                //defines action to take when submit is clicked
                 <form className = "emailStudent" onSubmit={this.sendMessage}>
                     <br/>
                     <Typography variant="h2" align="center">Enter Information</Typography><br/>
