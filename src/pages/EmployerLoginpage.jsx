@@ -4,7 +4,10 @@ import '../styles/app.scss';
 import EmployerLogin from "../components/EmployerLogin";
 import { withRouter, push } from 'react-router-dom';
 
-
+/**
+ * EmployerLoginPage renders EmployerLogin component
+ * includes LoginNavbar
+ */
 class EmployerLoginpage extends React.Component {
 
     render() {
