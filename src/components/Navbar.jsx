@@ -1,7 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { showEmailStudent } from '../actions/modals';
+import { showUploadResume } from '../actions/modals';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import AppBar from '@material-ui/core/AppBar';
 import Badge from '@material-ui/core/Badge';
@@ -25,7 +25,7 @@ class Navbar extends React.Component {
                     </Typography>
                     <div>
                         <Button color='inherit'
-                            onClick={this.props.showEmailStudent}>
+                            onClick={this.props.showUploadResume}>
                             Upload Resum&#201;
                         </Button>
                         <IconButton color='inherit'>
@@ -51,7 +51,7 @@ class Navbar extends React.Component {
 
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ showEmailStudent }, dispatch);
+    return bindActionCreators({ showUploadResume }, dispatch);
 }
 
 export default connect(
