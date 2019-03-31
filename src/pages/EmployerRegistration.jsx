@@ -9,7 +9,9 @@ class EmployerRegistration extends React.Component {
     render() {
         return (
             <div>
+                //insert navigation bar at the top of the page
                 <LoginNavbar/>
+                //insert form component into the page
                 <RegistrationForm/>
             </div>
         );
