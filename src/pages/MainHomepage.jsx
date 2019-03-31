@@ -31,16 +31,20 @@ class MainHomepage extends React.Component {
     render() {
         return (
             <div>
+                //inserts the navigation bar into the top of the page
                 <MainHomepageNavbar/>
                     <Typography className='top-padding' variant='h3' color='inherit' align='center' gutterBottom>
                             Welcome to BioPortal!
                         </Typography>
+                //shows 2 different buttons (student and employer)
                 <Grid container direction="row" justify="center" alignItems="center">
+                    //defines student button
                     <Button variant='contained'
                                 color='primary'
                                 onClick={this.studentHomepage}>
                                 Student
                             </Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    //defines employer button
                     <Button variant='contained'
                                 color='primary'
                                 onClick={this.employerLoginpage}>
