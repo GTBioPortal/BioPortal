@@ -11,6 +11,10 @@ import '../styles/app.scss';
 
 import { connect } from 'react-redux';
 
+/**
+ * Main homepage for the webportal contains two buttons for student and employer
+ * user pages
+ */
 class MainHomepage extends React.Component {
     constructor(props) {
         super(props);
@@ -18,11 +22,13 @@ class MainHomepage extends React.Component {
         this.employerLoginpage = this.employerLoginpage.bind(this);
     }
 
+    // routes to the student login page
     studentHomepage() {
         const path = '/studentLogin';
         this.props.history.push(path);
     }
 
+    // routes to the employer login page
     employerLoginpage() {
         const path = '/employerLogin';
         this.props.history.push(path);
@@ -31,20 +37,20 @@ class MainHomepage extends React.Component {
     render() {
         return (
             <div>
-                //inserts the navigation bar into the top of the page
+                {/** inserts the navigation bar into the top of the page*/}
                 <MainHomepageNavbar/>
                     <Typography className='top-padding' variant='h3' color='inherit' align='center' gutterBottom>
                             Welcome to BioPortal!
                         </Typography>
-                //shows 2 different buttons (student and employer)
+                {/** shows 2 different buttons (student and employer)*/}
                 <Grid container direction="row" justify="center" alignItems="center">
-                    //defines student button
+                    {/** defines student button */}
                     <Button variant='contained'
                                 color='primary'
                                 onClick={this.studentHomepage}>
                                 Student
                             </Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    //defines employer button
+                    {/** defines employer button*/}
                     <Button variant='contained'
                                 color='primary'
                                 onClick={this.employerLoginpage}>

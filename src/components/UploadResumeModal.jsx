@@ -10,7 +10,10 @@ import { hideUploadResume, showUploadSnackbar }  from '../actions/modals'
 
 import '../styles/modals.scss';
 
-
+/**
+ * Upload Resume component which handles uploading a resume from a local
+ * computer
+ */
 class UploadResumeModal extends React.Component {
     constructor(props) {
         super(props);
@@ -19,6 +22,8 @@ class UploadResumeModal extends React.Component {
         this.resumeChange = this.resumeChange.bind(this);
     }
 
+    // sends messages to the console that checks to see if the Resume was
+    // properlly uploaded
     uploadResume() {
         if (!this.state.resumeSelected) {
             console.log("Error uploading Resume");

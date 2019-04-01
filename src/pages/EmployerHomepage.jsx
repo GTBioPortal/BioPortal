@@ -10,7 +10,6 @@ import { connect } from 'react-redux';
  * EmployerHomePage renders EmployerJobGrid component which contains JobPostingCards
  * includes EmployerNavbar
  */
-
 class EmployerHomePage extends React.Component {
     constructor(props) {
         super(props);

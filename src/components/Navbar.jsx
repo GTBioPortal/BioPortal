@@ -21,32 +21,34 @@ import '../styles/toolbar.scss'
 class Navbar extends React.Component {
     render() {
         return (
-            // create a bar at the top
+            /**
+             * Create a bar at the top
+             */
             <AppBar position='static' className='Navbar'>
                 <Toolbar>
-                    // add portal title
+                    {/* add portal title */}
                     <Typography variant='title' color='inherit' className='grow'>
                         BioPortal
                     </Typography>
                     <div>
-                        // add upload resume button that calls showUploadResume function when clicked
+                        {/* add upload resume button that calls showUploadResume function when clicked*/}
                         <Button color='inherit'
                             onClick={this.props.showUploadResume}>
                             Upload Resum&#201;
                         </Button>
-                        // add mail badge
+                        {/* add mail badge */}
                         <IconButton color='inherit'>
                             <Badge color='secondary' badgeContent={0} invisible={true}>
                                 <MailIcon />
                             </Badge>
                         </IconButton>
-                        // add notifications badge
+                        {/* add notifications badge */}
                         <IconButton color='inherit'>
                             <Badge color='secondary' badgeContent={0} invisible={true}>
                                 <NotificationsIcon />
                             </Badge>
                         </IconButton>
-                        // add profile badge
+                        {/* add profile badge */}
                         <IconButton aria-haspopup='true'
                             color='inherit'>
                             <AccountCircle />

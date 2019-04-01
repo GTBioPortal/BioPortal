@@ -4,8 +4,12 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
+/**
+ * Restering a Student component
+ */
 class StudentRegistrationForm extends React.Component {
 
+    // creates a new student
     createRegistration = (event) => {
 
         event.preventDefault();

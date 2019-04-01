@@ -12,6 +12,9 @@ import { withRouter, push } from 'react-router-dom';
 
 import "../styles/login.scss";
 
+/**
+ * Student Login Component that handles a student logging in
+ */
 class StudentLogin extends Component {
   constructor(props) {
     super(props);

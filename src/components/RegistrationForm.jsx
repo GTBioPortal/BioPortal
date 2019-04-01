@@ -4,6 +4,9 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
+/**
+ * Registration Form component allows employers to create a job posting
+ */
 class RegistrationForm extends React.Component {
 
     createRegistration = (event) => {

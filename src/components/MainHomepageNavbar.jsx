@@ -20,10 +20,10 @@ import '../styles/toolbar.scss'
 class MainHomepageNavbar extends React.Component {
     render() {
         return (
-            // create a bar at the top
+            /** create a bar at the top*/
             <AppBar position='static' className='Navbar'>
+                {/* add portal title*/}
                 <Toolbar>
-                    // add portal title
                     <Typography variant='title' color='inherit' className='grow' align='left'>
                         BioPortal
                     </Typography>
