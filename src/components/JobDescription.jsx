@@ -17,24 +17,24 @@ class JobDescription extends React.Component {
     }
 
     render() {
-        // get individual job from props
+        /** get individual job from props */
     	const job = this.props.location.data.job;
         return (
         	<div>
-                // place job company
+                {/** place job company */}
 	        	<Typography variant="h2" align="center" className='title' gutterBottom>
 	        		{job.company}
 	        	</Typography>
-                // place job position
+                {/** place job position */}
 	        	<Typography variant="h5" align="center" >
         			{job.position}
         		</Typography>
-                // place job location and deadline
+                {/** place job location and deadline */}
         		<Typography variant="h5" align="center" gutterBottom>
         			{job.location} | {job.deadline}
         		</Typography>
         		<div align="center">
-                    // place job description
+                    {/** place job description */}
 	        		<Typography variant="subheading" align="center" gutterBottom>
 	        		Job Description:
 	        		</Typography>

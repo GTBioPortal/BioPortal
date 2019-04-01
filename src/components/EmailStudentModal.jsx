@@ -9,7 +9,9 @@ import { connect } from 'react-redux';
 import '../styles/modals.scss';
 import '../styles/employerEmailStudent.scss';
 
-
+/**
+ * Modal that sets up sending an email to a student
+ */
 class EmailStudentModal extends React.Component {
     sendMessage = (event) => {
 
@@ -53,10 +55,10 @@ class EmailStudentModal extends React.Component {
 
     render () {
         return (
-            //defines pop-up window for sending an email
+            /** defines pop-up window for sending an email */
             <Modal
                 open={true}>
-                //defines action to take when submit is clicked
+                {/* defines action to take when submit is clicked */}
                 <form className = "emailStudent" onSubmit={this.sendMessage}>
                     <br/>
                     <Typography variant="h2" align="center">Enter Information</Typography><br/>

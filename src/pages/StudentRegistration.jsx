@@ -4,7 +4,9 @@ import '../styles/app.scss';
 import StudentRegistrationForm from "../components/StudentRegistrationForm";
 import { withRouter, push } from 'react-router-dom';
 
-
+/**
+ * Register Student page which contains the Registration form component
+ */
 class StudentRegistration extends React.Component {
     render() {
         return (

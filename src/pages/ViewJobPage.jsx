@@ -16,7 +16,6 @@ import Chip from '@material-ui/core/Chip';
  * ViewJobPage renders the JobDescription component which allows the user to view the job and its description
  * includes Navbar
  */
-
 class ViewJobPage extends React.Component {
     // set default states
     constructor(props) {

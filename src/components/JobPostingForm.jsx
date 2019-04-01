@@ -76,31 +76,37 @@ class JobPostingForm extends React.Component {
             <form className = "jobPosting" onSubmit={this.createPosting}>
             <br/>
             <Typography variant="h2" align="center">Position Information</Typography><br/>
-
+                {/** @type {TextField} [Job Title text box] */}
                 <TextField name="jobTitle" id="outlined-full-width-name" label="Job Title" placeholder="Job Title" fullWidth margin="normal"
                 variant="outlined"
                 InputLabelProps={{shrink: true,}} value={this.state.jobTitle} onChange={this.handleChange('jobTitle')}/>
 
+                {/** @type {TextField} [Company text box] */}
                 <TextField name="company" id="outlined-full-width-name" label="Company" placeholder="Company Name"
                 fullWidth margin="normal" variant="outlined"
                 InputLabelProps={{shrink: true,}} value={this.state.company} onChange={this.handleChange('company')}/>
 
+                {/** @type {TextField} [location text box] */}
                 <TextField name="location" id="outlined-full-width-name" label="Job Location" placeholder="e.g. Atlanta, Georgia"
                 fullWidth margin="normal" variant="outlined"
                 InputLabelProps={{shrink: true,}} value={this.state.location} onChange={this.handleChange('location')}/>
 
+                {/** @type {TextField} [startdate text box] */}
                 <TextField name="startDate" id="outlined-full-width-name" label="Start Date" type="date"
                 fullWidth margin="normal" variant="outlined"
                 InputLabelProps={{shrink: true,}} value={this.state.startDate} onChange={this.handleChange('startDate')}/>
 
+                {/** @type {TextField} [Description text box] */}
                 <TextField name="desc" id="outlined-full-width-name" label="Job Description" placeholder="Job Description"
                 fullWidth margin="normal" variant="outlined" multiline rows="5"
                 InputLabelProps={{shrink: true,}} value={this.state.desc} onChange={this.handleChange('desc')}/>
 
+                {/** @type {TextField} [preferred skills text box] */}
                 <TextField name="skills" id="outlined-full-width-name" label="Preferred Skills" placeholder="Preferred Skills"
                 fullWidth margin="normal" variant="outlined"
                 InputLabelProps={{shrink: true,}} value={this.state.skills} onChange={this.handleChange('skills')}/>
 
+                {/** @type {TextField} [Deadline to apply text box] */}
                 <TextField name="deadline" id="outlined-full-width-name" label="Application Deadline" type="date"
                 fullWidth margin="normal" variant="outlined"
                 InputLabelProps={{shrink: true,}} value={this.state.deadline} onChange={this.handleChange('deadline')}/>

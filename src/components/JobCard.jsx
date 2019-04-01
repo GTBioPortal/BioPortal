@@ -35,10 +35,10 @@ class JobCard extends React.Component {
     render() {
         const { job, i } = this.props;
         return (
-            // create card from individual job
+            /** create card from individual job */
             <td key={i} className='card-td job-card'>
             <Card className='card job-card'>
-                // set content of card to be job position, job location and job company
+                {/** set content of card to be job position, job location and job company */}
                 <CardContent>
                     <Typography className='card-title' gutterBottom>
                         {job.company}
@@ -50,7 +50,7 @@ class JobCard extends React.Component {
                         {job.location}
                     </Typography>
                 </CardContent>
-                // set card to call the viewJob function when the view job button is clicked
+                {/** set card to call the viewJob function when the view job button is clicked */}
                 <CardActions id='view-job-div'>
                     <Button size='small' id='view-job' onClick={this.viewJob}>View Job</Button>
                 </CardActions>

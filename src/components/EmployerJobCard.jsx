@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
  * and allows an employer to click on it to edit it
  */
 class EmployerJobCard extends React.Component {
-    // bind the editJob function 
+    // bind the editJob function
     constructor(props) {
         super(props)
         this.editJob = this.editJob.bind(this);
@@ -34,10 +34,10 @@ class EmployerJobCard extends React.Component {
     render() {
         const { job, i } = this.props;
         return (
-            // create card from individual job
+            /** create card from individual job */
             <td key={i} className='card-td job-card'>
                 <Card className='card job-card'>
-                    // set content of card to be job position and job location
+                    {/** set content of card to be job position and job location */}
                     <CardContent>
                         <Typography className='card-title' gutterBottom>
                             {job.position}
@@ -46,7 +46,7 @@ class EmployerJobCard extends React.Component {
                             {job.location}
                         </Typography>
                     </CardContent>
-                    // set card to call the editJob function when the edit job button is clicked
+                    {/** set card to call the editJob function when the edit job button is clicked */}
                     <CardActions id='edit-job-div'>
                         <Button size='small' id='edit-job' onClick={this.editJob}>Edit Job Posting</Button>
                     </CardActions>
