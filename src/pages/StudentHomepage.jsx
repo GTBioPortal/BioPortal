@@ -8,6 +8,7 @@ import '../styles/app.scss';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Snackbar from '@material-ui/core/Snackbar';
+import API from '../api/api'
 
 /**
  * Student homepage that contains job cards
@@ -15,8 +16,10 @@ import Snackbar from '@material-ui/core/Snackbar';
 class StudentHomePage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { showUploadSnackbar: true };
-        //:this.handleSnackbarClose = this.handleSnackbarClose.bind(this);
+        this.state = {
+            showUploadSnackbar: true,
+            jobs: [] 
+        };
     }
 
     componentWillUnmount(){
