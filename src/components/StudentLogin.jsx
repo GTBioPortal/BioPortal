@@ -7,8 +7,9 @@ import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
 import { withRouter, push } from 'react-router-dom';
 
-
-
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { showLoginFailedSnackbar }  from '../actions/modals'
 
 import "../styles/login.scss";
 
@@ -23,6 +24,8 @@ class StudentLogin extends Component {
       email: "",
       password: ""
     };
+
+    this.loginStudent = this.loginStudent.bind(this);
 
     // this.studentHomepage = this.studentHomepage.bind(this);
   }
@@ -52,8 +55,13 @@ class StudentLogin extends Component {
   }
 
   loginStudent = () => {
-    const path = '/student';
-    this.props.history.push(path);
+    if (this.state.password.length == 1) {
+      console.log("Authentication failed");
+      this.props.showLoginFailedSnackbar();
+    } else {
+      const path = '/student';
+      this.props.history.push(path);
+    }
   }
 
   render() {
@@ -136,4 +144,11 @@ class StudentLogin extends Component {
   }
 }
 
-export default withRouter(StudentLogin);
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ showLoginFailedSnackbar }, dispatch);
+}
+
+export default withRouter(connect(
+    null,
+    mapDispatchToProps
+)(StudentLogin));

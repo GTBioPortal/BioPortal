@@ -35,3 +35,15 @@ export function showEmailStudent() {
         modalProps: {}
     };
 }
+
+export function showLoginFailedSnackbar() {
+    return {
+        type: 'SHOW_SNACKBAR'
+    };
+}
+
+export function hideLoginFailedSnackbar() {
+    return {
+        type: 'HIDE_SNACKBAR'
+    };
+}
