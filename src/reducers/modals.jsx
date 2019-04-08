@@ -1,8 +1,10 @@
+// set initial modal states
 export const initialModalState = {
     modalType: null,
     modalProps: {}
 }
 
+// set modals
 const modals = (state = initialModalState, action) => {
     switch (action.type) {
         case 'SHOW_MODAL':
@@ -17,4 +19,5 @@ const modals = (state = initialModalState, action) => {
     }
 }
 
+// export const for use
 export default modals

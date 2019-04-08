@@ -1,3 +1,7 @@
+/*
+* Set all modal actions with each of its types/props
+*/
+
 export function showUploadResume() {
     return {
         type: 'SHOW_MODAL',

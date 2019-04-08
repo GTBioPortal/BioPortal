@@ -4,7 +4,9 @@ import '../styles/app.scss';
 import StudentLogin from "../components/StudentLogin";
 import { withRouter, push } from 'react-router-dom';
 
-
+/**
+ * Student login page that contains the Student navbar and login components
+ */
 class StudentLoginpage extends React.Component {
 
     render() {

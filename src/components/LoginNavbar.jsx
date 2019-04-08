@@ -16,14 +16,19 @@ import { withRouter, push } from 'react-router-dom';
 
 import '../styles/toolbar.scss'
 
+/**
+ * Login Navigation top bar component that is the top bar of the portal,
+ * contains Register and Login buttons
+ */
 class LoginNavbar extends React.Component {
 
-
+    // changes the screen to register employer
     registerEmployer = () => {
         const path = '/registerEmployer';
         this.props.history.push(path);
     }
 
+    // changes the screen to login an employer
     loginEmployer = () => {
         const path = '/employerLogin';
         this.props.history.push(path);

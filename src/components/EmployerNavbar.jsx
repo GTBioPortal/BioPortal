@@ -14,25 +14,33 @@ import Typography from '@material-ui/core/Typography';
 
 import '../styles/toolbar.scss'
 
+/**
+ * EmployerNavbar component sets the portal navigation items at the top of each webpage for employers
+ */
 class EmployerNavbar extends React.Component {
     render() {
         return (
+            /* create a bar at the top */
             <AppBar position='static' className='Navbar'>
                 <Toolbar>
+                    {/* add portal title */}
                     <Typography variant='title' color='inherit' className='grow'>
                         BioPortal
                     </Typography>
                     <div>
+                        {/* add mail badge */}
                         <IconButton color='inherit'>
                             <Badge color='secondary' badgeContent={0} invisible={true}>
                                 <MailIcon />
                             </Badge>
                         </IconButton>
+                        {/* add notifications badge */}
                         <IconButton color='inherit'>
                             <Badge color='secondary' badgeContent={0} invisible={true}>
                                 <NotificationsIcon />
                             </Badge>
                         </IconButton>
+                        {/* add profile badge */}
                         <IconButton aria-haspopup='true'
                                     color='inherit'>
                             <AccountCircle />
@@ -44,4 +52,5 @@ class EmployerNavbar extends React.Component {
     }
 }
 
+// export component for use
 export default EmployerNavbar;

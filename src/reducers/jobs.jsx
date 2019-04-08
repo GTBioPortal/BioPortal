@@ -1,6 +1,4 @@
-
-
-
+// return default state of job based on action type
 const jobs = (state = [], action) => {
     switch(action.type) {
         default:
@@ -8,4 +6,5 @@ const jobs = (state = [], action) => {
     }
 }
 
+// export const for use
 export default jobs;

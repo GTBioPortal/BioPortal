@@ -16,14 +16,18 @@ import { withRouter, push } from 'react-router-dom';
 
 import '../styles/toolbar.scss'
 
+/**
+ * Student Login page's navigation bar
+ */
 class StudentLoginNavbar extends React.Component {
 
-
+    // changes the screen for registering a student
     registerStudent = () => {
         const path = '/registerStudent';
         this.props.history.push(path);
     }
 
+    // changes the screen for logging a student in
     loginStudent = () => {
         const path = '/studentLogin';
         this.props.history.push(path);
