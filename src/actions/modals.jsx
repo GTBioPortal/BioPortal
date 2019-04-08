@@ -35,3 +35,11 @@ export function showEmailStudent() {
         modalProps: {}
     };
 }
+
+export function applyToJob() {
+    return {
+        type: 'SHOW_MODAL',
+        modalType: 'APPLY_TO_JOB',
+        modalProps: {}
+    };
+}

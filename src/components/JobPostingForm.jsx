@@ -5,6 +5,8 @@ import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import TextField from '@material-ui/core/TextField';
+import API from '../api/api';
+
 
 /**
  * JobPostingForm component allows employers to create a job posting by
@@ -15,6 +17,7 @@ class JobPostingForm extends React.Component {
     createPosting = (event) => {
         // 1. Stop from submitting
         event.preventDefault();
+        var dt = new Date();
 
         // creates posting prop
         const posting = {
@@ -28,6 +31,11 @@ class JobPostingForm extends React.Component {
             desc: this.state.desc,
             skills: this.state.skills,
             deadline: this.state.deadline,
+
+            created_at: dt.toUTCString(),
+            author: this.state.author,
+            author_id: this.state.author_id,
+            id:this.state.id
         }
 
         // resets form to default onSubmit
@@ -41,9 +49,37 @@ class JobPostingForm extends React.Component {
         this.setState({desc: ''});
         this.setState({skills: ''});
         this.setState({deadline: '2019-01-01'});
+        // this.setState({created_at: ''});
+        this.setState({author: ''});
+        this.setState({author_id: 0});
+        this.setState({id: 0});
+
+
 
         // prints to console (testing)
         console.log(posting);
+
+            //TODO: store token
+        API.post('jobs/create', {
+            title: posting.jobTitle,
+            company: posting.company,
+            resume: posting.resume,
+            coverLetter: posting.coverLetter,
+            transcript: posting.transcript,
+            location: posting.location,
+            start_date: posting.startDate,
+            description: posting.desc,
+            // skills: posting.skills,
+            deadline: posting.deadline,
+
+            created_at: dt.toUTCString(),
+            author: 'jimmy',
+            author_id: 1,
+            id: 68
+        }).then(res => {
+            console.log(res);
+            // token = res.data.auth_token;
+      });
 
     }
 
@@ -59,6 +95,9 @@ class JobPostingForm extends React.Component {
         desc: '',
         skills: '',
         deadline: "2019-01-01",
+        author: '',
+        author_id: 0,
+        id: 0
     };
 
     // handles checkbox changes

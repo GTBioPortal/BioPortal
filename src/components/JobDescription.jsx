@@ -45,7 +45,7 @@ class JobDescription extends React.Component {
 		                </CardContent>
 
 		                <CardActions id='view-job-div'>
-		                    <Button size='small' id='apply'>Apply</Button>
+		                    <Button size='small' id='apply' onClick={this.applyToJob}>Apply</Button>
 		                </CardActions>
 	           	 	</Card>
            	 	</div>
@@ -53,6 +53,11 @@ class JobDescription extends React.Component {
 
         )
     }
+}
+
+// dispatch applyToJob function to props
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ applyToJob }, dispatch);
 }
 
 // export component for use/routing

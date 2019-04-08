@@ -24,19 +24,21 @@ class JobGrid extends React.Component {
         };
     }
 
+
     componentDidMount() {
         API.get('jobs/').then(res => {
             var allJobs = res.data.jobs;
             this.setState({ jobs: allJobs });
       })
-    } 
-    
+    }
+
     render() {
         /** set number of jobs per row and number of rows/jobs per row based on total number of job postings */
         const JOBS_PER_ROW = 5;
         const { page, jobsPerPage } = this.state;
+
         const totalJobs = this.state.jobs.length;
-        const elemsToDisplay = ((page + 1) * jobsPerPage) > totalJobs ? totalJobs - (page * jobsPerPage) : jobsPerPage 
+        const elemsToDisplay = ((page + 1) * jobsPerPage) > totalJobs ? totalJobs - (page * jobsPerPage) : jobsPerPage
 
         const rowsToDisplay = Math.ceil(elemsToDisplay / JOBS_PER_ROW);
 
@@ -85,14 +87,6 @@ class JobGrid extends React.Component {
 }
 
 
-// map states to props
-function mapStateToProps(state) {
-    return {
-        jobs: state.jobs
-    }
-}
-
-// export component for use/routing
 export default connect(
     null
 )(JobGrid);

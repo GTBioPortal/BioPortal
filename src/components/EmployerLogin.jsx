@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
 import { withRouter, push } from 'react-router-dom';
+import API from '../api/api';
 
 
 
@@ -21,8 +22,10 @@ class EmployerLogin extends Component {
 
     this.state = {
       email: "",
-      password: ""
+      password: "",
     };
+
+    const auth_token: '';
 
     // this.studentHomepage = this.studentHomepage.bind(this);
   }
@@ -51,9 +54,26 @@ class EmployerLogin extends Component {
     this.props.history.push(path);
   }
 
+
   loginEmployer = () => {
-    const path = '/employer';
-    this.props.history.push(path);
+    // const path = '/employer';
+    // this.props.history.push(path);
+    //
+    API.post('employer/login', {
+          email: this.state.email,
+          password: this.state.password,
+    }).then(res => {
+
+          auth_token = res.data.auth_token;
+          console.log(auth_token);
+
+          if (res.data.status === "success") {
+                const path = '/employer';
+                this.props.history.push(path);
+          } else {
+            //TODO: Error
+          }
+      });
   }
 
   render() {
