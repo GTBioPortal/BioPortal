@@ -13,6 +13,10 @@ import { connect } from 'react-redux';
 class EmployerHomePage extends React.Component {
     constructor(props) {
         super(props);
+        // console.log(props);
+        this.state = {
+           auth_token: this.props.location.data
+        };
     }
 
     render() {
@@ -22,7 +26,7 @@ class EmployerHomePage extends React.Component {
                 <EmployerNavbar msgCount={0} notificationCount={0}/>
 
                 {/* Renders EmployerJobGrid which contains JobPostingCards */}
-                <EmployerJobGrid />
+                <EmployerJobGrid auth_token={this.state.auth_token}/>
             </div>
         );
     }

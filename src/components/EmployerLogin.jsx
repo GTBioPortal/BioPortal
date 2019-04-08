@@ -23,9 +23,8 @@ class EmployerLogin extends Component {
     this.state = {
       email: "",
       password: "",
+      auth_token: ""
     };
-
-    const auth_token: '';
 
     // this.studentHomepage = this.studentHomepage.bind(this);
   }
@@ -64,12 +63,13 @@ class EmployerLogin extends Component {
           password: this.state.password,
     }).then(res => {
 
-          auth_token = res.data.auth_token;
-          console.log(auth_token);
-
+          this.setState({auth_token: res.data.auth_token});
           if (res.data.status === "success") {
                 const path = '/employer';
-                this.props.history.push(path);
+                this.props.history.push({
+                  pathname: path,
+                  data: this.state.auth_token
+                });
           } else {
             //TODO: Error
           }

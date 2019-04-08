@@ -27,8 +27,12 @@ class EmployerJobGrid extends React.Component {
 
     // function to go to create a new job page
     newPost = () => {
+        // console.log(this.props.location.data)
     const path = '/employerJobForm';
-    this.props.history.push(path);
+    this.props.history.push({
+            pathname: path,
+            data: this.props.location.data
+        });
     }
 
     render() {

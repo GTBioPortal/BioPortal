@@ -41,7 +41,8 @@ class JobDescription extends React.Component {
 	        		<Card className='job-description-card'>
 		                <CardContent>
 		                    <Typography color='textSecondary' align="left">
-								Create high-quality web and mobile apps containing rich content and user interface components by working closely with user experience designers to take wireframes and mockups from conception to implementation. Identify specific issues in the user interface, recommending and implementing solutions that influence and improve the design of products that provide a delightful user experience along with high performance, security, quality, and stability.		                    </Typography>
+                                {job.description}
+								</Typography>
 		                </CardContent>
 
 		                <CardActions id='view-job-div'>

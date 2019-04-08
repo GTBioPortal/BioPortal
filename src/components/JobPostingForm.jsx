@@ -13,6 +13,10 @@ import API from '../api/api';
  * inputting info into a form and creates prop
  */
 class JobPostingForm extends React.Component {
+     constructor(props) {
+        super(props)
+        // console.log(this.props);
+    }
 
     createPosting = (event) => {
         // 1. Stop from submitting
@@ -54,31 +58,28 @@ class JobPostingForm extends React.Component {
         this.setState({author_id: 0});
         this.setState({id: 0});
 
+        var authorize = 'Bearer ' + this.props.auth_token
+        var headers = {
+            'Content-Type': 'application/json',
+            'Authorization': authorize
+        }
+        var data = {
 
-
-        // prints to console (testing)
-        console.log(posting);
-
-            //TODO: store token
+        }
         API.post('jobs/create', {
             title: posting.jobTitle,
             company: posting.company,
             resume: posting.resume,
-            coverLetter: posting.coverLetter,
+            cover_letter: posting.coverLetter,
             transcript: posting.transcript,
             location: posting.location,
-            start_date: posting.startDate,
+            start_date: "2019-04-08T00:00:00.787Z",
             description: posting.desc,
             // skills: posting.skills,
-            deadline: posting.deadline,
-
-            created_at: dt.toUTCString(),
-            author: 'jimmy',
-            author_id: 1,
-            id: 68
-        }).then(res => {
+            deadline: "2019-04-08T00:00:00.787Z"},
+            {headers: headers}
+        ).then(res => {
             console.log(res);
-            // token = res.data.auth_token;
       });
 
     }
@@ -111,6 +112,7 @@ class JobPostingForm extends React.Component {
     };
 
     render()  {
+        // console.log(this.props);
         return (
             <form className = "jobPosting" onSubmit={this.createPosting}>
             <br/>

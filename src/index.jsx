@@ -35,7 +35,7 @@ const router = (
                 </Route>
                 <Route path='/editJobForm' component={EditEmployerJobForm}>
                 </Route>
-                <Route path='/EmployerJobForm' component={EmployerJobForm}>
+                <Route path='/employerJobForm' component={EmployerJobForm}>
                 </Route>
                 <Route path='/registerStudent' component={StudentRegistration}>
                 </Route>
