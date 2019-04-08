@@ -37,7 +37,7 @@ class JobGrid extends React.Component {
         const JOBS_PER_ROW = 5;
         const { page, jobsPerPage } = this.state;
 
-        const totalJobs = this.props.jobs.length;
+        const totalJobs = this.state.jobs.length;
         const elemsToDisplay = ((page + 1) * jobsPerPage) > totalJobs ? totalJobs - (page * jobsPerPage) : jobsPerPage
 
         const rowsToDisplay = Math.ceil(elemsToDisplay / JOBS_PER_ROW);
@@ -86,14 +86,6 @@ class JobGrid extends React.Component {
     }
 }
 
-// map states to props
-function mapStateToProps(state) {
-    return {
-        jobs: state.jobs
-    }
-}
-
-// export component for use/routing
 
 export default connect(
     null

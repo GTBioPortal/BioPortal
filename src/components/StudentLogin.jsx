@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
 import { withRouter, push } from 'react-router-dom';
+import API from '../api/api';
 
 
 
@@ -52,8 +53,22 @@ class StudentLogin extends Component {
   }
 
   loginStudent = () => {
-    const path = '/student';
-    this.props.history.push(path);
+    // const path = '/student';
+    // this.props.history.push(path);
+    //
+    API.post('student/login', {
+          email: this.state.email,
+          password: this.state.password,
+      }).then(res => {
+          console.log(res);
+
+          if (res.data.status === "success") {
+              const path = '/student';
+              this.props.history.push(path);
+          } else {
+            //TODO: Error
+          }
+    });
   }
 
   render() {
