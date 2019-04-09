@@ -24,6 +24,7 @@ class EmployerJobCard extends React.Component {
     // function to open up page to edit a job position
     editJob() {
         const { job } = this.props;
+        localStorage.setItem('employer-job-id', job.id);
         const path = '/editJobForm/' + job.id;
         this.props.history.push({
             pathname: path,
@@ -33,6 +34,7 @@ class EmployerJobCard extends React.Component {
 
     viewApps = () => {
         const { job } = this.props;
+        localStorage.setItem('employer-job-id', job.id);
         const path = '/viewApplicants/' + job.id;
         this.props.history.push({
             pathname: path,

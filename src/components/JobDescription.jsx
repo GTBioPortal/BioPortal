@@ -7,6 +7,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import '../styles/job-description.scss';
 import '../styles/card.scss';
+import API from '../api/api'
 
 /**
  * JobDescription component shows the description, name, location, deadline, and position for a job posting
@@ -14,6 +15,16 @@ import '../styles/card.scss';
 class JobDescription extends React.Component {
     constructor(props) {
         super(props)
+
+        this.state = {
+            job: []
+        };
+        var url = 'jobs/' + localStorage.getItem('job-id')
+        API.get(url).then(res => {
+            // var allJobs = res.data.jobs;
+            // console.log(res.data);
+            this.setState({ job: res.data.data });
+      })
     }
 
     applyToJob = () => {
@@ -26,7 +37,8 @@ class JobDescription extends React.Component {
 
     render() {
         /** get individual job from props */
-    	const job = this.props.location.data.job;
+    	const job = this.state.job;
+        // console.log(job)
         return (
         	<div>
                 {/** place job company */}

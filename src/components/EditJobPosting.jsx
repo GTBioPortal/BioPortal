@@ -5,62 +5,79 @@ import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import TextField from '@material-ui/core/TextField';
+import API from '../api/api';
 
 /**
  * EditJobPostingForm component allows employers to edit information into a
  * form and updates job posting prop
  */
 class EditJobPostingForm extends React.Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            resume: false,
+            coverLetter: false,
+            transcript: false,
+            jobTitle: '',
+            company: '',
+            location: '',
+            startDate: "2019-01-01",
+            desc: '',
+            skills: '',
+            deadline: "2019-01-01",
+            job: []
+        };
+
+        var url = 'jobs/' + localStorage.getItem('employer-job-id')
+        API.get(url).then(res => {
+            console.log(res.data.data);
+            const temp_job = res.data.data;
+            this.setState({
+                resume: temp_job.resume,
+                coverLetter: temp_job.cover_letter,
+                transcript: temp_job.transcript,
+                jobTitle: temp_job.title,
+                company: temp_job.company,
+                location: temp_job.location,
+                startDate: temp_job.start_date,
+                desc: temp_job.description,
+                skills: '',
+                deadline: temp_job.deadline,
+                job: res.data.data
+            });
+        })
+    }
 
     /* Creates prop for job posting*/
     createPosting = (event) => {
         // 1. Stop from submitting
         event.preventDefault();
 
-        // 2. creates job posting prop
-        const posting = {
-            jobTitle: this.state.jobTitle,
-            company: this.state.company,
-            resume: this.state.resume,
-            coverLetter: this.state.coverLetter,
-            transcript: this.state.transcript,
-            location: this.state.location,
-            startDate: this.state.startDate,
-            desc: this.state.desc,
-            skills: this.state.skills,
-            deadline: this.state.deadline,
-        }
-
-        // 3. resets form to default after submitting
-        this.setState({resume: false});
-        this.setState({coverLetter: false});
-        this.setState({transcript: false});
-        this.setState({jobTitle: ''});
-        this.setState({company: ''});
-        this.setState({location: ''});
-        this.setState({startDate: '2019-01-01'});
-        this.setState({desc: ''});
-        this.setState({skills: ''});
-        this.setState({deadline: '2019-01-01'});
-
         // prints posting to console (for testing purposes, delete later)
         console.log(posting);
+        var authorize = 'Bearer ' + this.props.auth_token
+        var headers = {
+            'Content-Type': 'application/json',
+            'Authorization': authorize
+        }
+      //   API.post('jobs/create', {
+      //       title: posting.jobTitle,
+      //       company: posting.company,
+      //       resume: posting.resume,
+      //       cover_letter: posting.coverLetter,
+      //       transcript: posting.transcript,
+      //       location: posting.location,
+      //       start_date: "2019-04-08T00:00:00.787Z",
+      //       description: posting.desc,
+      //       // skills: posting.skills,
+      //       deadline: "2019-04-08T00:00:00.787Z"},
+      //       {headers: headers}
+      //   ).then(res => {
+      //       console.log(res);
+      // });
 
     }
-
-    // default state
-    state = {
-        resume: false,
-        coverLetter: false,
-        transcript: false,
-        jobTitle: '',
-        company: '',
-        location: '',
-        startDate: "2019-01-01",
-        desc: '',
-        skills: '',
-        deadline: "2019-01-01",
-    };
 
     // handles changes for checkboxes
     handleCheckedChange = name => event => {
@@ -73,7 +90,7 @@ class EditJobPostingForm extends React.Component {
     };
 
     render()  {
-        const job = this.props.vars.job
+        const job = this.state.job
         return (
             <form className = "jobPosting" onSubmit={this.createPosting}>
             <br/>

@@ -22,10 +22,10 @@ class ViewApplicantsPage extends React.Component {
         }
 
         console.log(this.props);
-        const job = this.props.location.data.job;
+        // const job = this.props.location.data.job;
         var auth_token = localStorage.getItem('employer-token');
         var authorize = 'Bearer ' + auth_token
-        var url = 'jobs/' + job.id + '/applications'
+        var url = 'jobs/' + localStorage.getItem('employer-job-id') + '/applications'
         // console.log(url);
         var headers = {
             'Content-Type': 'application/json',

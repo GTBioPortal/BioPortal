@@ -18,6 +18,11 @@ class ApplyToJobPage extends React.Component {
     constructor(props) {
         super(props);
         // console.log(this.props);
+
+        this.state = {
+            resume_names: [],
+            job: []
+        }
         var auth_token = localStorage.getItem('token');
         var authorize = 'Bearer ' + auth_token
         var headers = {
@@ -28,16 +33,19 @@ class ApplyToJobPage extends React.Component {
         	{headers: headers}
         ).then(res => {
             console.log(res.data.files[0]);
+            this.setState({resume_names: res.data.files[0].name});
       	})
-
-      	this.state = {
-      		resume_names: name
-      	}
+        var url = 'jobs/' + localStorage.getItem('job-id')
+        API.get(url).then(res => {
+            // var allJobs = res.data.jobs;
+            // console.log(res.data);
+            this.setState({ job: res.data.data });
+        })
       	// console.log(this.state)
     }
 
     sendApp = () => {
-    	const job = this.props.location.data;
+    	const job = this.state.job;
     	var auth_token = localStorage.getItem('token');
         var authorize = 'Bearer ' + auth_token
         var url = 'jobs/' + job.id + '/apply'
@@ -57,7 +65,7 @@ class ApplyToJobPage extends React.Component {
     }
 
     render() {
-    	const job = this.props.location.data;
+    	const job = this.state.job;
     	// console.log(job)
         return (
         	<div>
@@ -88,7 +96,7 @@ class ApplyToJobPage extends React.Component {
 	           	 	</Card>
            	 	</div>
            	 	<Typography variant="h5" align="center" gutterBottom>
-        			{this.state.resume_names}
+        			Resumes: {this.state.resume_names}
         		</Typography>
         		<Grid container direction="row" justify="center" alignItems="center">
            	 		<Button size='medium' align='center' onClick={this.sendApp}>Send Application</Button>

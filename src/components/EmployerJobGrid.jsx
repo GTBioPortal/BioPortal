@@ -35,7 +35,7 @@ class EmployerJobGrid extends React.Component {
             'Authorization': authorize
         }
         API.get('employer/jobs', {headers: headers}).then(res => {
-            console.log(res);
+            // console.log(res);
             var allJobs = res.data.jobs;
             this.setState({ jobs: allJobs });
       })

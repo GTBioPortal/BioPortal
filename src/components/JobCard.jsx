@@ -26,6 +26,7 @@ class JobCard extends React.Component {
     viewJob() {
         const { job } = this.props;
         const path = '/job/' + job.id;
+        localStorage.setItem('job-id', job.id)
         this.props.history.push({
             pathname: path,
             data: this.props
