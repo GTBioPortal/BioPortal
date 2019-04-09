@@ -31,6 +31,15 @@ class EmployerJobCard extends React.Component {
         });
     }
 
+    viewApps = () => {
+        const { job } = this.props;
+        const path = '/viewApplicants/' + job.id;
+        this.props.history.push({
+            pathname: path,
+            data: this.props
+        });
+    }
+
     render() {
         const { job, i } = this.props;
         return (
@@ -49,6 +58,7 @@ class EmployerJobCard extends React.Component {
                     {/** set card to call the editJob function when the edit job button is clicked */}
                     <CardActions id='edit-job-div'>
                         <Button size='small' id='edit-job' onClick={this.editJob}>Edit Job Posting</Button>
+                        <Button size='small' id='view-apps' onClick={this.viewApps}>View Applicants</Button>
                     </CardActions>
                 </Card>
             </td>

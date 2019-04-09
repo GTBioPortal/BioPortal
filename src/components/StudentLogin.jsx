@@ -61,7 +61,7 @@ class StudentLogin extends Component {
           password: this.state.password,
       }).then(res => {
           console.log(res);
-
+          localStorage.setItem('token', res.data.auth_token);
           if (res.data.status === "success") {
               const path = '/student';
               this.props.history.push(path);

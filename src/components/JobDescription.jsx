@@ -16,6 +16,14 @@ class JobDescription extends React.Component {
         super(props)
     }
 
+    applyToJob = () => {
+        const path = '/apply';
+        this.props.history.push({
+              pathname: path,
+              data: this.props.location.data.job
+        });
+    }
+
     render() {
         /** get individual job from props */
     	const job = this.props.location.data.job;

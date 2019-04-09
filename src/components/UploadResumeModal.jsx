@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import { hideUploadResume, showUploadSnackbar }  from '../actions/modals'
 
 import '../styles/modals.scss';
+import API from '../api/api';
 
 /**
  * Upload Resume component which handles uploading a resume from a local
@@ -17,7 +18,8 @@ import '../styles/modals.scss';
 class UploadResumeModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { resumeSelected: false, resumeName: "No file selected." };
+        // console.log(auth_token);
+        this.state = { resumeSelected: false, resume: null, resumeName: ''};
         this.uploadResume = this.uploadResume.bind(this);
         this.resumeChange = this.resumeChange.bind(this);
     }
@@ -28,6 +30,22 @@ class UploadResumeModal extends React.Component {
         if (!this.state.resumeSelected) {
             console.log("Error uploading Resume");
         } else {
+            var auth_token = localStorage.getItem('token')
+            var authorize = 'Bearer ' + auth_token
+            var headers = {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': authorize
+            }
+            var formData = new FormData();
+            formData.append('file', this.state.resume)
+            formData.append('file_name', "TEST NAME")
+            formData.append('file_type', 'resume')
+            API.post('/upload', 
+                formData,
+                {headers: headers}
+            ).then(res => {
+                console.log(res);
+            });
             console.log(this.state.resumeName);
             console.log("Resume uploaded successfully");
             this.props.hideUploadResume();
@@ -38,6 +56,7 @@ class UploadResumeModal extends React.Component {
     resumeChange(e) {
         this.setState({
             resumeSelected: true,
+            resume: e.target.files[0],
             resumeName: e.target.files[0].name
         });
 

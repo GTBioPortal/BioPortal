@@ -11,6 +11,7 @@ import AddIcon from '@material-ui/icons/Add';
 import Grid from '@material-ui/core/Grid';
 import { withRouter, push } from 'react-router-dom';
 import '../styles/job-grid.scss';
+import API from '../api/api'
 
 /**
  * EmployerJobGrid component shows all of employers job postings
@@ -21,8 +22,23 @@ class EmployerJobGrid extends React.Component {
         super(props);
         this.state = {
             page: 0,
-            jobsPerPage: 10
+            jobsPerPage: 10,
+            jobs: []
         };
+    }
+
+    componentDidMount() {
+        var auth_token = localStorage.getItem('employer-token');
+        var authorize = 'Bearer ' + auth_token
+        var headers = {
+            'Content-Type': 'application/json',
+            'Authorization': authorize
+        }
+        API.get('employer/jobs', {headers: headers}).then(res => {
+            console.log(res);
+            var allJobs = res.data.jobs;
+            this.setState({ jobs: allJobs });
+      })
     }
 
     // function to go to create a new job page
@@ -40,24 +56,24 @@ class EmployerJobGrid extends React.Component {
             on total number of job postings */
         const JOBS_PER_ROW = 5;
         const { page, jobsPerPage } = this.state;
-        const totalJobs = this.props.jobs.length;
+        const totalJobs = this.state.jobs.length;
         const elemsToDisplay = ((page + 1) * jobsPerPage) > totalJobs ? totalJobs - (page * jobsPerPage) : jobsPerPage
         const rowsToDisplay = Math.ceil(elemsToDisplay / JOBS_PER_ROW);
 
         /** function to get specific jobs and show them on grid */
         const renderRows = () => {
             let table = [];
-            const jobsToShow = this.props.jobs.slice(page * jobsPerPage, page * jobsPerPage + elemsToDisplay);
+            const jobsToShow = this.state.jobs.slice(page * jobsPerPage, page * jobsPerPage + elemsToDisplay);
             let row = [];
             for (let i = 0; i < elemsToDisplay; i++) {
-                const job = this.props.jobs[page * jobsPerPage + i];
+                const job = this.state.jobs[page * jobsPerPage + i];
                 row.push(
                     <TableCell
                         key={i}
                         padding='none'
                         className='card employer-job-card'
                         component={() => <EmployerJobCard job={job} />} >
-                        <EmployerJobCard {...this.props} key={i} i={i} job={job} />
+                        <EmployerJobCard {...this.state.jobs} key={i} i={i} job={job} />
                     </TableCell>
                 );
                 if ((i + 1) % 5 == 0) {

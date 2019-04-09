@@ -63,9 +63,6 @@ class JobPostingForm extends React.Component {
             'Content-Type': 'application/json',
             'Authorization': authorize
         }
-        var data = {
-
-        }
         API.post('jobs/create', {
             title: posting.jobTitle,
             company: posting.company,
