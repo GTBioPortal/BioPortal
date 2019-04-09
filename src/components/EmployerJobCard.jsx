@@ -49,7 +49,10 @@ class EmployerJobCard extends React.Component {
                     {/** set content of card to be job position and job location */}
                     <CardContent>
                         <Typography className='card-title' gutterBottom>
-                            {job.position}
+                            {job.company}
+                        </Typography>
+                        <Typography color='textSecondary'>
+                            {job.description}
                         </Typography>
                         <Typography color='textSecondary'>
                             {job.location}

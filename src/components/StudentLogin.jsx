@@ -68,10 +68,13 @@ class StudentLogin extends Component {
           if (res.data.status === "success") {
               const path = '/student';
               this.props.history.push(path);
-          } else {
-            console.log("Authentication failed");
-            this.props.showLoginFailedSnackbar();
           }
+    }).catch(res => {
+            // console.log("Authentication failed");
+            // console.log(res.response)
+            if (res.response.status === 401) {
+               this.props.showLoginFailedSnackbar();
+            }
     });
   }
 
