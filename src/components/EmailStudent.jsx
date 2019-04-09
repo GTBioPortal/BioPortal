@@ -28,7 +28,7 @@ class EmailStudent extends React.Component {
         var email = messageInfo.to;
         var subject = messageInfo.subject;
 
-        window.location.href = "mailto:" + email + '?subject=' + subject + '&body=' + body_message;
+        window.open("mailto:" + email + '?subject=' + subject + '&body=' + body_message);
     }
 
     state = {
