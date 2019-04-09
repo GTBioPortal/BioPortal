@@ -38,10 +38,15 @@ export function showEmailStudent() {
     };
 }
 
-export function applyToJob() {
+
+export function showLoginFailedSnackbar() {
     return {
-        type: 'SHOW_MODAL',
-        modalType: 'APPLY_TO_JOB',
-        modalProps: {}
+        type: 'SHOW_SNACKBAR'
+    };
+}
+
+export function hideLoginFailedSnackbar() {
+    return {
+        type: 'HIDE_SNACKBAR'
     };
 }
