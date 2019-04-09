@@ -11,6 +11,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import {withRouter, push } from 'react-router-dom';
 
 import '../styles/toolbar.scss'
 
@@ -18,6 +19,12 @@ import '../styles/toolbar.scss'
  * EmployerNavbar component sets the portal navigation items at the top of each webpage for employers
  */
 class EmployerNavbar extends React.Component {
+
+    emailStudent = () => {
+        const path = '/emailStudentPage';
+        this.props.history.push(path);
+    }
+
     render() {
         return (
             /* create a bar at the top */
@@ -29,7 +36,7 @@ class EmployerNavbar extends React.Component {
                     </Typography>
                     <div>
                         {/* add mail badge */}
-                        <IconButton color='inherit'>
+                        <IconButton color='inherit' onClick = {this.emailStudent}>
                             <Badge color='secondary' badgeContent={0} invisible={true}>
                                 <MailIcon />
                             </Badge>
@@ -53,4 +60,4 @@ class EmployerNavbar extends React.Component {
 }
 
 // export component for use
-export default EmployerNavbar;
+export default withRouter(EmployerNavbar);

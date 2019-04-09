@@ -11,6 +11,7 @@ import EditEmployerJobForm from './pages/EditEmployerJobForm'
 import EmployerJobForm from './pages/EmployerJobForm'
 import StudentRegistration from './pages/StudentRegistration'
 import StudentLoginpage from './pages/StudentLoginpage'
+import EmailStudentPage from './pages/EmailStudentPage'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
@@ -40,6 +41,8 @@ const router = (
                 <Route path='/registerStudent' component={StudentRegistration}>
                 </Route>
                 <Route path='/studentLogin' component={StudentLoginpage}>
+                </Route>
+                <Route path='/emailStudentPage' component={EmailStudentPage}>
                 </Route>
             </div>
         </Router>

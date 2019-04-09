@@ -23,7 +23,7 @@ class UploadResumeModal extends React.Component {
     }
 
     // sends messages to the console that checks to see if the Resume was
-    // properlly uploaded
+    // properly uploaded
     uploadResume() {
         if (!this.state.resumeSelected) {
             console.log("Error uploading Resume");
