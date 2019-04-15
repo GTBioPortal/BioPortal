@@ -8,8 +8,9 @@ import Grid from '@material-ui/core/Grid';
 import { withRouter, push } from 'react-router-dom';
 import API from '../api/api';
 
-
-
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { showLoginFailedSnackbar }  from '../actions/modals'
 
 import "../styles/login.scss";
 
@@ -26,7 +27,7 @@ class EmployerLogin extends Component {
       auth_token: ""
     };
 
-    // this.studentHomepage = this.studentHomepage.bind(this);
+    this.loginEmployer = this.loginEmployer.bind(this);
   }
 
   validateForm() {
@@ -157,4 +158,11 @@ class EmployerLogin extends Component {
   }
 }
 
-export default withRouter(EmployerLogin);
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ showLoginFailedSnackbar }, dispatch);
+}
+
+export default withRouter(connect(
+    null,
+    mapDispatchToProps
+)(EmployerLogin));
