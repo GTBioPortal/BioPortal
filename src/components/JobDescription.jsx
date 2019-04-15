@@ -31,7 +31,7 @@ class JobDescription extends React.Component {
         const path = '/apply';
         this.props.history.push({
               pathname: path,
-              data: this.props.location.data.job
+              // data: this.props.location.data.job
         });
     }
 
