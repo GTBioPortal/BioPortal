@@ -58,7 +58,7 @@ class JobPostingForm extends React.Component {
         this.setState({author_id: 0});
         this.setState({id: 0});
 
-        var authorize = 'Bearer ' + this.props.auth_token
+        var authorize = 'Bearer ' + localStorage.getItem('employer-token');
         var headers = {
             'Content-Type': 'application/json',
             'Authorization': authorize
@@ -70,10 +70,10 @@ class JobPostingForm extends React.Component {
             cover_letter: posting.coverLetter,
             transcript: posting.transcript,
             location: posting.location,
-            start_date: "2019-04-08T00:00:00.787Z",
+            start_date: posting.startDate + "T00:00:00.787Z",
             description: posting.desc,
             // skills: posting.skills,
-            deadline: "2019-04-08T00:00:00.787Z"},
+            deadline: posting.deadline + "T00:00:00.787Z"},
             {headers: headers}
         ).then(res => {
             console.log(res);
