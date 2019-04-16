@@ -22,12 +22,7 @@ import '../styles/toolbar.scss'
 class EmployerNavbar extends React.Component {
 
     state = {
-    auth: true,
-    anchorEl: null,
-    };
-
-     handleChange = event => {
-        this.setState({ auth: event.target.checked });
+        anchorEl: null,
     };
 
     handleMenu = event => {
@@ -40,7 +35,7 @@ class EmployerNavbar extends React.Component {
 
     render() {
         const { classes } = this.props;
-        const { auth, anchorEl } = this.state;
+        const { anchorEl } = this.state;
         const open = Boolean(anchorEl);
 
         return (
