@@ -12,6 +12,8 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
 
 import '../styles/toolbar.scss'
 
@@ -19,7 +21,24 @@ import '../styles/toolbar.scss'
  * Navbar component sets the portal navigation items at the top of each webpage for students
  */
 class Navbar extends React.Component {
+
+    state = {
+        anchorEl: null,
+    };
+
+    handleMenu = event => {
+        this.setState({ anchorEl: event.currentTarget });
+    };
+
+    handleClose = () => {
+        this.setState({ anchorEl: null });
+    };
+
     render() {
+        const { classes } = this.props;
+        const { anchorEl } = this.state;
+        const open = Boolean(anchorEl);
+
         return (
             /**
              * Create a bar at the top
@@ -49,10 +68,29 @@ class Navbar extends React.Component {
                             </Badge>
                         </IconButton>
                         {/* add profile badge */}
-                        <IconButton aria-haspopup='true'
-                            color='inherit'>
+                        <IconButton aria-owns={open ? 'menu-appbar' : undefined}
+                                    aria-haspopup="true"
+                                    onClick={this.handleMenu}
+                                    color="inherit">
                             <AccountCircle />
                         </IconButton>
+
+                        <Menu
+                            id="menu-appbar"
+                            anchorEl={anchorEl}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            open={open}
+                            onClose={this.handleClose}>
+                            <MenuItem onClick={this.handleClose}>My Account</MenuItem>
+                            <MenuItem onClick={this.handleClose}>Log Out</MenuItem>
+                        </Menu>
                     </div>
                 </Toolbar>
             </AppBar>
