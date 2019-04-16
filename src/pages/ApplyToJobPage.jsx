@@ -12,7 +12,8 @@ import CardContent from '@material-ui/core/CardContent';
 import '../styles/job-description.scss';
 import '../styles/card.scss';
 import Grid from '@material-ui/core/Grid';
-
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
 class ApplyToJobPage extends React.Component {
     constructor(props) {
@@ -21,7 +22,10 @@ class ApplyToJobPage extends React.Component {
 
         this.state = {
             resume_names: [],
-            job: []
+            resume_ids: [],
+            job: [],
+            anchorEl: null,
+            selected_id: ''
         }
         var auth_token = localStorage.getItem('token');
         var authorize = 'Bearer ' + auth_token
@@ -32,8 +36,16 @@ class ApplyToJobPage extends React.Component {
         API.get('student/files', 
         	{headers: headers}
         ).then(res => {
-            console.log(res.data.files[0]);
-            this.setState({resume_names: res.data.files[0].name});
+            // console.log(res.data.files);
+            var temp_names = [];
+            var temp_ids = [];
+            for (var i = 0; i < res.data.files.length; i++) {
+                temp_names.push(res.data.files[i].name);
+                temp_ids.push(res.data.files[i].id);
+            }
+            this.setState({resume_names: temp_names});
+            this.setState({resume_ids: temp_ids})
+            // console.log(this.state);
       	})
         var url = 'jobs/' + localStorage.getItem('job-id')
         API.get(url).then(res => {
@@ -54,7 +66,7 @@ class ApplyToJobPage extends React.Component {
             'Authorization': authorize
         }
         var data = {
-        	'resume': 3
+        	'resume': this.state.selected_id
         }
         API.post(url, 
             data,
@@ -62,7 +74,22 @@ class ApplyToJobPage extends React.Component {
         ).then(res => {
             console.log(res);
       });
+      // console.log(this.state.selected_id);
     }
+
+    handleClick = event => {
+        this.setState({ anchorEl: event.currentTarget });
+    };
+
+    handleClose = (ev) => {
+        this.setState({ anchorEl: null });
+        var selectedResume = ev.nativeEvent.target.outerText;
+        for (var i = 0; i < this.state.resume_names.length; i++) {
+            if (this.state.resume_names[i] === selectedResume) {
+                this.setState({ selected_id: this.state.resume_ids[i] });
+            }
+        }
+    };
 
     render() {
     	const job = this.state.job;
@@ -95,9 +122,25 @@ class ApplyToJobPage extends React.Component {
 		                </CardContent>
 	           	 	</Card>
            	 	</div>
-           	 	<Typography variant="h5" align="center" gutterBottom>
-        			Resumes: {this.state.resume_names}
-        		</Typography>
+                <div>
+                    <Grid container direction="row" justify="center" alignItems="center">
+                        <Button
+                          aria-owns={this.state.anchorEl ? 'simple-menu' : undefined}
+                          aria-haspopup="true"
+                          onClick={this.handleClick}>
+                          Select a Resume
+                        </Button>
+                        <Menu
+                          id="simple-menu"
+                          anchorEl={this.state.anchorEl}
+                          open={Boolean(this.state.anchorEl)}
+                          onClose={this.handleClose}> 
+                          {this.state.resume_names.map((el, index) => {
+                            return <MenuItem key={index} onClick={this.handleClose}>{el}</MenuItem>;
+                          })}
+                        </Menu>
+                    </Grid> 
+                </div>
         		<Grid container direction="row" justify="center" alignItems="center">
            	 		<Button size='medium' align='center' onClick={this.sendApp}>Send Application</Button>
            	 	</Grid>	

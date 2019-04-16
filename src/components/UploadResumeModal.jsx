@@ -38,7 +38,7 @@ class UploadResumeModal extends React.Component {
             }
             var formData = new FormData();
             formData.append('file', this.state.resume)
-            formData.append('file_name', "TEST NAME")
+            formData.append('file_name', this.state.resumeName)
             formData.append('file_type', 'resume')
             API.post('/upload', 
                 formData,
