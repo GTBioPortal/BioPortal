@@ -29,10 +29,31 @@ class EditJobPostingForm extends React.Component {
             job: []
         };
 
-        var url = 'jobs/' + localStorage.getItem('employer-job-id')
+        var url = 'jobs/' + localStorage.getItem('employer-job-id');
         API.get(url).then(res => {
-            console.log(res.data.data);
             const temp_job = res.data.data;
+            var tempStartDate = temp_job.start_date.split(" ");
+            var endStartDate = temp_job.deadline.split(" ");
+            var splitDate = new Date(tempStartDate[2] + " " + tempStartDate[1] + ", " + tempStartDate[3]);
+            var endSplitDate = new Date(endStartDate[2] + " " + endStartDate[1] + ", " + endStartDate[3]);
+            var endmo = endSplitDate.getMonth()+1;
+            var startmo = splitDate.getMonth()+1;
+            var endday = endSplitDate.getDate();
+            var startday = splitDate.getDate();
+            var endyr = endSplitDate.getFullYear();
+            var startyr = splitDate.getFullYear();
+            if (startmo < 10) {
+                startmo = "0" + startmo;
+            }
+            if (startday < 10) {
+                startday = "0" + startday;
+            }
+            if (endmo < 10) {
+                endmo = "0" + endmo;
+            }
+            if (endday < 10) {
+                endday = "0" + endday;
+            }
             this.setState({
                 resume: temp_job.resume,
                 coverLetter: temp_job.cover_letter,
@@ -40,13 +61,13 @@ class EditJobPostingForm extends React.Component {
                 jobTitle: temp_job.title,
                 company: temp_job.company,
                 location: temp_job.location,
-                startDate: temp_job.start_date,
+                startDate: startyr + "-" + startmo + "-" + startday,
                 desc: temp_job.description,
                 skills: '',
-                deadline: temp_job.deadline,
+                deadline: endyr + "-" + endmo + "-" + endday,
                 job: res.data.data
             });
-        })
+        });
     }
 
     /* Creates prop for job posting*/
@@ -55,27 +76,28 @@ class EditJobPostingForm extends React.Component {
         event.preventDefault();
 
         // prints posting to console (for testing purposes, delete later)
-        console.log(posting);
-        var authorize = 'Bearer ' + this.props.auth_token
+        // console.log(posting);
+        var authorize = 'Bearer ' + localStorage.getItem('employer-token');
         var headers = {
             'Content-Type': 'application/json',
             'Authorization': authorize
         }
-      //   API.post('jobs/create', {
-      //       title: posting.jobTitle,
-      //       company: posting.company,
-      //       resume: posting.resume,
-      //       cover_letter: posting.coverLetter,
-      //       transcript: posting.transcript,
-      //       location: posting.location,
-      //       start_date: "2019-04-08T00:00:00.787Z",
-      //       description: posting.desc,
-      //       // skills: posting.skills,
-      //       deadline: "2019-04-08T00:00:00.787Z"},
-      //       {headers: headers}
-      //   ).then(res => {
-      //       console.log(res);
-      // });
+        var url = 'jobs/' + localStorage.getItem('employer-job-id');
+        API.put(url, {
+            title: this.state.jobTitle,
+            company: this.state.company,
+            resume: this.state.resume,
+            cover_letter: this.state.coverLetter,
+            transcript: this.state.transcript,
+            location: this.state.location,
+            start_date: this.state.startDate + "T00:00:00.787Z",
+            description: this.state.desc,
+            // skills: posting.skills,
+            deadline: this.state.deadline + "T00:00:00.787Z"},
+            {headers: headers}
+        ).then(res => {
+            console.log(res);
+      });
 
     }
 
