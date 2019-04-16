@@ -43,6 +43,7 @@ class RegistrationForm extends React.Component {
             company: regis.companyName
         }).then(res => {
             console.log(res.data.auth_token);
+            alert("Registration successful!")
             // token = res.data.auth_token;
       });
     }

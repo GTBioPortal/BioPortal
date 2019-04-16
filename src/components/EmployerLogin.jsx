@@ -10,9 +10,7 @@ import API from '../api/api';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { showLoginFailedSnackbar, hideLoginFailedSnackbar }  from '../actions/modals'
-
-
+import { showLoginFailedSnackbar }  from '../actions/modals'
 
 import "../styles/login.scss";
 
@@ -30,8 +28,6 @@ class EmployerLogin extends Component {
     };
 
     this.loginEmployer = this.loginEmployer.bind(this);
-
-    // this.studentHomepage = this.studentHomepage.bind(this);
   }
 
   validateForm() {
@@ -76,20 +72,10 @@ class EmployerLogin extends Component {
                   pathname: path,
                   data: this.state.auth_token
                 });
+          } else {
+            //TODO: Error
           }
-      }).catch(res => {
-            // console.log("Authentication failed");
-            // console.log(res.response.status)
-            if (res.response.status === 401) {
-
-               alert("Invalid login credentials!")
-               // this.props.hideLoginFailedSnackbar();
-            }
-            if (res.response.status === 500) {
-               alert("Invalid login credentials!")
-               // this.props.hideLoginFailedSnackbar();
-            }
-    });
+      });
   }
 
   render() {
