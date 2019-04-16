@@ -14,13 +14,16 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-
+import { withRouter, push } from 'react-router-dom';
 import '../styles/toolbar.scss'
 
 /**
  * Navbar component sets the portal navigation items at the top of each webpage for students
  */
 class Navbar extends React.Component {
+    constructor(props) {
+        super(props);
+    }
 
     state = {
         anchorEl: null,
@@ -33,6 +36,17 @@ class Navbar extends React.Component {
     handleClose = () => {
         this.setState({ anchorEl: null });
     };
+
+    showProfile = () => {
+        const path = '/studentProfile';
+        this.props.history.push(path);
+    };
+
+    logOut = () => {
+            this.setState({ anchorEl: null });
+            const path = '/studentLogin';
+            this.props.history.replace(path);
+        };
 
     render() {
         const { classes } = this.props;
@@ -55,18 +69,7 @@ class Navbar extends React.Component {
                             onClick={this.props.showUploadResume}>
                             Upload Resum&#201;
                         </Button>
-                        {/* add mail badge */}
-                        <IconButton color='inherit'>
-                            <Badge color='secondary' badgeContent={0} invisible={true}>
-                                <MailIcon />
-                            </Badge>
-                        </IconButton>
-                        {/* add notifications badge */}
-                        <IconButton color='inherit'>
-                            <Badge color='secondary' badgeContent={0} invisible={true}>
-                                <NotificationsIcon />
-                            </Badge>
-                        </IconButton>
+
                         {/* add profile badge */}
                         <IconButton aria-owns={open ? 'menu-appbar' : undefined}
                                     aria-haspopup="true"
@@ -88,8 +91,8 @@ class Navbar extends React.Component {
                             }}
                             open={open}
                             onClose={this.handleClose}>
-                            <MenuItem onClick={this.handleClose}>My Account</MenuItem>
-                            <MenuItem onClick={this.handleClose}>Log Out</MenuItem>
+                            <MenuItem onClick={this.showProfile}>My Account</MenuItem>
+                            <MenuItem onClick={this.logOut}>Log Out</MenuItem>
                         </Menu>
                     </div>
                 </Toolbar>
@@ -104,7 +107,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 // export component for use
-export default connect(
+export default withRouter(connect(
     null,
     mapDispatchToProps
-)(Navbar);
+)(Navbar));

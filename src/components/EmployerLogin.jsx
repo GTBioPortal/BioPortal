@@ -72,10 +72,19 @@ class EmployerLogin extends Component {
                   pathname: path,
                   data: this.state.auth_token
                 });
-          } else {
-            //TODO: Error
           }
-      });
+      }).catch(res => {
+            // console.log("Authentication failed");
+            // console.log(res.response)
+            if (res.response.status === 401) {
+               alert("Invalid login credentials!")
+               // this.props.hideLoginFailedSnackbar();
+            }
+            if (res.response.status === 500) {
+               alert("Invalid login credentials!")
+               // this.props.hideLoginFailedSnackbar();
+            }
+    });;
   }
 
   render() {
