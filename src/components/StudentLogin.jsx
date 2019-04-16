@@ -10,7 +10,7 @@ import API from '../api/api';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { showLoginFailedSnackbar }  from '../actions/modals'
+import { showLoginFailedSnackbar, hideLoginFailedSnackbar }  from '../actions/modals'
 
 import "../styles/login.scss";
 
@@ -25,8 +25,8 @@ class StudentLogin extends Component {
       email: "",
       password: ""
     };
-
     this.loginStudent = this.loginStudent.bind(this);
+
 
     // this.studentHomepage = this.studentHomepage.bind(this);
   }
@@ -73,7 +73,12 @@ class StudentLogin extends Component {
             // console.log("Authentication failed");
             // console.log(res.response)
             if (res.response.status === 401) {
-               this.props.showLoginFailedSnackbar();
+               alert("Invalid login credentials!")
+               // this.props.hideLoginFailedSnackbar();
+            }
+            if (res.response.status === 500) {
+               alert("Invalid login credentials!")
+               // this.props.hideLoginFailedSnackbar();
             }
     });
   }

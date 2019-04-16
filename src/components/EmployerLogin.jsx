@@ -8,6 +8,9 @@ import Grid from '@material-ui/core/Grid';
 import { withRouter, push } from 'react-router-dom';
 import API from '../api/api';
 
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { showLoginFailedSnackbar, hideLoginFailedSnackbar }  from '../actions/modals'
 
 
 
@@ -25,6 +28,8 @@ class EmployerLogin extends Component {
       password: "",
       auth_token: ""
     };
+
+    this.loginEmployer = this.loginEmployer.bind(this);
 
     // this.studentHomepage = this.studentHomepage.bind(this);
   }
@@ -71,10 +76,20 @@ class EmployerLogin extends Component {
                   pathname: path,
                   data: this.state.auth_token
                 });
-          } else {
-            //TODO: Error
           }
-      });
+      }).catch(res => {
+            // console.log("Authentication failed");
+            // console.log(res.response.status)
+            if (res.response.status === 401) {
+
+               alert("Invalid login credentials!")
+               // this.props.hideLoginFailedSnackbar();
+            }
+            if (res.response.status === 500) {
+               alert("Invalid login credentials!")
+               // this.props.hideLoginFailedSnackbar();
+            }
+    });
   }
 
   render() {
@@ -157,4 +172,11 @@ class EmployerLogin extends Component {
   }
 }
 
-export default withRouter(EmployerLogin);
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ showLoginFailedSnackbar }, dispatch);
+}
+
+export default withRouter(connect(
+    null,
+    mapDispatchToProps
+)(EmployerLogin));
