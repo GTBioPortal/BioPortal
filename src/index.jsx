@@ -17,6 +17,9 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 import StudentHomepage from "./pages/StudentHomepage";
+import EmpolyerProfilePage from "./pages/EmployerProfilePage";
+import StudentProfilePage from "./pages/StudentProfilePage";
+
 
 /* Router: Determines path to component correspondence */
 const router = (
@@ -46,6 +49,10 @@ const router = (
                 <Route path='/apply' component={ApplyToJobPage}>
                 </Route>
                 <Route path='/viewApplicants' component={ViewApplicantsPage}>
+                </Route>
+                <Route path='/employerProfile' component={EmpolyerProfilePage}>
+                </Route>
+                <Route path='/studentProfile' component={StudentProfilePage}>
                 </Route>
             </div>
         </Router>

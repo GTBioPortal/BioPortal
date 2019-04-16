@@ -13,6 +13,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import { withRouter, push } from 'react-router-dom';
+
 
 import '../styles/toolbar.scss'
 
@@ -20,6 +22,9 @@ import '../styles/toolbar.scss'
  * EmployerNavbar component sets the portal navigation items at the top of each webpage for employers
  */
 class EmployerNavbar extends React.Component {
+    constructor(props) {
+        super(props);
+    }
 
     state = {
         anchorEl: null,
@@ -31,6 +36,18 @@ class EmployerNavbar extends React.Component {
 
     handleClose = () => {
         this.setState({ anchorEl: null });
+
+    };
+
+    showProfile = () => {
+        const path = '/employerProfile';
+        this.props.history.push(path);
+    };
+
+    logOut = () => {
+            this.setState({ anchorEl: null });
+            const path = '/employerLogin';
+            this.props.history.replace(path);
     };
 
     render() {
@@ -47,18 +64,7 @@ class EmployerNavbar extends React.Component {
                         BioPortal
                     </Typography>
                     <div>
-                        {/* add mail badge */}
-                        <IconButton color='inherit'>
-                            <Badge color='secondary' badgeContent={0} invisible={true}>
-                                <MailIcon />
-                            </Badge>
-                        </IconButton>
-                        {/* add notifications badge */}
-                        <IconButton color='inherit'>
-                            <Badge color='secondary' badgeContent={0} invisible={true}>
-                                <NotificationsIcon />
-                            </Badge>
-                        </IconButton>
+
                         {/* add profile badge */}
                         <IconButton aria-owns={open ? 'menu-appbar' : undefined}
                                     aria-haspopup="true"
@@ -80,8 +86,8 @@ class EmployerNavbar extends React.Component {
                             }}
                             open={open}
                             onClose={this.handleClose}>
-                            <MenuItem onClick={this.handleClose}>My Account</MenuItem>
-                            <MenuItem onClick={this.handleClose}>Log Out</MenuItem>
+                            <MenuItem onClick={this.showProfile}>My Account</MenuItem>
+                            <MenuItem onClick={this.logOut}>Log Out</MenuItem>
                         </Menu>
                     </div>
                 </Toolbar>
@@ -91,4 +97,4 @@ class EmployerNavbar extends React.Component {
 }
 
 // export component for use
-export default EmployerNavbar;
+export default withRouter(EmployerNavbar);
