@@ -42,6 +42,8 @@ class StudentRegistrationForm extends React.Component {
             class: regis.class
         }).then(res => {
             console.log(res.data.auth_token);
+            alert("Registration successful!")
+
             // token = res.data.auth_token;
       });
     }
