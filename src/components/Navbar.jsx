@@ -15,6 +15,8 @@ import Typography from '@material-ui/core/Typography';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { withRouter, push } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
+
 import '../styles/toolbar.scss'
 
 /**
@@ -48,6 +50,11 @@ class Navbar extends React.Component {
             this.props.history.replace(path);
         };
 
+    goStudentHome = () => {
+        const path = '/student';
+        this.props.history.push(path);
+    }
+
     render() {
         const { classes } = this.props;
         const { anchorEl } = this.state;
@@ -61,7 +68,9 @@ class Navbar extends React.Component {
                 <Toolbar>
                     {/* add portal title */}
                     <Typography variant='title' color='inherit' className='grow'>
-                        BioPortal
+                        <Link component = "button" underline = 'none' variant='title' color='inherit' className='grow' onClick = {this.goStudentHome}>
+                            BioPortal
+                        </Link>
                     </Typography>
                     <div>
                         {/* add upload resume button that calls showUploadResume function when clicked*/}
