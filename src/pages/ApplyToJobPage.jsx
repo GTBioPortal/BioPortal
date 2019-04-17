@@ -19,7 +19,6 @@ class ApplyToJobPage extends React.Component {
     constructor(props) {
         super(props);
         // console.log(this.props);
-
         this.state = {
             resume_names: [],
             resume_ids: [],
@@ -33,7 +32,7 @@ class ApplyToJobPage extends React.Component {
             'Content-Type': 'application/json',
             'Authorization': authorize
         }
-        API.get('student/files', 
+        API.get('student/files',
         	{headers: headers}
         ).then(res => {
             // console.log(res.data.files);
@@ -68,7 +67,7 @@ class ApplyToJobPage extends React.Component {
         var data = {
         	'resume': this.state.selected_id
         }
-        API.post(url, 
+        API.post(url,
             data,
             {headers: headers}
         ).then(res => {
@@ -134,16 +133,16 @@ class ApplyToJobPage extends React.Component {
                           id="simple-menu"
                           anchorEl={this.state.anchorEl}
                           open={Boolean(this.state.anchorEl)}
-                          onClose={this.handleClose}> 
+                          onClose={this.handleClose}>
                           {this.state.resume_names.map((el, index) => {
                             return <MenuItem key={index} onClick={this.handleClose}>{el}</MenuItem>;
                           })}
                         </Menu>
-                    </Grid> 
+                    </Grid>
                 </div>
         		<Grid container direction="row" justify="center" alignItems="center">
            	 		<Button size='medium' align='center' onClick={this.sendApp}>Send Application</Button>
-           	 	</Grid>	
+           	 	</Grid>
         	</div>
         );
     }

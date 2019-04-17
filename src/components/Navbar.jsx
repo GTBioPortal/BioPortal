@@ -39,7 +39,11 @@ class Navbar extends React.Component {
 
     showProfile = () => {
         const path = '/studentProfile';
-        this.props.history.push(path);
+        this.props.history.push({
+            pathname: path,
+            data: this.props.email
+        });
+        console.log(this.props);
     };
 
     logOut = () => {
