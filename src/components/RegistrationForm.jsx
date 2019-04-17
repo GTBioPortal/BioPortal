@@ -43,8 +43,16 @@ class RegistrationForm extends React.Component {
             company: regis.companyName
         }).then(res => {
             console.log(res.data.auth_token);
-            alert("Registration successful!")
-            // token = res.data.auth_token;
+            if (res.data.auth_token == undefined) {
+                alert('Registration unsuccessful')
+            } else {
+                alert("Registration successful!")
+            }
+        }).catch(res => {
+            if (res.response.status === 200) {
+               alert("Registration unsuccessful")
+               // this.props.hideLoginFailedSnackbar();
+            }
       });
     }
 
