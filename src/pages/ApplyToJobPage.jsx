@@ -14,6 +14,7 @@ import '../styles/card.scss';
 import Grid from '@material-ui/core/Grid';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import Link from '@material-ui/core/Link';
 
 class ApplyToJobPage extends React.Component {
     constructor(props) {
@@ -24,7 +25,8 @@ class ApplyToJobPage extends React.Component {
             resume_ids: [],
             job: [],
             anchorEl: null,
-            selected_id: ''
+            selected_id: '',
+            selected_resume: ''
         }
         var auth_token = localStorage.getItem('token');
         var authorize = 'Bearer ' + auth_token
@@ -80,12 +82,39 @@ class ApplyToJobPage extends React.Component {
         this.setState({ anchorEl: event.currentTarget });
     };
 
+    downloadResume = () => {
+        var auth_token = localStorage.getItem('token');
+        var authorize = 'Bearer ' + auth_token;
+        var url = '/files/' + this.state.selected_id;
+        var headers = {
+            'Content-Type': 'application/json',
+            'Authorization': authorize
+        }
+        API.get(url,
+            {responseType: 'blob',
+            headers: headers}
+        ).then(res => {
+            // console.log(res);
+            var blob = new Blob(
+                [res.data],
+                {type: 'application/pdf'});
+            const fileURL = URL.createObjectURL(blob);
+            window.open(fileURL);
+        })
+        .catch(res => {
+            // console.log(res);
+        });
+    }
+
     handleClose = (ev) => {
         this.setState({ anchorEl: null });
         var selectedResume = ev.nativeEvent.target.outerText;
         for (var i = 0; i < this.state.resume_names.length; i++) {
             if (this.state.resume_names[i] === selectedResume) {
-                this.setState({ selected_id: this.state.resume_ids[i] });
+                this.setState({
+                    selected_id: this.state.resume_ids[i],
+                    selected_resume: "Selected Resume: " + this.state.resume_names[i]
+                });
             }
         }
     };
@@ -138,6 +167,11 @@ class ApplyToJobPage extends React.Component {
                             return <MenuItem key={index} onClick={this.handleClose}>{el}</MenuItem>;
                           })}
                         </Menu>
+                    </Grid>
+                    <Grid container direction="row" justify="center" alignItems="center">
+                        <Link variant="subtitle1" align="center" onClick={this.downloadResume} gutterBottom>
+                            {this.state.selected_resume}
+                        </Link>
                     </Grid>
                 </div>
         		<Grid container direction="row" justify="center" alignItems="center">
