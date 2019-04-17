@@ -12,6 +12,8 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
+import {withRouter, push } from 'react-router-dom';
 
 import '../styles/toolbar.scss'
 
@@ -19,6 +21,12 @@ import '../styles/toolbar.scss'
  * Navbar component sets the portal navigation items at the top of each webpage for students
  */
 class Navbar extends React.Component {
+
+    goStudentHome = () => {
+        const path = '/student';
+        this.props.history.push(path);
+    }
+
     render() {
         return (
             /**
@@ -28,7 +36,9 @@ class Navbar extends React.Component {
                 <Toolbar>
                     {/* add portal title */}
                     <Typography variant='title' color='inherit' className='grow'>
-                        BioPortal
+                        <Link component = "button" underline = 'none' variant='title' color='inherit' className='grow' onClick = {this.goStudentHome}>
+                            BioPortal
+                        </Link>
                     </Typography>
                     <div>
                         {/* add upload resume button that calls showUploadResume function when clicked*/}
@@ -66,7 +76,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 // export component for use
-export default connect(
+export default withRouter(connect(
     null,
     mapDispatchToProps
-)(Navbar);
+)(Navbar));
