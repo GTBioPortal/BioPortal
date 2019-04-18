@@ -38,7 +38,9 @@ class JobDescription extends React.Component {
     render() {
         /** get individual job from props */
     	const job = this.state.job;
-        // console.log(job)
+        const deadLine = String(job.deadline)
+        const temp = deadLine.split(" ")
+        const parsedDate = temp[0] + " " + temp[1] + " " + temp[2] +  " "  + temp[3]
         return (
         	<div>
                 {/** place job company */}
@@ -51,7 +53,7 @@ class JobDescription extends React.Component {
         		</Typography>
                 {/** place job location and deadline */}
         		<Typography variant="h5" align="center" gutterBottom>
-        			{job.location} | {job.deadline}
+        			Location: {job.location} | Deadline: {parsedDate}
         		</Typography>
         		<div align="center">
                     {/** place job description */}
