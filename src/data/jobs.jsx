@@ -99,7 +99,7 @@ const jobs = [
         'description':  'INSERT DESCRIPTION HERE',
         'start_date': '12/12/2019',
         'skills': 'BIOLOGY'
-    }   
+    }
 ];
 
 export default jobs;
