@@ -57,13 +57,14 @@ class StudentProfileComponents extends React.Component {
 
     handleClose = (ev) => {
         this.setState({ anchorEl: null });
-        this.setState({ deleteFlag: true});
         var selectedResume = ev.nativeEvent.target.outerText;
+        console.log(selectedResume);
         for (var i = 0; i < this.state.resume_names.length; i++) {
             if (this.state.resume_names[i] === selectedResume) {
                 this.setState({
                     selected_id: this.state.resume_ids[i],
-                    selected_resume: this.state.resume_names[i]
+                    selected_resume: this.state.resume_names[i],
+                    deleteFlag: true
                 });
             }
         }
@@ -90,6 +91,26 @@ class StudentProfileComponents extends React.Component {
         })
         .catch(res => {
             // console.log(res);
+        });
+    };
+
+    deleteResume = () => {
+        var auth_token = localStorage.getItem('token');
+        var authorize = 'Bearer ' + auth_token;
+        var url = '/files/' + this.state.selected_id;
+        console.log(this.state.selected_id);
+        var headers = {
+            'Content-Type': 'application/json',
+            'Authorization': authorize
+        }
+        API.delete(url,
+            {headers: headers}
+        ).then(res => {
+            console.log(res);
+            window.location.reload();
+            alert("Resume was deleted successfully!")
+        }).catch(res => {
+           alert("Resume was not deleted successfully!")
         });
     }
 
@@ -123,8 +144,8 @@ class StudentProfileComponents extends React.Component {
                                 <Link variant="subtitle1" align="center" onClick={this.downloadResume} gutterBottom>
                                     {this.state.selected_resume}
                                 </Link>
-                                {Boolean(this.state.deleteFlag) && <IconButton aria-label="Delete" >
-                                      <DeleteIcon />
+                                {Boolean(this.state.deleteFlag) && <IconButton aria-label="Delete" onClick = {this.deleteResume}>
+                                      <DeleteIcon/>
                                 </IconButton>}
 
                             </Grid>
