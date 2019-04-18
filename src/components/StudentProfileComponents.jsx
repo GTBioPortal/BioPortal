@@ -21,8 +21,7 @@ class StudentProfileComponents extends React.Component {
          this.state = {
             name: null,
             email: localStorage.getItem("studentEmail"),
-            resume_names: [],
-            resume_ids: [],
+            resumes: [],
             anchorEl: null,
             selected_id: '',
             selected_resume: '',
@@ -39,15 +38,8 @@ class StudentProfileComponents extends React.Component {
             {headers: headers}
         ).then(res => {
             // console.log(res.data.files);
-            var temp_names = [];
-            var temp_ids = [];
-            for (var i = 0; i < res.data.files.length; i++) {
-                temp_names.push(res.data.files[i].name);
-                temp_ids.push(res.data.files[i].id);
-            }
-            this.setState({resume_names: temp_names});
-            this.setState({resume_ids: temp_ids})
-            // console.log(this.state);
+            this.setState({ resumes: res.data.files });
+            // console.log(this.state.resumes);
         });
     }
 
@@ -55,19 +47,18 @@ class StudentProfileComponents extends React.Component {
         this.setState({ anchorEl: event.currentTarget });
     };
 
-    handleClose = (ev) => {
-        this.setState({ anchorEl: null });
-        var selectedResume = ev.nativeEvent.target.outerText;
-        console.log(selectedResume);
-        for (var i = 0; i < this.state.resume_names.length; i++) {
-            if (this.state.resume_names[i] === selectedResume) {
-                this.setState({
-                    selected_id: this.state.resume_ids[i],
-                    selected_resume: this.state.resume_names[i],
-                    deleteFlag: true
-                });
-            }
-        }
+    handleMenuClose = (ev) => {
+        this.setState({ anchorEl: null });  
+    }
+
+    handleClose(el) {
+        this.setState({ 
+            anchorEl: null,
+            selected_id: el.id,
+            selected_resume: el.name,
+            deleteFlag: true
+        });
+        // console.log(this.state.selected_resume);
     };
 
     downloadResume = () => {
@@ -98,7 +89,7 @@ class StudentProfileComponents extends React.Component {
         var auth_token = localStorage.getItem('token');
         var authorize = 'Bearer ' + auth_token;
         var url = '/files/' + this.state.selected_id;
-        console.log(this.state.selected_id);
+        // console.log(this.state.selected_id);
         var headers = {
             'Content-Type': 'application/json',
             'Authorization': authorize
@@ -106,11 +97,16 @@ class StudentProfileComponents extends React.Component {
         API.delete(url,
             {headers: headers}
         ).then(res => {
-            console.log(res);
+            // console.log(res);
             window.location.reload();
             alert("Resume was deleted successfully!")
         }).catch(res => {
-           alert("Resume was not deleted successfully!")
+           // console.log(res);
+           if (res.response.status == 500) {
+               alert("Resume is linked to a job application. Unable to delete resume.");
+           } else {
+                alert("Resume was not deleted successfully!")
+            }
         });
     }
 
@@ -121,7 +117,7 @@ class StudentProfileComponents extends React.Component {
                 <Grid container spacing={24}>
                     <Grid item xs={12}>
                         <br/>
-                            <Typography variant="h4" align="center">Email: {this.state.email}</Typography>
+                            <Typography variant="h4" align="center">Email: {this.state.email} </Typography>
                             <br/>
                               <Grid container direction="row" justify="center" alignItems="center">
                                 <Button
@@ -134,9 +130,9 @@ class StudentProfileComponents extends React.Component {
                                   id="simple-menu"
                                   anchorEl={this.state.anchorEl}
                                   open={Boolean(this.state.anchorEl)}
-                                  onClose={this.handleClose}>
-                                  {this.state.resume_names.map((el, index) => {
-                                    return <MenuItem key={index} onClick={this.handleClose}>{el}</MenuItem>;
+                                  onClose={this.handleMenuClose}>
+                                  {this.state.resumes.map((el, index) => {
+                                    return <MenuItem key={index} onClick={() => this.handleClose(el)}> {el.name} </MenuItem>;
                                   })}
                                 </Menu>
                             </Grid>
