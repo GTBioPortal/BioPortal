@@ -20,7 +20,6 @@ class ApplyToJobPage extends React.Component {
     constructor(props) {
         super(props);
         // console.log(this.props);
-
         this.state = {
             resume_names: [],
             resume_ids: [],
@@ -35,7 +34,7 @@ class ApplyToJobPage extends React.Component {
             'Content-Type': 'application/json',
             'Authorization': authorize
         }
-        API.get('student/files', 
+        API.get('student/files',
         	{headers: headers}
         ).then(res => {
             // console.log(res.data.files);
@@ -70,7 +69,7 @@ class ApplyToJobPage extends React.Component {
         var data = {
         	'resume': this.state.selected_id
         }
-        API.post(url, 
+        API.post(url,
             data,
             {headers: headers}
         ).then(res => {
@@ -92,7 +91,7 @@ class ApplyToJobPage extends React.Component {
             'Authorization': authorize
         }
         API.get(url,
-            {responseType: 'blob', 
+            {responseType: 'blob',
             headers: headers}
         ).then(res => {
             // console.log(res);
@@ -103,7 +102,7 @@ class ApplyToJobPage extends React.Component {
             window.open(fileURL);
         })
         .catch(res => {
-            // console.log(res);  
+            // console.log(res);
         });
     }
 
@@ -112,7 +111,7 @@ class ApplyToJobPage extends React.Component {
         var selectedResume = ev.nativeEvent.target.outerText;
         for (var i = 0; i < this.state.resume_names.length; i++) {
             if (this.state.resume_names[i] === selectedResume) {
-                this.setState({ 
+                this.setState({
                     selected_id: this.state.resume_ids[i],
                     selected_resume: "Selected Resume: " + this.state.resume_names[i]
                 });
@@ -122,7 +121,9 @@ class ApplyToJobPage extends React.Component {
 
     render() {
     	const job = this.state.job;
-    	// console.log(job)
+    	const deadLine = String(job.deadline)
+        const temp = deadLine.split(" ")
+        const parsedDate = temp[0] + " " + temp[1] + " " + temp[2] +  " "  + temp[3]
         return (
         	<div>
         		<Navbar msgCount={0} notificationCount={0}/>
@@ -136,7 +137,7 @@ class ApplyToJobPage extends React.Component {
         		</Typography>
                 {/** place job location and deadline */}
         		<Typography variant="h5" align="center" gutterBottom>
-        			{job.location} | {job.deadline}
+        			Location: {job.location} | Deadline: {parsedDate}
         		</Typography>
         		<div align="center">
                     {/** place job description */}
@@ -163,21 +164,21 @@ class ApplyToJobPage extends React.Component {
                           id="simple-menu"
                           anchorEl={this.state.anchorEl}
                           open={Boolean(this.state.anchorEl)}
-                          onClose={this.handleClose}> 
+                          onClose={this.handleClose}>
                           {this.state.resume_names.map((el, index) => {
                             return <MenuItem key={index} onClick={this.handleClose}>{el}</MenuItem>;
                           })}
                         </Menu>
-                    </Grid> 
+                    </Grid>
                     <Grid container direction="row" justify="center" alignItems="center">
                         <Link variant="subtitle1" align="center" onClick={this.downloadResume} gutterBottom>
                             {this.state.selected_resume}
                         </Link>
-                    </Grid> 
+                    </Grid>
                 </div>
         		<Grid container direction="row" justify="center" alignItems="center">
            	 		<Button size='medium' align='center' onClick={this.sendApp}>Send Application</Button>
-           	 	</Grid>	
+           	 	</Grid>
         	</div>
         );
     }

@@ -64,10 +64,15 @@ class StudentLogin extends Component {
           password: this.state.password,
       }).then(res => {
           console.log(res);
+
           localStorage.setItem('token', res.data.auth_token);
+          localStorage.setItem('studentEmail', res.config.data.split("\"")[3]);
           if (res.data.status === "success") {
               const path = '/student';
-              this.props.history.push(path);
+              this.props.history.push({
+                pathname: path,
+                data: res.config.data
+              });
           }
     }).catch(res => {
             // console.log("Authentication failed");
