@@ -2,13 +2,23 @@
 * Set all modal actions with each of its types/props
 */
 
-export function showUploadResume(auth_token) {
+export function showUploadResume() {
     return {
         type: 'SHOW_MODAL',
-        modalType: 'UPLOAD_RESUME',
-        modalProps: {
-            'token': auth_token
-        }
+        modalType: 'UPLOAD_RESUME'
+    };
+}
+
+export function showUploadCoverLetter() {
+    return {
+        type: 'SHOW_MODAL',
+        modalType: 'UPLOAD_COVER_LETTER'
+    };
+}
+
+export function hideUploadCoverLetter() {
+    return {
+        type: 'HIDE_MODAL',
     };
 }
 
