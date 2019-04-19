@@ -55,7 +55,7 @@ class EmailStudent extends React.Component {
                 <TextField name="emailSubject" id="outlined-full-width-email-subject" label="Email Subject" placeholder="Email Subject" fullWidth margin="normal" variant="outlined"
                            InputLabelProps={{shrink: true,}} value={this.state.subject} onChange={this.handleChange('subject')}/>
 
-                <TextField name="emailBody" id="outlined-full-width-email-body" label="Email Subject" placeholder="Email Subject" fullWidth margin="normal" variant="outlined" multiline rows="5"
+                <TextField name="emailBody" id="outlined-full-width-email-body" label="Email Message" placeholder="Email Message" fullWidth margin="normal" variant="outlined" multiline rows="5"
                            InputLabelProps={{shrink: true,}} value={this.state.body} onChange={this.handleChange('body')}/>
 
                 <Button size='large' type="sendMessage" variant="contained" fullWidth={true} className="sendMessage" color="secondary">Send Message</Button>
