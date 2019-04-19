@@ -64,25 +64,29 @@ class EmployerLogin extends Component {
           password: this.state.password,
     }).then(res => {
           // console.log(res)
-          this.setState({auth_token: res.data.auth_token});
-          localStorage.setItem('employer-token', this.state.auth_token);
-          localStorage.setItem('employerEmail', res.config.data.split("\"")[3]);
-          if (res.data.status === "success") {
-                const path = '/employer';
-                this.props.history.push({
-                  pathname: path,
-                  data: this.state.auth_token
-                });
+          if (res.data.status === 'error') {
+              alert("Account not verified by administrator")
+          } else {
+            this.setState({auth_token: res.data.auth_token});
+            localStorage.setItem('employer-token', this.state.auth_token);
+            localStorage.setItem('employerEmail', res.config.data.split("\"")[3]);
+            if (res.data.status === "success") {
+                  const path = '/employer';
+                  this.props.history.push({
+                    pathname: path,
+                    data: this.state.auth_token
+                  });
+            }
           }
       }).catch(res => {
             // console.log("Authentication failed");
-            // console.log(res.response)
+            // console.log(res)
             if (res.response.status === 401) {
                alert("Invalid login credentials!")
                // this.props.hideLoginFailedSnackbar();
             }
             if (res.response.status === 500) {
-               alert("Invalid login credentials!")
+               alert("Server error!")
                // this.props.hideLoginFailedSnackbar();
             }
     });;

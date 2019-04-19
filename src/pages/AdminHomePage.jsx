@@ -54,7 +54,17 @@ class AdminHomePage extends React.Component {
         });
     }
 
+    viewJobs(employer) {
+        var postings = employer.job_postings;
+        var path = '/adminViewJobs'
+        this.props.history.push({
+            pathname: path,
+            data: postings
+        });
+    }
+
     render() {
+        console.log(this.state.employers);
         return (
             <div>
                 <AdminNavbar />
@@ -62,13 +72,17 @@ class AdminHomePage extends React.Component {
                     {this.state.employers.map((el, index) => {
                         return (
                             <React.Fragment key={index}>
+                                <Typography align="center" variant="subtitle1" gutterBottom> Name: {el.name} / Company: {el.company} / Email: {el.email} / Verified: {Boolean(el.is_approved).toString()} </Typography>
                                 <Grid container direction="row" justify="center" alignItems="center">
-                                    <Typography align="center" variant="subtitle1" gutterBottom> Company: {el.company} / Email: {el.email} / Verified: {Boolean(el.is_approved).toString()} </Typography>
                                     {!el.is_approved &&
                                     <Button
                                         size="small"
                                         variant="outlined"
-                                        onClick = {() => this.verifyEmployer(el)}> Verify</Button>}
+                                        onClick = {() => this.verifyEmployer(el)}> Verify </Button>}
+                                    <Button
+                                        size="small"
+                                        variant="outlined"
+                                        onClick = {() => this.viewJobs(el)}> View Job Postings </Button>
                                     </Grid>
                             </React.Fragment>)
                     })}
