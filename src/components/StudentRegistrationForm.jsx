@@ -41,7 +41,7 @@ class StudentRegistrationForm extends React.Component {
             password: regis.password,
             class: regis.class
         }).then(res => {
-            console.log(res.data.auth_token);
+            //console.log(res.data.auth_token);
             if (res.data.auth_token == undefined) {
                 alert('Registration unsuccessful')
             } else {

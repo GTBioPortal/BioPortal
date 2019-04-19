@@ -73,7 +73,7 @@ class ApplyToJobPage extends React.Component {
             data,
             {headers: headers}
         ).then(res => {
-            console.log(res);
+
       });
       // console.log(this.state.selected_id);
     }

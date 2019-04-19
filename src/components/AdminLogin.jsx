@@ -63,7 +63,6 @@ class AdminLogin extends Component {
           email: this.state.email,
           password: this.state.password,
       }).then(res => {
-          console.log(res);
 
           localStorage.setItem('admin-token', res.data.auth_token);
           if (res.data.status === "success") {

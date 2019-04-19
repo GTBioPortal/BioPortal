@@ -36,7 +36,7 @@ class ViewApplicantsPage extends React.Component {
             'Content-Type': 'application/json',
             'Authorization': authorize
         }
-        API.get(url, 
+        API.get(url,
             {headers: headers}
         ).then(res => {
             // console.log(res.data.applications);
@@ -63,10 +63,9 @@ class ViewApplicantsPage extends React.Component {
         }
         API.post(url,
             {application_id: app.id},
-            {responseType: 'blob', 
+            {responseType: 'blob',
             headers: headers}
         ).then(res => {
-            console.log(res);
             var blob = new Blob(
                 [res.data],
                 {type: 'application/pdf'});
@@ -74,7 +73,7 @@ class ViewApplicantsPage extends React.Component {
             window.open(fileURL);
         })
         .catch(res => {
-            // console.log(res);  
+            // console.log(res);
         });
     }
 

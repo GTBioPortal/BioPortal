@@ -29,7 +29,7 @@ class RegistrationForm extends React.Component {
         this.setState({password: ''});
         this.setState({summary: ''});
 
-        console.log(regis);
+        //console.log(regis);
 
 
         // const token = "";
@@ -42,7 +42,7 @@ class RegistrationForm extends React.Component {
             company_description: regis.summary,
             company: regis.companyName
         }).then(res => {
-            console.log(res.data.auth_token);
+            //console.log(res.data.auth_token);
             if (res.data.auth_token == undefined) {
                 alert('Registration unsuccessful')
             } else {

@@ -96,7 +96,7 @@ class EditJobPostingForm extends React.Component {
             deadline: this.state.deadline + "T00:00:00.787Z"},
             {headers: headers}
         ).then(res => {
-            console.log(res);
+            //console.log(res);
             alert("Job posting successfully updated!");
       });
 

@@ -38,8 +38,6 @@ class AdminRegistrationForm extends React.Component {
             password: regis.password,
             position: regis.position
         }).then(res => {
-            console.log(res);
-            // console.log(res.data.auth_token);
             alert("Registration successful!")
             // token = res.data.auth_token;
       });
