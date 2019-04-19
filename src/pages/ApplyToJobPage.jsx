@@ -15,6 +15,9 @@ import Grid from '@material-ui/core/Grid';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Link from '@material-ui/core/Link';
+import Checkbox from '@material-ui/core/Checkbox';
+import Icon from '@material-ui/core/Icon';
+
 
 class ApplyToJobPage extends React.Component {
     constructor(props) {
@@ -119,11 +122,19 @@ class ApplyToJobPage extends React.Component {
         }
     };
 
+    dateParser(stringDate) {
+        const temp = stringDate.split(" ")
+        const parsedDate = temp[0] + " " + temp[1] + " " + temp[2] +  " "  + temp[3]
+        return parsedDate
+    };
+
     render() {
     	const job = this.state.job;
-    	const deadLine = String(job.deadline)
+        const deadLine = String(job.deadline)
         const temp = deadLine.split(" ")
-        const parsedDate = temp[0] + " " + temp[1] + " " + temp[2] +  " "  + temp[3]
+        const parsedDate = this.dateParser(deadLine)
+        const parsedStartDate = this.dateParser(String(job.start_date))
+        const parsedCreatedDate = this.dateParser(String(job.created_at))
         return (
         	<div>
         		<Navbar msgCount={0} notificationCount={0}/>
@@ -141,44 +152,79 @@ class ApplyToJobPage extends React.Component {
         		</Typography>
         		<div align="center">
                     {/** place job description */}
-	        		<Typography variant="subheading" align="center" gutterBottom>
-	        		Job Description:
-	        		</Typography>
-	        		<Card className='job-description-card'>
-		                <CardContent>
-		                    <Typography color='textSecondary' align="left">
-                                {job.description}
-								</Typography>
-		                </CardContent>
-	           	 	</Card>
-           	 	</div>
-                <div>
-                    <Grid container direction="row" justify="center" alignItems="center">
-                        <Button
-                          aria-owns={this.state.anchorEl ? 'simple-menu' : undefined}
-                          aria-haspopup="true"
-                          onClick={this.handleClick}>
-                          Select a Resume
-                        </Button>
-                        <Menu
-                          id="simple-menu"
-                          anchorEl={this.state.anchorEl}
-                          open={Boolean(this.state.anchorEl)}
-                          onClose={this.handleClose}>
-                          {this.state.resume_names.map((el, index) => {
-                            return <MenuItem key={index} onClick={this.handleClose}>{el}</MenuItem>;
-                          })}
-                        </Menu>
-                    </Grid>
-                    <Grid container direction="row" justify="center" alignItems="center">
-                        <Link variant="subtitle1" align="center" onClick={this.downloadResume} gutterBottom>
-                            {this.state.selected_resume}
-                        </Link>
-                    </Grid>
+
+                    <Card className='job-description-card' raised = {true}>
+                        <CardContent>
+                            <Typography color='textSecondary' align="left">
+                                <Typography variant="headline" align="center" gutterBottom>
+                                Job Details
+                                </Typography>
+                                <br/>
+                                Job Description: {job.description}
+                                </Typography>
+                                <br/>
+                                <Typography color='textSecondary' align="left">
+                                Start Date: {parsedStartDate}
+                                </Typography>
+                                <br/>
+                                <Typography color='textSecondary' align="left">
+                                Job Title: {job.title}
+                                </Typography>
+                                <br/>
+                                <Typography color='textSecondary' align="left">
+                                Job posted at: {parsedCreatedDate}
+                                </Typography>
+                                <br/>
+                                <Grid container direction="row" justify="center" alignItems="center">
+                                    <Typography color='textSecondary' align="left">
+                                    Resume Required:<Checkbox disabled={true} checked={Boolean(job.resume)} />
+                                    </Typography>
+                                    <Typography color='textSecondary' align="left">
+                                    Cover Letter Required:<Checkbox disabled={true} checked={Boolean(job.cover_letter)} />
+                                    </Typography>
+                                    <Typography color='textSecondary' align="left">
+                                    Transcript Required:<Checkbox disabled={true} checked={Boolean(job.transcript)} />
+                                    </Typography>
+                                </Grid>
+                            <div>
+                                <Grid container direction="row" justify="center" alignItems="center">
+                                    <Button
+                                      variant="outlined"
+                                      aria-owns={this.state.anchorEl ? 'simple-menu' : undefined}
+                                      aria-haspopup="true"
+                                      onClick={this.handleClick}>
+                                      Select a Resume
+                                    </Button>
+
+                                    <Menu
+                                      id="simple-menu"
+                                      anchorEl={this.state.anchorEl}
+                                      open={Boolean(this.state.anchorEl)}
+                                      onClose={this.handleClose}>
+                                      {this.state.resume_names.map((el, index) => {
+                                        return <MenuItem key={index} onClick={this.handleClose}>{el}</MenuItem> ;
+                                      })}
+                                    </Menu>
+                                </Grid>
+                                <Grid container direction="row" justify="center" alignItems="center">
+                                    <Link variant="subtitle1" align="center" onClick={this.downloadResume} gutterBottom>
+                                        {this.state.selected_resume}
+                                    </Link>
+                                </Grid>
+                            </div>
+                        </CardContent>
+                        <Grid container direction="row" justify="center" alignItems="center">
+                            <CardActions id='view-job-div'>
+                                <Button style={{padding: 10}} onClick={this.sendApp} size = 'small' align= 'center' variant="contained">
+                                Send Application
+                                {/** <Icon>send</Icon>*/}
+                              </Button>
+                            </CardActions>
+                            <br/>
+                        </Grid>
+                        <br/>
+                    </Card>
                 </div>
-        		<Grid container direction="row" justify="center" alignItems="center">
-           	 		<Button size='medium' align='center' onClick={this.sendApp}>Send Application</Button>
-           	 	</Grid>
         	</div>
         );
     }
