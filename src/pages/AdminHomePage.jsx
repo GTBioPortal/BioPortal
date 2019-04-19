@@ -64,6 +64,7 @@ class AdminHomePage extends React.Component {
     }
 
     render() {
+        console.log(this.state.employers);
         return (
             <div>
                 <AdminNavbar />
@@ -71,7 +72,7 @@ class AdminHomePage extends React.Component {
                     {this.state.employers.map((el, index) => {
                         return (
                             <React.Fragment key={index}>
-                                <Typography align="center" variant="subtitle1" gutterBottom> Company: {el.company} / Email: {el.email} / Verified: {Boolean(el.is_approved).toString()} </Typography>
+                                <Typography align="center" variant="subtitle1" gutterBottom> Name: {el.name} / Company: {el.company} / Email: {el.email} / Verified: {Boolean(el.is_approved).toString()} </Typography>
                                 <Grid container direction="row" justify="center" alignItems="center">
                                     {!el.is_approved &&
                                     <Button
