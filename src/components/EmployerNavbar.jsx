@@ -56,11 +56,6 @@ class EmployerNavbar extends React.Component {
         this.props.history.push(path);
     }
 
-    emailStudent = () => {
-        const path = '/emailStudentPage';
-        this.props.history.push(path);
-    }
-
     render() {
         const { classes } = this.props;
         const { anchorEl } = this.state;
@@ -77,18 +72,6 @@ class EmployerNavbar extends React.Component {
                         </Link>
                     </Typography>
                     <div>
-                        {/* add mail badge */}
-                        <IconButton color='inherit' onClick = {this.emailStudent}>
-                            <Badge color='secondary' badgeContent={0} invisible={true}>
-                                <MailIcon />
-                            </Badge>
-                        </IconButton>
-                        {/* add notifications badge */}
-                        <IconButton color='inherit'>
-                            <Badge color='secondary' badgeContent={0} invisible={true}>
-                                <NotificationsIcon />
-                            </Badge>
-                        </IconButton>
                         {/* add profile badge */}
                         <IconButton aria-owns={open ? 'menu-appbar' : undefined}
                                     aria-haspopup="true"
