@@ -4,6 +4,19 @@ BioPortal Junior Design Project
 ## Release Notes version BioPortal 1.0
 
 ### NEW FEATURES
+* Admin Account Login/Registration
+* Admin homepage to view list of employers and students
+* Admin ability to approve new employer accounts
+* Employer Account Login/Registration
+* Employer homepage to view all their active job postings
+* Employer ability to create new job postings
+* Employer ability to edit job postings
+* Employer page to view all student applications to job postings
+* Student Account Login/Registration
+* Student hoempage to view all available job postings
+* Student page to view detailed information about job posting
+* Student ability to apply to job
+* Student settings page to view and upload resume, transcript, and cover letters
 
 
 ### BUG FIXES
