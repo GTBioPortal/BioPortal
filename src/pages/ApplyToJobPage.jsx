@@ -17,6 +17,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Link from '@material-ui/core/Link';
 import Checkbox from '@material-ui/core/Checkbox';
 import Icon from '@material-ui/core/Icon';
+import { showUploadCoverLetter, showUploadTranscript } from '../actions/modals';
+import { bindActionCreators } from 'redux';
 
 
 class ApplyToJobPage extends React.Component {
@@ -24,40 +26,62 @@ class ApplyToJobPage extends React.Component {
         super(props);
         // console.log(this.props);
         this.state = {
-            resume_names: [],
-            resume_ids: [],
             job: [],
+            name: null,
+            email: localStorage.getItem("studentEmail"),
+            resumes: [],
+            cover_letters: [],
+            transcripts: [],
             anchorEl: null,
+            anchorElcov: null,
+            anchorElTrans: null,
             selected_id: '',
-            selected_resume: ''
+            selected_resume: '',
+            selected_cover_letter: '',
+            selected_transcript: '',
+            selected_id_coverLetter: '',
+            selected_id_transcript: '',
+            deleteFlag: false,
+            deleteFlagCov: false,
+            deleteFlagTrans: false
         }
+
         var auth_token = localStorage.getItem('token');
-        var authorize = 'Bearer ' + auth_token
+        var authorize = 'Bearer ' + auth_token;
         var headers = {
             'Content-Type': 'application/json',
             'Authorization': authorize
-        }
+        };
         API.get('student/files',
-        	{headers: headers}
+            {headers: headers}
         ).then(res => {
             // console.log(res.data.files);
-            var temp_names = [];
-            var temp_ids = [];
+            var tempres = [];
+            var tempcov = [];
+            var temptrans = [];
             for (var i = 0; i < res.data.files.length; i++) {
-                temp_names.push(res.data.files[i].name);
-                temp_ids.push(res.data.files[i].id);
+                if (res.data.files[i].document_type === "resume") {
+                    tempres.push(res.data.files[i]);
+                }
+                if (res.data.files[i].document_type === "cover_letter") {
+                    tempcov.push(res.data.files[i]);
+                }
+                if (res.data.files[i].document_type === "transcript") {
+                    temptrans.push(res.data.files[i]);
+                }
             }
-            this.setState({resume_names: temp_names});
-            this.setState({resume_ids: temp_ids})
-            // console.log(this.state);
-      	})
-        var url = 'jobs/' + localStorage.getItem('job-id')
+            this.setState({
+                resumes: tempres,
+                cover_letters: tempcov,
+                transcripts: temptrans
+            });
+            // console.log(this.state.resumes);
+        });
+
+        var url = 'jobs/' + localStorage.getItem('job-id');
         API.get(url).then(res => {
-            // var allJobs = res.data.jobs;
-            // console.log(res.data);
-            this.setState({ job: res.data.data });
+            this.setState({job: res.data.data})
         })
-      	// console.log(this.state)
     }
 
     sendApp = () => {
@@ -69,9 +93,21 @@ class ApplyToJobPage extends React.Component {
             'Content-Type': 'application/json',
             'Authorization': authorize
         }
-        var data = {
-        	'resume': this.state.selected_id
+
+        var data = {}
+
+        if (this.state.selected_id_coverLetter != '') {
+            data['cover_letter'] = this.state.selected_id_coverLetter
         }
+
+        if (this.state.selected_id_transcript != '') {
+            data['transcript'] = this.state.selected_id_transcript
+        }
+
+        if (this.state.selected_id != '') {
+            data['resume'] = this.state.selected_id
+        }
+
         API.post(url,
             data,
             {headers: headers}
@@ -79,11 +115,59 @@ class ApplyToJobPage extends React.Component {
             console.log(res);
       });
       // console.log(this.state.selected_id);
-    }
+    };
 
     handleClick = event => {
         this.setState({ anchorEl: event.currentTarget });
     };
+
+    handleClickcov = event => {
+        this.setState({ anchorElcov: event.currentTarget });
+    };
+
+    handleClickTrans = event => {
+        this.setState({ anchorElTrans: event.currentTarget });
+    };
+
+    handleMenuClose = (ev) => {
+        this.setState({ anchorEl: null });
+    };
+
+    handleMenuCloseCov = (ev) => {
+        this.setState({ anchorElcov: null });
+    };
+
+    handleMenuCloseTrans = (ev) => {
+        this.setState({ anchorElTrans: null });
+    };
+
+    handleClose(resume) {
+        this.setState({
+            anchorEl: null,
+            selected_id: resume.id,
+            selected_resume: resume.name,
+            deleteFlag: true
+        });
+        // console.log(this.state.selected_resume);
+    };
+
+    handleCloseCov(cover_letter) {
+        this.setState({
+            anchorElcov: null,
+            selected_id_coverLetter: cover_letter.id,
+            selected_cover_letter: cover_letter.name,
+            deleteFlagCov: true
+        });
+    }
+
+    handleCloseTrans(transcript) {
+        this.setState({
+            anchorElTrans: null,
+            selected_id_transcript: transcript.id,
+            selected_transcript: transcript.name,
+            deleteFlagTrans: true
+        });
+    }
 
     downloadResume = () => {
         var auth_token = localStorage.getItem('token');
@@ -107,19 +191,54 @@ class ApplyToJobPage extends React.Component {
         .catch(res => {
             // console.log(res);
         });
-    }
+    };
 
-    handleClose = (ev) => {
-        this.setState({ anchorEl: null });
-        var selectedResume = ev.nativeEvent.target.outerText;
-        for (var i = 0; i < this.state.resume_names.length; i++) {
-            if (this.state.resume_names[i] === selectedResume) {
-                this.setState({
-                    selected_id: this.state.resume_ids[i],
-                    selected_resume: "Selected Resume: " + this.state.resume_names[i]
-                });
-            }
+    downloadCoverLetter = () => {
+        var auth_token = localStorage.getItem('token');
+        var authorize = 'Bearer ' + auth_token;
+        var url = '/files/' + this.state.selected_id_coverLetter;
+        var headers = {
+            'Content-Type': 'application/json',
+            'Authorization': authorize
         }
+        API.get(url,
+            {responseType: 'blob',
+            headers: headers}
+        ).then(res => {
+            // console.log(res);
+            var blob = new Blob(
+                [res.data],
+                {type: 'application/pdf'});
+            const fileURL = URL.createObjectURL(blob);
+            window.open(fileURL);
+        })
+        .catch(res => {
+            // console.log(res);
+        });
+    };
+
+    downloadTranscript = () => {
+        var auth_token = localStorage.getItem('token');
+        var authorize = 'Bearer ' + auth_token;
+        var url = '/files/' + this.state.selected_id_transcript;
+        var headers = {
+            'Content-Type': 'application/json',
+            'Authorization': authorize
+        }
+        API.get(url,
+            {responseType: 'blob',
+            headers: headers}
+        ).then(res => {
+            // console.log(res);
+            var blob = new Blob(
+                [res.data],
+                {type: 'application/pdf'});
+            const fileURL = URL.createObjectURL(blob);
+            window.open(fileURL);
+        })
+        .catch(res => {
+            // console.log(res);
+        });
     };
 
     dateParser(stringDate) {
@@ -187,29 +306,77 @@ class ApplyToJobPage extends React.Component {
                                     </Typography>
                                 </Grid>
                             <div>
-                                <Grid container direction="row" justify="center" alignItems="center">
-                                    <Button
-                                      variant="outlined"
-                                      aria-owns={this.state.anchorEl ? 'simple-menu' : undefined}
-                                      aria-haspopup="true"
-                                      onClick={this.handleClick}>
-                                      Select a Resume
-                                    </Button>
+                                <Grid container direction="row" justify="center" alignItems="center" spacing={8}>
+                                    <Grid item xs ={12}>
+                                        <Grid container direction = "column">
+                                                <Button
+                                                  variant= "outlined"
+                                                  aria-owns={this.state.anchorEl ? 'simple-menu' : undefined}
+                                                  aria-haspopup="true"
+                                                  onClick={this.handleClick}>
+                                                  Select a Resume
+                                                </Button>
+                                                <Menu
+                                                  id="simple-menu"
+                                                  anchorEl={this.state.anchorEl}
+                                                  open={Boolean(this.state.anchorEl)}
+                                                  onClose={this.handleMenuClose}>
+                                                  {this.state.resumes.map((el, index) => {
+                                                    return <MenuItem key={index} onClick={() => this.handleClose(el)}> {el.name} </MenuItem>;
+                                                  })}
+                                                </Menu>
+                                                <Link variant="subtitle1" align="center" onClick={this.downloadResume} gutterBottom>
+                                                    {this.state.selected_resume}
+                                                </Link>
+                                            </Grid>
+                                        </Grid>
+                                    <Grid item xs = {12}>
+                                        <Grid container direction="column">
+                                            <Button
+                                              variant= "outlined"
+                                              aria-owns={this.state.anchorElcov ? 'simple-menu' : undefined}
+                                              aria-haspopup="true"
+                                              onClick={this.handleClickcov}>
+                                              Select a Cover Letter
+                                            </Button>
+                                            <Menu
+                                              id="simple-menu"
+                                              anchorEl={this.state.anchorElcov}
+                                              open={Boolean(this.state.anchorElcov)}
+                                              onClose={this.handleMenuCloseCov}>
+                                              {this.state.cover_letters.map((el, index) => {
+                                                return <MenuItem key={index} onClick={() => this.handleCloseCov(el)}> {el.name} </MenuItem>;
+                                              })}
+                                            </Menu>
+                                            <Link variant="subtitle1" align="center" onClick={this.downloadCoverLetter} gutterBottom>
+                                                {this.state.selected_cover_letter}
+                                            </Link>
 
-                                    <Menu
-                                      id="simple-menu"
-                                      anchorEl={this.state.anchorEl}
-                                      open={Boolean(this.state.anchorEl)}
-                                      onClose={this.handleClose}>
-                                      {this.state.resume_names.map((el, index) => {
-                                        return <MenuItem key={index} onClick={this.handleClose}>{el}</MenuItem> ;
-                                      })}
-                                    </Menu>
-                                </Grid>
-                                <Grid container direction="row" justify="center" alignItems="center">
-                                    <Link variant="subtitle1" align="center" onClick={this.downloadResume} gutterBottom>
-                                        {this.state.selected_resume}
-                                    </Link>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid item>
+                                        <Button
+                                          variant= "outlined"
+                                          aria-owns={this.state.anchorElTrans ? 'simple-menu' : undefined}
+                                          aria-haspopup="true"
+                                          onClick={this.handleClickTrans}>
+                                          Select a Transcript
+                                        </Button>
+                                        <Menu
+                                          id="simple-menu"
+                                          anchorEl={this.state.anchorElTrans}
+                                          open={Boolean(this.state.anchorElTrans)}
+                                          onClose={this.handleMenuCloseTrans}>
+                                          {this.state.transcripts.map((el, index) => {
+                                            return <MenuItem key={index} onClick={() => this.handleCloseTrans(el)}> {el.name} </MenuItem>;
+                                          })}
+                                        </Menu>
+                                    </Grid>
+                                    <Grid item>
+                                        <Link variant="subtitle1" align="center" onClick={this.downloadTranscript} gutterBottom>
+                                            {this.state.selected_transcript}
+                                        </Link>
+                                    </Grid>
                                 </Grid>
                             </div>
                         </CardContent>
@@ -230,4 +397,11 @@ class ApplyToJobPage extends React.Component {
     }
 }
 
-export default ApplyToJobPage;
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ showUploadCoverLetter, showUploadTranscript }, dispatch);
+}
+
+export default withRouter(connect(
+    null,
+    mapDispatchToProps
+)(ApplyToJobPage));
