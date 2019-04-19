@@ -1,0 +1,98 @@
+import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { showUploadResume } from '../actions/modals';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import AppBar from '@material-ui/core/AppBar';
+import Badge from '@material-ui/core/Badge';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import InputBase from '@material-ui/core/InputBase';
+import MailIcon from '@material-ui/icons/Mail';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+import { withRouter, push } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
+
+import '../styles/toolbar.scss'
+
+/**
+ * Navbar component sets the portal navigation items at the top of each webpage for students
+ */
+class AdminNavbar extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    state = {
+        anchorEl: null,
+    };
+
+    handleMenu = event => {
+        this.setState({ anchorEl: event.currentTarget });
+    };
+
+    handleClose = () => {
+        this.setState({ anchorEl: null });
+    };
+
+    logOut = () => {
+            this.setState({ anchorEl: null });
+            const path = '/admin';
+            this.props.history.replace(path);
+        };
+
+    goAdminHome = () => {
+        const path = '/adminHome';
+        this.props.history.push(path);
+    }
+
+    render() {
+        const { classes } = this.props;
+        const { anchorEl } = this.state;
+        const open = Boolean(anchorEl);
+
+        return (
+            /**
+             * Create a bar at the top
+             */
+            <AppBar position='static' className='Navbar'>
+                <Toolbar>
+                    {/* add portal title */}
+                    <Typography variant='title' color='inherit' className='grow'>
+                        <Link component = "button" underline = 'none' variant='title' color='inherit' className='grow' onClick = {this.goAdminHome}>
+                            BioPortal
+                        </Link>
+                    </Typography>
+                        <IconButton aria-owns={open ? 'menu-appbar' : undefined}
+                                    aria-haspopup="true"
+                                    onClick={this.handleMenu}
+                                    color="inherit">
+                            <AccountCircle />
+                        </IconButton>
+                        <Menu
+                            id="menu-appbar"
+                            anchorEl={anchorEl}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            open={open}
+                            onClose={this.handleClose}>
+                            <MenuItem onClick={this.logOut}>Log Out</MenuItem>
+                        </Menu>
+                </Toolbar>
+            </AppBar>
+        )
+    }
+}
+
+// export component for use
+export default withRouter(AdminNavbar);

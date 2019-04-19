@@ -32,17 +32,17 @@ class AdminRegistrationForm extends React.Component {
         // const token = "";
 
         //TODO: store token
-      //   API.post('employer/create', {
-      //       name: regis.name,
-      //       email: regis.email,
-      //       password: regis.password,
-      //       company_description: regis.summary,
-      //       company: regis.companyName
-      //   }).then(res => {
-      //       console.log(res.data.auth_token);
-      //       alert("Registration successful!")
-      //       // token = res.data.auth_token;
-      // });
+        API.post('admin/create', {
+            name: regis.name,
+            email: regis.email,
+            password: regis.password,
+            position: regis.position
+        }).then(res => {
+            console.log(res);
+            // console.log(res.data.auth_token);
+            alert("Registration successful!")
+            // token = res.data.auth_token;
+      });
     }
 
     state = {

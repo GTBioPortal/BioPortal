@@ -16,6 +16,7 @@ import StudentLoginpage from './pages/StudentLoginpage'
 import ViewApplicantsPage from './pages/ViewApplicantsPage'
 import AdminLoginpage from './pages/AdminLoginpage'
 import AdminRegistration from './pages/AdminRegistration'
+import AdminHomePage from './pages/AdminHomePage'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
@@ -61,6 +62,8 @@ const router = (
                 <Route path='/admin' component={AdminLoginpage}>
                 </Route>
                 <Route path='/registerAdmin' component={AdminRegistration}>
+                </Route>
+                <Route path='/adminHome' component={AdminHomePage}>
                 </Route>
             </div>
         </Router>

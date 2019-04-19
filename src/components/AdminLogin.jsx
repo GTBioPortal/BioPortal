@@ -55,37 +55,36 @@ class AdminLogin extends Component {
     this.props.history.push(path);
   }
 
-  loginStudent = () => {
+  loginAdmin = () => {
     // const path = '/student';
     // this.props.history.push(path);
     // //
-    // API.post('student/login', {
-    //       email: this.state.email,
-    //       password: this.state.password,
-    //   }).then(res => {
-    //       console.log(res);
+    API.post('admin/login', {
+          email: this.state.email,
+          password: this.state.password,
+      }).then(res => {
+          console.log(res);
 
-    //       localStorage.setItem('token', res.data.auth_token);
-    //       localStorage.setItem('studentEmail', res.config.data.split("\"")[3]);
-    //       if (res.data.status === "success") {
-    //           const path = '/student';
-    //           this.props.history.push({
-    //             pathname: path,
-    //             data: res.config.data
-    //           });
-    //       }
-    // }).catch(res => {
-    //         // console.log("Authentication failed");
-    //         // console.log(res.response)
-    //         if (res.response.status === 401) {
-    //            alert("Invalid login credentials!")
-    //            // this.props.hideLoginFailedSnackbar();
-    //         }
-    //         if (res.response.status === 500) {
-    //            alert("Invalid login credentials!")
-    //            // this.props.hideLoginFailedSnackbar();
-    //         }
-    // });
+          localStorage.setItem('admin-token', res.data.auth_token);
+          if (res.data.status === "success") {
+              const path = '/adminHome';
+              this.props.history.push({
+                pathname: path,
+                data: res.config.data
+              });
+          }
+    }).catch(res => {
+            // console.log("Authentication failed");
+            // console.log(res.response)
+            if (res.response.status === 401) {
+               alert("Invalid login credentials!")
+               // this.props.hideLoginFailedSnackbar();
+            }
+            if (res.response.status === 500) {
+               alert("Invalid login credentials!")
+               // this.props.hideLoginFailedSnackbar();
+            }
+    });
   }
 
   render() {
@@ -95,7 +94,7 @@ class AdminLogin extends Component {
           direction="column"
           justify="center"
           alignItems="center"
-          spacing='15'>
+          spacing={16}>
           <Grid item xs={12}>
                 <Typography variant="h2" align="center" className='title' gutterBottom>
                 Admin Login
@@ -108,7 +107,7 @@ class AdminLogin extends Component {
           justify="center"
           alignItems="center">
             <form onSubmit={this.handleSubmit}>
-            <Grid item xs={24}>
+            <Grid item xs={12}>
               <TextField
                   id="email"
                   label="Email"
@@ -121,7 +120,7 @@ class AdminLogin extends Component {
 
                 />
             </Grid>
-            <Grid item xs={24}>
+            <Grid item xs={12}>
 
               <TextField
                   id="password"
