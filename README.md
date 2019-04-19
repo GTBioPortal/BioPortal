@@ -1,7 +1,7 @@
 BioPortal Junior Design Project
 ========
 
-##Release Notes version BioPortal 1.0
+## Release Notes version BioPortal 1.0
 
 ### NEW FEATURES
 
