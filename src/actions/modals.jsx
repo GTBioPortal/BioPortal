@@ -22,6 +22,19 @@ export function hideUploadCoverLetter() {
     };
 }
 
+export function showUploadTranscript() {
+    return {
+        type: 'SHOW_MODAL',
+        modalType: 'UPLOAD_TRANSCRIPT'
+    };
+}
+
+export function hideUploadTranscript() {
+    return {
+        type: 'HIDE_MODAL',
+    };
+}
+
 export function hideUploadResume() {
     return {
         type: 'HIDE_MODAL',
