@@ -23,7 +23,7 @@ BioPortal Junior Design Project
 
 
 ### KNOWN BUGS
-
+* When Admin views a specific job posting and uses browser back button the home page will have no data and user will need to refresh page
 
 ## Getting Started With Development
 To start clone repo and type `npm i` at root directory to import all required
