@@ -5,9 +5,12 @@ BioPortal Junior Design Project
 
 ### NEW FEATURES
 
+
 ### BUG FIXES
 
+
 ### KNOWN BUGS
+
 
 ## Getting Started With Development
 To start clone repo and type `npm i` at root directory to import all required
