@@ -66,6 +66,7 @@ class EmployerLogin extends Component {
           // console.log(res)
           this.setState({auth_token: res.data.auth_token});
           localStorage.setItem('employer-token', this.state.auth_token);
+          localStorage.setItem('employerEmail', res.config.data.split("\"")[3]);
           if (res.data.status === "success") {
                 const path = '/employer';
                 this.props.history.push({
