@@ -63,7 +63,9 @@ class EmployerLogin extends Component {
           email: this.state.email,
           password: this.state.password,
     }).then(res => {
-          // console.log(res)
+          if (res.data.auth_token == undefined) {
+            alert('Invalid login credentials!')
+          }
           this.setState({auth_token: res.data.auth_token});
           localStorage.setItem('employer-token', this.state.auth_token);
           localStorage.setItem('employerEmail', res.config.data.split("\"")[3]);
@@ -76,7 +78,7 @@ class EmployerLogin extends Component {
           }
       }).catch(res => {
             // console.log("Authentication failed");
-            // console.log(res.response)
+
             if (res.response.status === 401) {
                alert("Invalid login credentials!")
                // this.props.hideLoginFailedSnackbar();

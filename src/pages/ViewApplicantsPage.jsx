@@ -53,7 +53,7 @@ class ViewApplicantsPage extends React.Component {
     }
 
     downloadResume(app) {
-        console.log(app);
+        //console.log(app);
         var auth_token = localStorage.getItem('employer-token');
         var authorize = 'Bearer ' + auth_token;
         var url = '/files/' + app.resume;
