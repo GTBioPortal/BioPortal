@@ -22,7 +22,8 @@ class AdminHomePage extends React.Component {
         super(props);
 
         this.state = {
-            employers: []
+            employers: [],
+            students: []
         }
 
         var auth_token = localStorage.getItem('admin-token');
@@ -37,6 +38,12 @@ class AdminHomePage extends React.Component {
             employersSort.sort((a,b) => a.is_approved - b.is_approved);
             // console.log(employersSort);
             this.setState({ employers: employersSort });
+        });
+
+        API.get('admin/students', {headers: headers}).then(res => {
+            console.log(res);
+
+            this.setState({ students: res.data.students });
         });
     }
 
@@ -64,28 +71,45 @@ class AdminHomePage extends React.Component {
     }
 
     render() {
-        console.log(this.state.employers);
+        console.log(this.state.students);
         return (
             <div>
                 <AdminNavbar />
-                <Grid container direction="column" justify="center" alignItems="center">
-                    {this.state.employers.map((el, index) => {
-                        return (
-                            <React.Fragment key={index}>
-                                <Typography align="center" variant="subtitle1" gutterBottom> Name: {el.name} / Company: {el.company} / Email: {el.email} / Verified: {Boolean(el.is_approved).toString()} </Typography>
-                                <Grid container direction="row" justify="center" alignItems="center">
-                                    {!el.is_approved &&
-                                    <Button
-                                        size="small"
-                                        variant="outlined"
-                                        onClick = {() => this.verifyEmployer(el)}> Verify </Button>}
-                                    <Button
-                                        size="small"
-                                        variant="outlined"
-                                        onClick = {() => this.viewJobs(el)}> View Job Postings </Button>
-                                    </Grid>
-                            </React.Fragment>)
-                    })}
+                <Grid container direction="row" justify="center" alignItems="center" spacing={16} alignItems="stretch">
+
+                    <Grid item direction="column" justify="center" alignItems="center"  spacing={16}>
+                                    <Typography align="center" variant="h3" gutterBottom>  Employers:  </Typography>
+                        {this.state.employers.map((el, index) => {
+                            return (
+                                <React.Fragment key={index}>
+                                    <Typography align="center" variant="subtitle1" gutterBottom> Name: {el.name} / Company: {el.company} / Email: {el.email} / Verified: {Boolean(el.is_approved).toString()} </Typography>
+                                    <Grid container direction="row" justify="center" alignItems="center">
+                                        {!el.is_approved &&
+                                        <Button
+                                            size="small"
+                                            variant="outlined"
+                                            onClick = {() => this.verifyEmployer(el)}> Verify </Button>}
+                                        <Button
+                                            size="small"
+                                            variant="outlined"
+                                            onClick = {() => this.viewJobs(el)}> View Job Postings </Button>
+                                        </Grid>
+                                </React.Fragment>)
+                        })}
+                    </Grid>
+                    <Grid item direction="column" justify="center" alignItems="center">
+                        <Typography align="center" variant="h3" gutterBottom>  Students:  </Typography>
+
+                        {this.state.students.map((el, index) => {
+                            return (
+                                <React.Fragment key={index}>
+                                    <Grid container direction="row" justify="center" alignItems="center">
+                                        <Typography align="center" variant="subtitle1" gutterBottom> Name: {el.name} / Class: {el.class} / Email: {el.email} </Typography>
+
+                                        </Grid>
+                                </React.Fragment>)
+                        })}
+                    </Grid>
                 </Grid>
             </div>
         );
