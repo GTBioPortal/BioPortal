@@ -1,7 +1,7 @@
 import React from 'react';
 import { hideUploadSnackbar } from '../actions/modals'
 import BaseModal from '../containers/BaseModal';
-import JobGrid from '../components/JobGrid';
+import StudentProfileComponents from '../components/StudentProfileComponents'
 import Navbar from '../components/Navbar';
 import { withRouter, push } from 'react-router-dom';
 import '../styles/app.scss';
@@ -13,10 +13,10 @@ import API from '../api/api'
 /**
  * Student homepage that contains job cards
  */
-class StudentHomePage extends React.Component {
+class StudentProfilePage extends React.Component {
     constructor(props) {
         super(props);
-        // console.log(props.location.data);
+        // console.log(props)
         this.state = {
             showUploadSnackbar: true,
             jobs: []
@@ -32,9 +32,12 @@ class StudentHomePage extends React.Component {
     }
 
     render() {
+        const { classes } = this.props;
+        const { auth, anchorEl } = this.state;
+        const open = Boolean(anchorEl);
         return (
             <div>
-                <Navbar msgCount={0} notificationCount={0} email = {this.props.location.data}/>
+                <Navbar msgCount={0} notificationCount={0}/>
                 {/* determines if resume confirmation pop-up message needs to be displayed*/}
                 <Snackbar
                     anchorOrigin={{vertical: 'top', horizontal: 'center'}}
@@ -42,9 +45,8 @@ class StudentHomePage extends React.Component {
                     onClose={this.handleSnackbarClose}
                     autoHideDuration={2000}
                     message={<span id='message-id'>Resume uploaded successfully!</span>} />
-                {/* inserts job grid with the different cards into the page*/}
-                <JobGrid />
                 <BaseModal />
+                <StudentProfileComponents data = {this.props}/>
             </div>
         );
     }
@@ -64,4 +66,4 @@ function mapDispatchToProps(dispatch) {
 export default withRouter(connect(
     mapStateToProps,
     mapDispatchToProps
-)(StudentHomePage));
+)(StudentProfilePage));

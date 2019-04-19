@@ -10,24 +10,25 @@ import API from '../api/api';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { showLoginFailedSnackbar }  from '../actions/modals'
+import { showLoginFailedSnackbar, hideLoginFailedSnackbar }  from '../actions/modals'
 
 import "../styles/login.scss";
 
 /**
- * EmployerLogin component allows employers to login
+ * Student Login Component that handles a student logging in
  */
-class EmployerLogin extends Component {
+class AdminLogin extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       email: "",
-      password: "",
-      auth_token: ""
+      password: ""
     };
+    // this.loginStudent = this.loginStudent.bind(this);
 
-    this.loginEmployer = this.loginEmployer.bind(this);
+
+    // this.studentHomepage = this.studentHomepage.bind(this);
   }
 
   validateForm() {
@@ -49,43 +50,42 @@ class EmployerLogin extends Component {
   //   this.props.history.push(null, path);
   // }
 
-  registerEmployer = () => {
-    const path = '/registerEmployer';
+  registerAdmin = () => {
+    const path = '/registerAdmin';
     this.props.history.push(path);
   }
 
-
-  loginEmployer = () => {
-    // const path = '/employer';
+  loginStudent = () => {
+    // const path = '/student';
     // this.props.history.push(path);
-    //
-    API.post('employer/login', {
-          email: this.state.email,
-          password: this.state.password,
-    }).then(res => {
-          // console.log(res)
-          this.setState({auth_token: res.data.auth_token});
-          localStorage.setItem('employer-token', this.state.auth_token);
-          localStorage.setItem('employerEmail', res.config.data.split("\"")[3]);
-          if (res.data.status === "success") {
-                const path = '/employer';
-                this.props.history.push({
-                  pathname: path,
-                  data: this.state.auth_token
-                });
-          }
-      }).catch(res => {
-            // console.log("Authentication failed");
-            // console.log(res.response)
-            if (res.response.status === 401) {
-               alert("Invalid login credentials!")
-               // this.props.hideLoginFailedSnackbar();
-            }
-            if (res.response.status === 500) {
-               alert("Invalid login credentials!")
-               // this.props.hideLoginFailedSnackbar();
-            }
-    });;
+    // //
+    // API.post('student/login', {
+    //       email: this.state.email,
+    //       password: this.state.password,
+    //   }).then(res => {
+    //       console.log(res);
+
+    //       localStorage.setItem('token', res.data.auth_token);
+    //       localStorage.setItem('studentEmail', res.config.data.split("\"")[3]);
+    //       if (res.data.status === "success") {
+    //           const path = '/student';
+    //           this.props.history.push({
+    //             pathname: path,
+    //             data: res.config.data
+    //           });
+    //       }
+    // }).catch(res => {
+    //         // console.log("Authentication failed");
+    //         // console.log(res.response)
+    //         if (res.response.status === 401) {
+    //            alert("Invalid login credentials!")
+    //            // this.props.hideLoginFailedSnackbar();
+    //         }
+    //         if (res.response.status === 500) {
+    //            alert("Invalid login credentials!")
+    //            // this.props.hideLoginFailedSnackbar();
+    //         }
+    // });
   }
 
   render() {
@@ -98,7 +98,7 @@ class EmployerLogin extends Component {
           spacing='15'>
           <Grid item xs={12}>
                 <Typography variant="h2" align="center" className='title' gutterBottom>
-                Employer Login
+                Admin Login
                 </Typography>
           </Grid>
         </Grid>
@@ -130,7 +130,7 @@ class EmployerLogin extends Component {
                   autoComplete="current-password"
                   margin="normal"
                   variant="outlined"
-                  value={this.state.passowrd}
+                  value={this.state.password}
                   onChange={this.handleChange}
 
                 />
@@ -148,14 +148,14 @@ class EmployerLogin extends Component {
                     disabled={!this.validateForm()}
                     type="submit"
                     variant="outlined"
-                    onClick = {this.loginEmployer}> Login</Button>
+                    onClick = {this.loginAdmin}> Login</Button>
               </Grid>
               <Grid item xs={6}>
                   <Button
                     size="medium"
                     type="button"
                     variant="outlined"
-                    onClick = {this.registerEmployer}> Register</Button>
+                    onClick = {this.registerAdmin}> Register</Button>
               </Grid>
             </Grid>
           </form>
@@ -175,4 +175,4 @@ function mapDispatchToProps(dispatch) {
 export default withRouter(connect(
     null,
     mapDispatchToProps
-)(EmployerLogin));
+)(AdminLogin));

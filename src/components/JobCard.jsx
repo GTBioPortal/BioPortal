@@ -26,6 +26,7 @@ class JobCard extends React.Component {
     viewJob() {
         const { job } = this.props;
         const path = '/job/' + job.id;
+        localStorage.setItem('job-id', job.id)
         this.props.history.push({
             pathname: path,
             data: this.props
@@ -44,7 +45,7 @@ class JobCard extends React.Component {
                         {job.company}
                     </Typography>
                     <Typography color='textSecondary'>
-                        {job.position}
+                        {job.description}
                     </Typography>
                     <Typography color='textSecondary'>
                         {job.location}

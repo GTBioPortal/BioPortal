@@ -5,6 +5,11 @@ import EmailStudent from "../components/EmailStudent";
 
 
 class EmailStudentPage extends React.Component {
+    constructor(props) {
+        super(props);
+        // console.log(props);
+    }
+
     render() {
         return (
             <div>
@@ -12,7 +17,7 @@ class EmailStudentPage extends React.Component {
                 <EmployerNavbar msgCount={0} notificationCount={0}/>
 
                 {/* Renders JobPostingForm component */}
-                <EmailStudent/>
+                <EmailStudent data={this.props.location.data.applicant}/>
             </div>
         );
     }

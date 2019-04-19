@@ -6,9 +6,11 @@ import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
 import { withRouter, push } from 'react-router-dom';
+import API from '../api/api';
 
-
-
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { showLoginFailedSnackbar, hideLoginFailedSnackbar }  from '../actions/modals'
 
 import "../styles/login.scss";
 
@@ -23,6 +25,8 @@ class StudentLogin extends Component {
       email: "",
       password: ""
     };
+    this.loginStudent = this.loginStudent.bind(this);
+
 
     // this.studentHomepage = this.studentHomepage.bind(this);
   }
@@ -52,8 +56,36 @@ class StudentLogin extends Component {
   }
 
   loginStudent = () => {
-    const path = '/student';
-    this.props.history.push(path);
+    // const path = '/student';
+    // this.props.history.push(path);
+    //
+    API.post('student/login', {
+          email: this.state.email,
+          password: this.state.password,
+      }).then(res => {
+          console.log(res);
+
+          localStorage.setItem('token', res.data.auth_token);
+          localStorage.setItem('studentEmail', res.config.data.split("\"")[3]);
+          if (res.data.status === "success") {
+              const path = '/student';
+              this.props.history.push({
+                pathname: path,
+                data: res.config.data
+              });
+          }
+    }).catch(res => {
+            // console.log("Authentication failed");
+            // console.log(res.response)
+            if (res.response.status === 401) {
+               alert("Invalid login credentials!")
+               // this.props.hideLoginFailedSnackbar();
+            }
+            if (res.response.status === 500) {
+               alert("Invalid login credentials!")
+               // this.props.hideLoginFailedSnackbar();
+            }
+    });
   }
 
   render() {
@@ -136,4 +168,11 @@ class StudentLogin extends Component {
   }
 }
 
-export default withRouter(StudentLogin);
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ showLoginFailedSnackbar }, dispatch);
+}
+
+export default withRouter(connect(
+    null,
+    mapDispatchToProps
+)(StudentLogin));

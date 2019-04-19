@@ -5,13 +5,18 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
 class EmailStudent extends React.Component {
+    constructor(props) {
+        super(props);
+        // console.log(props);
+    }
+
     sendMessage = (event) => {
 
         event.preventDefault();
 
         //set initial values of the different attributes
         const messageInfo = {
-            to: "slp0824@yahoo.com",
+            to: this.props.data.email,
             subject: this.state.subject,
             body: this.state.body,
         }

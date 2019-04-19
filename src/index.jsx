@@ -7,15 +7,21 @@ import MainHomepage from './pages/MainHomepage'
 import EmployerLoginpage from './pages/EmployerLoginpage'
 import EmployerHomepage from './pages/EmployerHomepage'
 import EmployerRegistration from './pages/EmployerRegistration'
+import ApplyToJobPage from './pages/ApplyToJobPage'
 import StudentHomepage from "./pages/StudentHomepage";
 import EditEmployerJobForm from './pages/EditEmployerJobForm'
 import EmployerJobForm from './pages/EmployerJobForm'
 import StudentRegistration from './pages/StudentRegistration'
 import StudentLoginpage from './pages/StudentLoginpage'
-import EmailStudentPage from './pages/EmailStudentPage'
+import ViewApplicantsPage from './pages/ViewApplicantsPage'
+import AdminLoginpage from './pages/AdminLoginpage'
+import AdminRegistration from './pages/AdminRegistration'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
+import EmpolyerProfilePage from "./pages/EmployerProfilePage";
+import StudentProfilePage from "./pages/StudentProfilePage";
+import EmailStudentPage from './pages/EmailStudentPage'
 
 /* Router: Determines path to component correspondence */
 const router = (
@@ -36,13 +42,25 @@ const router = (
                 </Route>
                 <Route path='/editJobForm' component={EditEmployerJobForm}>
                 </Route>
-                <Route path='/EmployerJobForm' component={EmployerJobForm}>
+                <Route path='/employerJobForm' component={EmployerJobForm}>
                 </Route>
                 <Route path='/registerStudent' component={StudentRegistration}>
                 </Route>
                 <Route path='/studentLogin' component={StudentLoginpage}>
                 </Route>
+                <Route path='/apply' component={ApplyToJobPage}>
+                </Route>
+                <Route path='/viewApplicants' component={ViewApplicantsPage}>
+                </Route>
+                <Route path='/employerProfile' component={EmpolyerProfilePage}>
+                </Route>
+                <Route path='/studentProfile' component={StudentProfilePage}>
+                </Route>
                 <Route path='/emailStudentPage' component={EmailStudentPage}>
+                </Route>
+                <Route path='/admin' component={AdminLoginpage}>
+                </Route>
+                <Route path='/registerAdmin' component={AdminRegistration}>
                 </Route>
             </div>
         </Router>

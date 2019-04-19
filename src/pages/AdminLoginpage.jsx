@@ -1,7 +1,7 @@
 import React from 'react';
-import StudentLoginNavbar from '../components/StudentLoginNavbar';
+import AdminLoginNavbar from '../components/AdminLoginNavbar';
 import '../styles/app.scss';
-import StudentLogin from "../components/StudentLogin";
+import AdminLogin from "../components/AdminLogin";
 import { withRouter, push } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -11,7 +11,7 @@ import { hideLoginFailedSnackbar } from '../actions/modals'
 /**
  * Student login page that contains the Student navbar and login components
  */
-class StudentLoginpage extends React.Component {
+class AdminLoginpage extends React.Component {
 
     constructor(props) {
         super(props);
@@ -32,7 +32,7 @@ class StudentLoginpage extends React.Component {
             <div>
                 {/*creates login page with two components: navigation bar and the login interface*/}
 
-                <StudentLoginNavbar/>
+                <AdminLoginNavbar/>
                 <Snackbar
                     anchorOrigin={{vertical: 'top', horizontal: 'center'}}
                     open={this.props.showLoginFailedSnackbar && this.state.showLoginFailedSnackbar}
@@ -40,7 +40,7 @@ class StudentLoginpage extends React.Component {
                     autoHideDuration={2000}
                     message={<span id='message-id'>Invalid login credentials</span>} />
 
-                <StudentLogin/>
+                <AdminLogin/>
             </div>
         );
     }
@@ -59,4 +59,4 @@ function mapDispatchToProps(dispatch) {
 export default withRouter(connect(
     mapStateToProps,
     mapDispatchToProps
-)(StudentLoginpage));
+)(AdminLoginpage));

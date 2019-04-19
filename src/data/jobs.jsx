@@ -1,4 +1,4 @@
-// Provides hard coded job description for testing purposes
+
 const jobs = [
     {
         'id': 'XemdTpsMSn',
@@ -101,5 +101,6 @@ const jobs = [
         'skills': 'BIOLOGY'
     }
 ];
+
 
 export default jobs;

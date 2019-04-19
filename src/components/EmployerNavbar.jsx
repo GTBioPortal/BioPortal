@@ -11,6 +11,9 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+
 import Link from '@material-ui/core/Link';
 import {withRouter, push } from 'react-router-dom';
 
@@ -20,6 +23,33 @@ import '../styles/toolbar.scss'
  * EmployerNavbar component sets the portal navigation items at the top of each webpage for employers
  */
 class EmployerNavbar extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    state = {
+        anchorEl: null,
+    };
+
+    handleMenu = event => {
+        this.setState({ anchorEl: event.currentTarget });
+    };
+
+    handleClose = () => {
+        this.setState({ anchorEl: null });
+
+    };
+
+    showProfile = () => {
+        const path = '/employerProfile';
+        this.props.history.push(path);
+    };
+
+    logOut = () => {
+            this.setState({ anchorEl: null });
+            const path = '/employerLogin';
+            this.props.history.replace(path);
+    };
 
     goEmployerHome = () => {
         const path = '/employer';
@@ -32,6 +62,10 @@ class EmployerNavbar extends React.Component {
     }
 
     render() {
+        const { classes } = this.props;
+        const { anchorEl } = this.state;
+        const open = Boolean(anchorEl);
+
         return (
             /* create a bar at the top */
             <AppBar position='static' className='Navbar'>
@@ -56,10 +90,29 @@ class EmployerNavbar extends React.Component {
                             </Badge>
                         </IconButton>
                         {/* add profile badge */}
-                        <IconButton aria-haspopup='true'
-                                    color='inherit'>
+                        <IconButton aria-owns={open ? 'menu-appbar' : undefined}
+                                    aria-haspopup="true"
+                                    onClick={this.handleMenu}
+                                    color="inherit">
                             <AccountCircle />
                         </IconButton>
+
+                        <Menu
+                            id="menu-appbar"
+                            anchorEl={anchorEl}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            open={open}
+                            onClose={this.handleClose}>
+                            <MenuItem onClick={this.showProfile}>My Account</MenuItem>
+                            <MenuItem onClick={this.logOut}>Log Out</MenuItem>
+                        </Menu>
                     </div>
                 </Toolbar>
             </AppBar>

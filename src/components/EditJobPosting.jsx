@@ -5,62 +5,101 @@ import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import TextField from '@material-ui/core/TextField';
+import API from '../api/api';
 
 /**
  * EditJobPostingForm component allows employers to edit information into a
  * form and updates job posting prop
  */
 class EditJobPostingForm extends React.Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            resume: false,
+            coverLetter: false,
+            transcript: false,
+            jobTitle: '',
+            company: '',
+            location: '',
+            startDate: "2019-01-01",
+            desc: '',
+            skills: '',
+            deadline: "2019-01-01",
+            job: []
+        };
+
+        var url = 'jobs/' + localStorage.getItem('employer-job-id');
+        API.get(url).then(res => {
+            const temp_job = res.data.data;
+            var tempStartDate = temp_job.start_date.split(" ");
+            var endStartDate = temp_job.deadline.split(" ");
+            var splitDate = new Date(tempStartDate[2] + " " + tempStartDate[1] + ", " + tempStartDate[3]);
+            var endSplitDate = new Date(endStartDate[2] + " " + endStartDate[1] + ", " + endStartDate[3]);
+            var endmo = endSplitDate.getMonth()+1;
+            var startmo = splitDate.getMonth()+1;
+            var endday = endSplitDate.getDate();
+            var startday = splitDate.getDate();
+            var endyr = endSplitDate.getFullYear();
+            var startyr = splitDate.getFullYear();
+            if (startmo < 10) {
+                startmo = "0" + startmo;
+            }
+            if (startday < 10) {
+                startday = "0" + startday;
+            }
+            if (endmo < 10) {
+                endmo = "0" + endmo;
+            }
+            if (endday < 10) {
+                endday = "0" + endday;
+            }
+            this.setState({
+                resume: temp_job.resume,
+                coverLetter: temp_job.cover_letter,
+                transcript: temp_job.transcript,
+                jobTitle: temp_job.title,
+                company: temp_job.company,
+                location: temp_job.location,
+                startDate: startyr + "-" + startmo + "-" + startday,
+                desc: temp_job.description,
+                skills: '',
+                deadline: endyr + "-" + endmo + "-" + endday,
+                job: res.data.data
+            });
+        });
+    }
 
     /* Creates prop for job posting*/
     createPosting = (event) => {
         // 1. Stop from submitting
         event.preventDefault();
 
-        // 2. creates job posting prop
-        const posting = {
-            jobTitle: this.state.jobTitle,
+        // prints posting to console (for testing purposes, delete later)
+        // console.log(posting);
+        var authorize = 'Bearer ' + localStorage.getItem('employer-token');
+        var headers = {
+            'Content-Type': 'application/json',
+            'Authorization': authorize
+        }
+        var url = 'jobs/' + localStorage.getItem('employer-job-id');
+        API.put(url, {
+            title: this.state.jobTitle,
             company: this.state.company,
             resume: this.state.resume,
-            coverLetter: this.state.coverLetter,
+            cover_letter: this.state.coverLetter,
             transcript: this.state.transcript,
             location: this.state.location,
-            startDate: this.state.startDate,
-            desc: this.state.desc,
-            skills: this.state.skills,
-            deadline: this.state.deadline,
-        }
-
-        // 3. resets form to default after submitting
-        this.setState({resume: false});
-        this.setState({coverLetter: false});
-        this.setState({transcript: false});
-        this.setState({jobTitle: ''});
-        this.setState({company: ''});
-        this.setState({location: ''});
-        this.setState({startDate: '2019-01-01'});
-        this.setState({desc: ''});
-        this.setState({skills: ''});
-        this.setState({deadline: '2019-01-01'});
-
-        // prints posting to console (for testing purposes, delete later)
-        console.log(posting);
+            start_date: this.state.startDate + "T00:00:00.787Z",
+            description: this.state.desc,
+            // skills: posting.skills,
+            deadline: this.state.deadline + "T00:00:00.787Z"},
+            {headers: headers}
+        ).then(res => {
+            console.log(res);
+      });
 
     }
-
-    // default state
-    state = {
-        resume: false,
-        coverLetter: false,
-        transcript: false,
-        jobTitle: '',
-        company: '',
-        location: '',
-        startDate: "2019-01-01",
-        desc: '',
-        skills: '',
-        deadline: "2019-01-01",
-    };
 
     // handles changes for checkboxes
     handleCheckedChange = name => event => {
@@ -73,7 +112,7 @@ class EditJobPostingForm extends React.Component {
     };
 
     render()  {
-        const job = this.props.vars.job
+        const job = this.state.job
         return (
             <form className = "jobPosting" onSubmit={this.createPosting}>
             <br/>

@@ -9,43 +9,25 @@ import { connect } from 'react-redux';
 import { hideUploadResume, showUploadSnackbar }  from '../actions/modals'
 
 import '../styles/modals.scss';
-import API from '../api/api';
 
 /**
  * Upload Resume component which handles uploading a resume from a local
  * computer
  */
-class UploadResumeModal extends React.Component {
+class ApplyToJobModal extends React.Component {
     constructor(props) {
         super(props);
-        // console.log(auth_token);
-        this.state = { resumeSelected: false, resume: null, resumeName: ''};
+        this.state = { resumeSelected: false, resumeName: "No file selected." };
         this.uploadResume = this.uploadResume.bind(this);
         this.resumeChange = this.resumeChange.bind(this);
     }
 
     // sends messages to the console that checks to see if the Resume was
-    // properly uploaded
+    // properlly uploaded
     uploadResume() {
         if (!this.state.resumeSelected) {
             console.log("Error uploading Resume");
         } else {
-            var auth_token = localStorage.getItem('token')
-            var authorize = 'Bearer ' + auth_token
-            var headers = {
-                'Content-Type': 'multipart/form-data',
-                'Authorization': authorize
-            }
-            var formData = new FormData();
-            formData.append('file', this.state.resume)
-            formData.append('file_name', this.state.resumeName)
-            formData.append('file_type', 'resume')
-            API.post('/upload', 
-                formData,
-                {headers: headers}
-            ).then(res => {
-                console.log(res);
-            });
             console.log(this.state.resumeName);
             console.log("Resume uploaded successfully");
             this.props.hideUploadResume();
@@ -56,7 +38,6 @@ class UploadResumeModal extends React.Component {
     resumeChange(e) {
         this.setState({
             resumeSelected: true,
-            resume: e.target.files[0],
             resumeName: e.target.files[0].name
         });
 
@@ -113,4 +94,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
     null,
     mapDispatchToProps
-)(UploadResumeModal);
+)(ApplyToJobModal);

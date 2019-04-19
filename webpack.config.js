@@ -20,6 +20,9 @@ module.exports = {
             }
         ]
     },
+    output: {
+        publicPath: '/',
+    },
     plugins: [
         new HtmlWebpackPlugin({
             template: 'src/index.html'
@@ -29,6 +32,9 @@ module.exports = {
             chunkFilename: 'styles/[id].css'
         })
     ],
+    devServer: {
+        historyApiFallback: true,
+    },
     resolve: {
         extensions: ['.js', '.jsx']
     },

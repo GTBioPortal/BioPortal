@@ -12,8 +12,10 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+import { withRouter, push } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
-import {withRouter, push } from 'react-router-dom';
 
 import '../styles/toolbar.scss'
 
@@ -21,6 +23,36 @@ import '../styles/toolbar.scss'
  * Navbar component sets the portal navigation items at the top of each webpage for students
  */
 class Navbar extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    state = {
+        anchorEl: null,
+    };
+
+    handleMenu = event => {
+        this.setState({ anchorEl: event.currentTarget });
+    };
+
+    handleClose = () => {
+        this.setState({ anchorEl: null });
+    };
+
+    showProfile = () => {
+        const path = '/studentProfile';
+        this.props.history.push({
+            pathname: path,
+            data: this.props.email
+        });
+        console.log(this.props);
+    };
+
+    logOut = () => {
+            this.setState({ anchorEl: null });
+            const path = '/studentLogin';
+            this.props.history.replace(path);
+        };
 
     goStudentHome = () => {
         const path = '/student';
@@ -28,6 +60,10 @@ class Navbar extends React.Component {
     }
 
     render() {
+        const { classes } = this.props;
+        const { anchorEl } = this.state;
+        const open = Boolean(anchorEl);
+
         return (
             /**
              * Create a bar at the top
@@ -46,23 +82,31 @@ class Navbar extends React.Component {
                             onClick={this.props.showUploadResume}>
                             Upload Resum&#201;
                         </Button>
-                        {/* add mail badge */}
-                        <IconButton color='inherit'>
-                            <Badge color='secondary' badgeContent={0} invisible={true}>
-                                <MailIcon />
-                            </Badge>
-                        </IconButton>
-                        {/* add notifications badge */}
-                        <IconButton color='inherit'>
-                            <Badge color='secondary' badgeContent={0} invisible={true}>
-                                <NotificationsIcon />
-                            </Badge>
-                        </IconButton>
+
                         {/* add profile badge */}
-                        <IconButton aria-haspopup='true'
-                            color='inherit'>
+                        <IconButton aria-owns={open ? 'menu-appbar' : undefined}
+                                    aria-haspopup="true"
+                                    onClick={this.handleMenu}
+                                    color="inherit">
                             <AccountCircle />
                         </IconButton>
+
+                        <Menu
+                            id="menu-appbar"
+                            anchorEl={anchorEl}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            open={open}
+                            onClose={this.handleClose}>
+                            <MenuItem onClick={this.showProfile}>My Account</MenuItem>
+                            <MenuItem onClick={this.logOut}>Log Out</MenuItem>
+                        </Menu>
                     </div>
                 </Toolbar>
             </AppBar>

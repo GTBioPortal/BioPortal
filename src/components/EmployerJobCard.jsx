@@ -24,7 +24,18 @@ class EmployerJobCard extends React.Component {
     // function to open up page to edit a job position
     editJob() {
         const { job } = this.props;
+        localStorage.setItem('employer-job-id', job.id);
         const path = '/editJobForm/' + job.id;
+        this.props.history.push({
+            pathname: path,
+            data: this.props
+        });
+    }
+
+    viewApps = () => {
+        const { job } = this.props;
+        localStorage.setItem('employer-job-id', job.id);
+        const path = '/viewApplicants/' + job.id;
         this.props.history.push({
             pathname: path,
             data: this.props
@@ -40,7 +51,10 @@ class EmployerJobCard extends React.Component {
                     {/** set content of card to be job position and job location */}
                     <CardContent>
                         <Typography className='card-title' gutterBottom>
-                            {job.position}
+                            {job.company}
+                        </Typography>
+                        <Typography color='textSecondary'>
+                            {job.description}
                         </Typography>
                         <Typography color='textSecondary'>
                             {job.location}
@@ -49,6 +63,7 @@ class EmployerJobCard extends React.Component {
                     {/** set card to call the editJob function when the edit job button is clicked */}
                     <CardActions id='edit-job-div'>
                         <Button size='small' id='edit-job' onClick={this.editJob}>Edit Job Posting</Button>
+                        <Button size='small' id='view-apps' onClick={this.viewApps}>View Applicants</Button>
                     </CardActions>
                 </Card>
             </td>

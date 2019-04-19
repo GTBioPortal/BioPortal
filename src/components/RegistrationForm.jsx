@@ -3,6 +3,8 @@ import '../styles/employerJobPosting.scss';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import API from '../api/api'
+
 
 /**
  * Registration Form component allows employers to create a job posting
@@ -17,24 +19,40 @@ class RegistrationForm extends React.Component {
             name: this.state.name,
             companyName: this.state.companyName,
             email: this.state.email,
-            username: this.state.username,
+            password: this.state.password,
             summary: this.state.summary,
         }
 
         this.setState({name: ''});
         this.setState({companyName: ''});
         this.setState({email: ''});
-        this.setState({username: ''});
+        this.setState({password: ''});
         this.setState({summary: ''});
 
         console.log(regis);
+
+
+        // const token = "";
+
+        //TODO: store token
+        API.post('employer/create', {
+            name: regis.name,
+            email: regis.email,
+            password: regis.password,
+            company_description: regis.summary,
+            company: regis.companyName
+        }).then(res => {
+            console.log(res.data.auth_token);
+            alert("Registration successful!")
+            // token = res.data.auth_token;
+      });
     }
 
     state = {
         name: '',
         companyName: '',
         email: '',
-        username: '',
+        password: '',
         summary: '',
     };
 
@@ -58,10 +76,10 @@ class RegistrationForm extends React.Component {
                 <TextField name="email" id="outlined-full-width-email" label="E-mail Address" placeholder="E-mail Address" fullWidth margin="normal" variant="outlined"
                 InputLabelProps={{shrink: true,}} autoComplete="email" value={this.state.email} onChange={this.handleChange('email')} type="email"/>
 
-                <TextField name="username" id="outlined-full-width-email" label="Username" placeholder="Username" fullWidth
+                <TextField name="password" id="outlined-full-width-email" label="Password" placeholder="Password" fullWidth
                 margin="normal" variant="outlined"
-                InputLabelProps={{shrink: true,}} value={this.state.username}
-                onChange={this.handleChange('username')}/>
+                InputLabelProps={{shrink: true,}} value={this.state.password}
+                onChange={this.handleChange('password')} type="password"/>
 
                 <TextField name="summary" id="outlined-full-width-summary" label="Summary of Position/Company" placeholder="Summary of Position/Company" multiline
                 fullWidth rows="5" margin="normal" variant="outlined"

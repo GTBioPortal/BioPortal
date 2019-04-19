@@ -15,7 +15,7 @@ class EmployerJobForm extends React.Component {
                 <EmployerNavbar msgCount={0} notificationCount={0}/>
 
                 {/* Renders JobPostingForm component */}
-                <JobPostingForm/>
+                <JobPostingForm auth_token={this.props.location.data}/>
             </div>
         );
     }

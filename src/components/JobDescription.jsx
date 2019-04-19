@@ -7,6 +7,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import '../styles/job-description.scss';
 import '../styles/card.scss';
+import API from '../api/api'
 
 /**
  * JobDescription component shows the description, name, location, deadline, and position for a job posting
@@ -14,11 +15,32 @@ import '../styles/card.scss';
 class JobDescription extends React.Component {
     constructor(props) {
         super(props)
+
+        this.state = {
+            job: []
+        };
+        var url = 'jobs/' + localStorage.getItem('job-id')
+        API.get(url).then(res => {
+            // var allJobs = res.data.jobs;
+            // console.log(res.data);
+            this.setState({ job: res.data.data });
+      })
+    }
+
+    applyToJob = () => {
+        const path = '/apply';
+        this.props.history.push({
+              pathname: path,
+              // data: this.props.location.data.job
+        });
     }
 
     render() {
         /** get individual job from props */
-    	const job = this.props.location.data.job;
+    	const job = this.state.job;
+        const deadLine = String(job.deadline)
+        const temp = deadLine.split(" ")
+        const parsedDate = temp[0] + " " + temp[1] + " " + temp[2] +  " "  + temp[3]
         return (
         	<div>
                 {/** place job company */}
@@ -31,7 +53,7 @@ class JobDescription extends React.Component {
         		</Typography>
                 {/** place job location and deadline */}
         		<Typography variant="h5" align="center" gutterBottom>
-        			{job.location} | {job.deadline}
+        			Location: {job.location} | Deadline: {parsedDate}
         		</Typography>
         		<div align="center">
                     {/** place job description */}
@@ -41,11 +63,12 @@ class JobDescription extends React.Component {
 	        		<Card className='job-description-card'>
 		                <CardContent>
 		                    <Typography color='textSecondary' align="left">
-								Create high-quality web and mobile apps containing rich content and user interface components by working closely with user experience designers to take wireframes and mockups from conception to implementation. Identify specific issues in the user interface, recommending and implementing solutions that influence and improve the design of products that provide a delightful user experience along with high performance, security, quality, and stability.		                    </Typography>
+                                {job.description}
+								</Typography>
 		                </CardContent>
 
 		                <CardActions id='view-job-div'>
-		                    <Button size='small' id='apply'>Apply</Button>
+		                    <Button size='small' id='apply' onClick={this.applyToJob}>Apply</Button>
 		                </CardActions>
 	           	 	</Card>
            	 	</div>
@@ -53,6 +76,11 @@ class JobDescription extends React.Component {
 
         )
     }
+}
+
+// dispatch applyToJob function to props
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ applyToJob }, dispatch);
 }
 
 // export component for use/routing

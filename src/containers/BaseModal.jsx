@@ -1,10 +1,14 @@
 import React from 'react';
 import UploadResumeModal from '../components/UploadResumeModal';
 import { connect } from 'react-redux';
+import EmailStudentModal from "../components/EmailStudent";
+import ApplyToJobModal from '../components/ApplyToJobModal';
 
 // set component modals
 const MODAL_COMPONENTS = {
     'UPLOAD_RESUME': UploadResumeModal,
+    'EMAIL_STUDENT': EmailStudentModal,
+    'APPLY_TO_JOB': ApplyToJobModal
 
 }
 
@@ -19,7 +23,7 @@ const BaseModal = ({ modals }) => {
 
 // map modal states to props
 function mapStateToProps(state) {
-    return { 
+    return {
         modals: state.modals
     }
 }
