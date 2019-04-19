@@ -10,6 +10,7 @@ BioPortal Junior Design Project
 
 
 ### KNOWN BUGS
+Log out doesn't entirely log out, you can click the back button and enter back in
 
 
 ## Getting Started With Development
