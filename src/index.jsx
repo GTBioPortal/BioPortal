@@ -17,12 +17,14 @@ import ViewApplicantsPage from './pages/ViewApplicantsPage'
 import AdminLoginpage from './pages/AdminLoginpage'
 import AdminRegistration from './pages/AdminRegistration'
 import AdminHomePage from './pages/AdminHomePage'
+import AdminViewJobs from './pages/AdminViewJobs'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 import EmpolyerProfilePage from "./pages/EmployerProfilePage";
 import StudentProfilePage from "./pages/StudentProfilePage";
 import EmailStudentPage from './pages/EmailStudentPage'
+import AdminViewJobDetailsPage from './pages/AdminViewJobDetailsPage'
 
 /* Router: Determines path to component correspondence */
 const router = (
@@ -64,6 +66,10 @@ const router = (
                 <Route path='/registerAdmin' component={AdminRegistration}>
                 </Route>
                 <Route path='/adminHome' component={AdminHomePage}>
+                </Route>
+                <Route path='/adminViewJobs' component={AdminViewJobs}>
+                </Route>
+                <Route path='/adminViewJobDetails' component={AdminViewJobDetailsPage}>
                 </Route>
             </div>
         </Router>
