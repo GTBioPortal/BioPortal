@@ -36,7 +36,7 @@ class ViewApplicantsPage extends React.Component {
             'Content-Type': 'application/json',
             'Authorization': authorize
         }
-        API.get(url, 
+        API.get(url,
             {headers: headers}
         ).then(res => {
             // console.log(res.data.applications);
@@ -51,10 +51,10 @@ class ViewApplicantsPage extends React.Component {
             data: el
         });
     }
-
+    
     downloadFile(id, app) {
         // console.log(app);
-        console.log(id);
+        //console.log(app);
         var auth_token = localStorage.getItem('employer-token');
         var authorize = 'Bearer ' + auth_token;
         var url = '/files/' + id;
@@ -67,7 +67,6 @@ class ViewApplicantsPage extends React.Component {
             {responseType: 'blob', 
             headers: headers}
         ).then(res => {
-            console.log(res);
             var blob = new Blob(
                 [res.data],
                 {type: 'application/pdf'});
@@ -75,7 +74,7 @@ class ViewApplicantsPage extends React.Component {
             window.open(fileURL);
         })
         .catch(res => {
-            // console.log(res);  
+            // console.log(res);
         });
     }
 

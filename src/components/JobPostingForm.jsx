@@ -76,8 +76,12 @@ class JobPostingForm extends React.Component {
             deadline: posting.deadline + "T00:00:00.787Z"},
             {headers: headers}
         ).then(res => {
-            console.log(res);
+            //console.log(res);
             alert("Job posting successfully created!");
+        }).catch(res => {
+            if (res.response.status === 500) {
+               alert("Job posting unsuccessful");
+            }
       });
 
     }

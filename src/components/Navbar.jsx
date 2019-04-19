@@ -45,7 +45,7 @@ class Navbar extends React.Component {
             pathname: path,
             data: this.props.email
         });
-        console.log(this.props);
+        //console.log(this.props);
     };
 
     logOut = () => {

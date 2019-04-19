@@ -79,15 +79,11 @@ class EmployerLogin extends Component {
             }
           }
       }).catch(res => {
-            // console.log("Authentication failed");
-            // console.log(res)
             if (res.response.status === 401) {
                alert("Invalid login credentials!")
-               // this.props.hideLoginFailedSnackbar();
             }
             if (res.response.status === 500) {
                alert("Server error!")
-               // this.props.hideLoginFailedSnackbar();
             }
     });;
   }

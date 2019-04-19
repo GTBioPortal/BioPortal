@@ -28,7 +28,8 @@ class UploadResumeModal extends React.Component {
     // properly uploaded
     uploadResume() {
         if (!this.state.resumeSelected) {
-            console.log("Error uploading Resume");
+            //console.log("Error uploading Resume");
+            alert("Error uploading resume");
         } else {
             var auth_token = localStorage.getItem('token')
             var authorize = 'Bearer ' + auth_token
@@ -40,14 +41,15 @@ class UploadResumeModal extends React.Component {
             formData.append('file', this.state.resume)
             formData.append('file_name', this.state.resumeName)
             formData.append('file_type', 'resume')
-            API.post('/upload', 
+            API.post('/upload',
                 formData,
                 {headers: headers}
             ).then(res => {
                 console.log(res);
             });
-            console.log(this.state.resumeName);
-            console.log("Resume uploaded successfully");
+            //console.log(this.state.resumeName);
+            alert("Resume uploaded successfully");
+            //console.log("Resume uploaded successfully");
             this.props.hideUploadResume();
             this.props.showUploadSnackbar();
         }

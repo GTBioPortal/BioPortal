@@ -63,7 +63,7 @@ class StudentLogin extends Component {
           email: this.state.email,
           password: this.state.password,
       }).then(res => {
-          console.log(res);
+          //console.log(res);
 
           localStorage.setItem('token', res.data.auth_token);
           localStorage.setItem('studentEmail', res.config.data.split("\"")[3]);

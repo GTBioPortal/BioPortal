@@ -1,6 +1,17 @@
 BioPortal Junior Design Project
 ========
 
+## Release Notes version BioPortal 1.0
+
+### NEW FEATURES
+
+
+### BUG FIXES
+
+
+### KNOWN BUGS
+
+
 ## Getting Started With Development
 To start clone repo and type `npm i` at root directory to import all required
 packages.
@@ -55,7 +66,7 @@ High level page components. e.g. Student Homepage and Employer Homepage
 
 ## src/reducers
 [Redux reducers](https://redux.js.org/basics/reducers). All reducers must be
-added to combineReducers function in src/reducers/index.jsx 
+added to combineReducers function in src/reducers/index.jsx
 
 ## src/styles
 Style sheets for application. Each component should have its own stylesheet.

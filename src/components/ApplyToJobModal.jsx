@@ -26,10 +26,11 @@ class ApplyToJobModal extends React.Component {
     // properlly uploaded
     uploadResume() {
         if (!this.state.resumeSelected) {
-            console.log("Error uploading Resume");
+            //console.log("Error uploading Resume");
+            alert("Error uploading resume");
         } else {
-            console.log(this.state.resumeName);
-            console.log("Resume uploaded successfully");
+            //console.log("Resume uploaded successfully");
+            alert("Resume uploaded successfully");
             this.props.hideUploadResume();
             this.props.showUploadSnackbar();
         }

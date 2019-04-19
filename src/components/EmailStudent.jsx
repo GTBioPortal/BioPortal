@@ -26,7 +26,7 @@ class EmailStudent extends React.Component {
         this.setState({subject: ''});
         this.setState({body: ''});
 
-        console.log(messageInfo);
+        //console.log(messageInfo);
 
         //specify different variables within data structure
         var body_message = messageInfo.body;
