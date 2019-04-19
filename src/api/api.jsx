@@ -3,6 +3,6 @@ import React from 'react';
 
 // set connection to backend using axios
 export default axios.create({
-  baseURL: "http://bioportal.us-east-1.elasticbeanstalk.com/",
+  baseURL: "https://api.gtbioportal.com/",
   headers: {'Content-Type': 'application/json'}
 });

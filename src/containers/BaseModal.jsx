@@ -1,7 +1,7 @@
 import React from 'react';
 import UploadResumeModal from '../components/UploadResumeModal';
 import { connect } from 'react-redux';
-import EmailStudentModal from "../components/EmailStudentModal";
+import EmailStudentModal from "../components/EmailStudent";
 import ApplyToJobModal from '../components/ApplyToJobModal';
 
 // set component modals
@@ -9,6 +9,7 @@ const MODAL_COMPONENTS = {
     'UPLOAD_RESUME': UploadResumeModal,
     'EMAIL_STUDENT': EmailStudentModal,
     'APPLY_TO_JOB': ApplyToJobModal
+
 }
 
 // return desired component modal

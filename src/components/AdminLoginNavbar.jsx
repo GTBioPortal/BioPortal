@@ -18,25 +18,24 @@ import { withRouter, push } from 'react-router-dom';
 import '../styles/toolbar.scss'
 
 /**
- * Login Navigation top bar component that is the top bar of the portal,
- * contains Register and Login buttons
+ * Student Login page's navigation bar
  */
-class LoginNavbar extends React.Component {
+class AdminLoginNavbar extends React.Component {
 
     goMainHome = () => {
-        const path = '/';
+        const path = '/admin';
         this.props.history.push(path);
     }
 
-    // changes the screen to register employer
-    registerEmployer = () => {
-        const path = '/registerEmployer';
+    // changes the screen for registering a student
+    registerAdmin = () => {
+        const path = '/registerAdmin';
         this.props.history.push(path);
     }
 
-    // changes the screen to login an employer
-    loginEmployer = () => {
-        const path = '/employerLogin';
+    // changes the screen for logging a student in
+    loginAdmin = () => {
+        const path = '/admin';
         this.props.history.push(path);
     }
 
@@ -49,8 +48,8 @@ class LoginNavbar extends React.Component {
                             BioPortal
                         </Link>
                     </Typography>
-                    <Button color="inherit"  onClick={this.loginEmployer}>Login</Button>
-                    <Button color="inherit"  onClick={this.registerEmployer}>Register</Button>
+                    <Button color="inherit"  onClick={this.loginAdmin}>Login</Button>
+                    <Button color="inherit"  onClick={this.registerAdmin}>Register</Button>
 
                 </Toolbar>
             </AppBar>
@@ -58,4 +57,4 @@ class LoginNavbar extends React.Component {
     }
 }
 
-export default withRouter(LoginNavbar);
+export default withRouter(AdminLoginNavbar);

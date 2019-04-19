@@ -1,6 +1,8 @@
 import React from 'react';
 import EmployerJobGrid from '../components/EmployerJobGrid';
 import EmployerNavbar from '../components/EmployerNavbar';
+import EmployerProfileComponents from '../components/EmployerProfileComponents';
+
 import { withRouter, push } from 'react-router-dom';
 import '../styles/app.scss';
 import { bindActionCreators } from 'redux';
@@ -24,6 +26,7 @@ class EmployerProfilePage extends React.Component {
             <div>
                 {/* Renders EmployerNavbar component */}
                 <EmployerNavbar msgCount={0} notificationCount={0}/>
+                <EmployerProfileComponents/>
             </div>
         );
     }

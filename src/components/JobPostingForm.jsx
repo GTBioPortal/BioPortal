@@ -77,6 +77,7 @@ class JobPostingForm extends React.Component {
             {headers: headers}
         ).then(res => {
             console.log(res);
+            alert("Job posting successfully created!");
       });
 
     }

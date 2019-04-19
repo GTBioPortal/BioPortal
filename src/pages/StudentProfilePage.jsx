@@ -1,6 +1,7 @@
 import React from 'react';
 import { hideUploadSnackbar } from '../actions/modals'
 import BaseModal from '../containers/BaseModal';
+import StudentProfileComponents from '../components/StudentProfileComponents'
 import Navbar from '../components/Navbar';
 import { withRouter, push } from 'react-router-dom';
 import '../styles/app.scss';
@@ -15,6 +16,7 @@ import API from '../api/api'
 class StudentProfilePage extends React.Component {
     constructor(props) {
         super(props);
+        // console.log(props)
         this.state = {
             showUploadSnackbar: true,
             jobs: []
@@ -44,6 +46,7 @@ class StudentProfilePage extends React.Component {
                     autoHideDuration={2000}
                     message={<span id='message-id'>Resume uploaded successfully!</span>} />
                 <BaseModal />
+                <StudentProfileComponents data = {this.props}/>
             </div>
         );
     }

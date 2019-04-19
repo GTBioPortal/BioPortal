@@ -16,8 +16,11 @@
 
 .job-card {
     margin: 1rem 1rem 1rem 1rem;
+    justify-content: left;
+    width: 200px;
+    height: 185px;
 
-    #view-job {
+  #view-job {
         margin: auto;
         bottom: 0px;
     }

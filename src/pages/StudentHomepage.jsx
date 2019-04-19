@@ -16,9 +16,10 @@ import API from '../api/api'
 class StudentHomePage extends React.Component {
     constructor(props) {
         super(props);
+        // console.log(props.location.data);
         this.state = {
             showUploadSnackbar: true,
-            jobs: [] 
+            jobs: []
         };
     }
 
@@ -33,7 +34,7 @@ class StudentHomePage extends React.Component {
     render() {
         return (
             <div>
-                <Navbar msgCount={0} notificationCount={0}/>
+                <Navbar msgCount={0} notificationCount={0} email = {this.props.location.data}/>
                 {/* determines if resume confirmation pop-up message needs to be displayed*/}
                 <Snackbar
                     anchorOrigin={{vertical: 'top', horizontal: 'center'}}

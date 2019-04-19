@@ -22,7 +22,7 @@ import '../styles/toolbar.scss'
 /**
  * Navbar component sets the portal navigation items at the top of each webpage for students
  */
-class Navbar extends React.Component {
+class AdminNavbar extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -39,23 +39,14 @@ class Navbar extends React.Component {
         this.setState({ anchorEl: null });
     };
 
-    showProfile = () => {
-        const path = '/studentProfile';
-        this.props.history.push({
-            pathname: path,
-            data: this.props.email
-        });
-        console.log(this.props);
-    };
-
     logOut = () => {
             this.setState({ anchorEl: null });
-            const path = '/studentLogin';
+            const path = '/admin';
             this.props.history.replace(path);
         };
 
-    goStudentHome = () => {
-        const path = '/student';
+    goAdminHome = () => {
+        const path = '/adminHome';
         this.props.history.push(path);
     }
 
@@ -72,25 +63,16 @@ class Navbar extends React.Component {
                 <Toolbar>
                     {/* add portal title */}
                     <Typography variant='title' color='inherit' className='grow'>
-                        <Link component = "button" underline = 'none' variant='title' color='inherit' className='grow' onClick = {this.goStudentHome}>
+                        <Link component = "button" underline = 'none' variant='title' color='inherit' className='grow' onClick = {this.goAdminHome}>
                             BioPortal
                         </Link>
                     </Typography>
-                    <div>
-                        {/* add upload resume button that calls showUploadResume function when clicked*/}
-                        <Button color='inherit'
-                            onClick={this.props.showUploadResume}>
-                            Upload Resum&#201;
-                        </Button>
-
-                        {/* add profile badge */}
                         <IconButton aria-owns={open ? 'menu-appbar' : undefined}
                                     aria-haspopup="true"
                                     onClick={this.handleMenu}
                                     color="inherit">
                             <AccountCircle />
                         </IconButton>
-
                         <Menu
                             id="menu-appbar"
                             anchorEl={anchorEl}
@@ -104,23 +86,13 @@ class Navbar extends React.Component {
                             }}
                             open={open}
                             onClose={this.handleClose}>
-                            <MenuItem onClick={this.showProfile}>My Account</MenuItem>
                             <MenuItem onClick={this.logOut}>Log Out</MenuItem>
                         </Menu>
-                    </div>
                 </Toolbar>
             </AppBar>
         )
     }
 }
 
-// dispatch showUploadResume function to props
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ showUploadResume }, dispatch);
-}
-
 // export component for use
-export default withRouter(connect(
-    null,
-    mapDispatchToProps
-)(Navbar));
+export default withRouter(AdminNavbar);
