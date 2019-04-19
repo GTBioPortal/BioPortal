@@ -6,6 +6,9 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import EmployerNavbar from '../components/EmployerNavbar';
+import MailIcon from '@material-ui/icons/Mail';
+import IconButton from '@material-ui/core/IconButton';
+import Badge from '@material-ui/core/Badge';
 import '../styles/job-description.scss';
 import '../styles/card.scss';
 import API from '../api/api'
@@ -38,6 +41,14 @@ class ViewApplicantsPage extends React.Component {
         ).then(res => {
             // console.log(res.data.applications);
             this.setState({apps: res.data.applications});
+        });
+    }
+
+    emailStudent(el) {
+        const path = '/emailStudentPage';
+        this.props.history.push({
+            pathname: path,
+            data: el
         });
     }
 
@@ -77,7 +88,17 @@ class ViewApplicantsPage extends React.Component {
                 <br/>
                 <Grid container direction="column" justify="center" alignItems="center">
                     {this.state.apps.map((el, index) => {
-                        return <Link key={index} align="center" variant="subtitle1" onClick={() => this.downloadResume(el)} gutterBottom>Applicant: {el.applicant} Resume <br/> </Link>
+                        return (
+                            <React.Fragment key={index}>
+                                <Grid container direction="row" justify="center" alignItems="center">
+                                    <Link align="center" variant="subtitle1" onClick={() => this.downloadResume(el)} gutterBottom>Applicant: {el.applicant.name} Resume <br/> </Link>
+                                    <IconButton color='inherit' onClick = {() => this.emailStudent(el)}>
+                                        <Badge color='secondary' badgeContent={0} invisible={true}>
+                                            <MailIcon />
+                                        </Badge>
+                                    </IconButton>
+                                </Grid>
+                            </React.Fragment>)
                     })}
                 </Grid>
         	</div>
