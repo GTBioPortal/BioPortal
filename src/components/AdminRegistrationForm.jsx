@@ -39,6 +39,10 @@ class AdminRegistrationForm extends React.Component {
             position: regis.position
         }).then(res => {
             alert("Registration successful!")
+        }).catch(res => {
+            if (res.response.status === 200) {
+               alert("Job posting unsuccessful");
+            }
             // token = res.data.auth_token;
       });
     }
