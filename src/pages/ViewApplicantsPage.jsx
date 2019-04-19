@@ -83,7 +83,7 @@ class ViewApplicantsPage extends React.Component {
         	<div>
                 <EmployerNavbar msgCount={0} notificationCount={0}/>
                 <br/>
-                <Typography variant="h5" align="center" >
+                <Typography variant="h2" align="center" >
                     Applicants
                 </Typography>
                 <br/>
