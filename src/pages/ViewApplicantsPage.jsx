@@ -52,17 +52,18 @@ class ViewApplicantsPage extends React.Component {
         });
     }
 
-    downloadResume(app) {
-        console.log(app);
+    downloadFile(id, app) {
+        // console.log(app);
+        console.log(id);
         var auth_token = localStorage.getItem('employer-token');
         var authorize = 'Bearer ' + auth_token;
-        var url = '/files/' + app.resume;
+        var url = '/files/' + id;
         var headers = {
             'Content-Type': 'application/json',
             'Authorization': authorize
         }
         API.post(url,
-            {application_id: app.id},
+            {application_id: app},
             {responseType: 'blob', 
             headers: headers}
         ).then(res => {
@@ -79,6 +80,7 @@ class ViewApplicantsPage extends React.Component {
     }
 
     render() {
+        console.log(this.state.apps);
         return (
         	<div>
                 <EmployerNavbar msgCount={0} notificationCount={0}/>
@@ -92,12 +94,15 @@ class ViewApplicantsPage extends React.Component {
                         return (
                             <React.Fragment key={index}>
                                 <Grid container direction="row" justify="center" alignItems="center">
-                                    <Link align="center" variant="subtitle1" onClick={() => this.downloadResume(el)} gutterBottom>Applicant: {el.applicant.name} Resume <br/> </Link>
-                                    <IconButton color='inherit' onClick = {() => this.emailStudent(el)}>
+                                <Typography variant='subtitle1' align='center' gutterBottom> Applicant: {el.applicant.name} </Typography>
+                                <IconButton color='inherit' onClick = {() => this.emailStudent(el)}>
                                         <Badge color='secondary' badgeContent={0} invisible={true}>
                                             <MailIcon />
                                         </Badge>
                                     </IconButton>
+                                    {(el.resume != null) && <Link align="center" variant="subtitle1" onClick={() => this.downloadFile(el.resume, el.id)} gutterBottom>Resume <br/> </Link>}
+                                    {(el.cover_letter != null) && <Link align="center" variant="subtitle1" onClick={() => this.downloadFile(el.cover_letter, el.id)} gutterBottom>Cover Letter <br/> </Link>}
+                                    {(el.transcript != null) && <Link align="center" variant="subtitle1" onClick={() => this.downloadFile(el.transcript, el.id)} gutterBottom>Transcript <br/> </Link>}
                                 </Grid>
                             </React.Fragment>)
                     })}
