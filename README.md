@@ -27,6 +27,10 @@ BioPortal Junior Design Project
 * When Admin views a specific job posting and uses browser back button the home page will have no data and user will need to refresh page
 * Often the db upgrade command fails because the db upgrade function does not check minor schema changes.
 
+### Required Packages
+* Frontend - First download npm/node.js using [the official source](https://www.npmjs.com/get-npm). Then all required packages are located in the package.json file and can be installed using npm i
+* Backend - Install [Python3 version](https://www.python.org/downloads/) (recommended most recent version), and MySQL. All required Python packages are located in the requirements.txt file and can be installed using python install -r requirements.txt
+
 ## Getting Started With Development
 To start clone repo and type `npm i` at root directory to import all required
 packages.
