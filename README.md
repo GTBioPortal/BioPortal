@@ -20,14 +20,18 @@ BioPortal Junior Design Project
 
 
 ### BUG FIXES
+* If python manage.py db upgrade fails it is likely because minor schema changes like field size are not updated with db migrate command. To fix this you need to alembic change to the generated file in migrations/versions.
 
 
 ### KNOWN BUGS
 * When Admin views a specific job posting and uses browser back button the home page will have no data and user will need to refresh page
+* Often the db upgrade command fails because the db upgrade function does not check minor schema changes.
 
 ## Getting Started With Development
 To start clone repo and type `npm i` at root directory to import all required
 packages.
+
+Download backend code located [here](https://github.com/GTBioPortal/BioPortal_Backend) and run using python run.py or python3 run.py. The backend will run using MySQL database deployed on AWS RDS. To use another database or for local testing update SQLALCHEMY_DATABASE_URI in config.py and create database by running python manage.py db migrate followed by python manage.py db upgrade.
 
 ### React Developer Tools
 Allows you to view React components in developer tools. Really useful for
